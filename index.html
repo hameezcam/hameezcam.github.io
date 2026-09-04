@@ -132,7 +132,7 @@
                             <span class="stat-label">Verified Certs</span>
                         </div>
                         <div class="stat-card glass-card">
-                            <span class="stat-number cyber-accent-purple">04</span>
+                            <span class="stat-number cyber-accent-purple">14</span>
                             <span class="stat-label">Core Projects</span>
                         </div>
                         <div class="stat-card glass-card">
@@ -641,59 +641,326 @@
                 </div>
                 
                 <div class="projects-grid">
-                    <!-- Project 1: AD Red Team Lab -->
-                    <article class="project-card glass-card hover-glow" data-category="redteam">
+                    <!-- Project 1: In-House SOC Implementation Roadmap -->
+                    <article class="project-card glass-card hover-glow" data-category="soc">
                         <div class="project-media">
                             <div class="cyber-scan-effect"></div>
                             <div class="media-placeholder">
-                                <i class="fas fa-sitemap"></i>
-                                <span class="grid-text-bg">AD_REDTEAM_LAB</span>
+                                <i class="fas fa-map"></i>
+                                <span class="grid-text-bg">SOC_ROADMAP</span>
                             </div>
                         </div>
                         <div class="project-content">
                             <div class="project-tags">
-                                <span class="tag">Active Directory</span>
-                                <span class="tag">BloodHound</span>
-                                <span class="tag">Kerberoasting</span>
-                                <span class="tag">Red Team</span>
+                                <span class="tag">SOC</span>
+                                <span class="tag">SOCaaS</span>
+                                <span class="tag">SIEM</span>
+                                <span class="tag">Incident Response</span>
+                                <span class="tag">SOC Architecture</span>
                             </div>
-                            <h3 class="project-title">Active Directory Red Team Lab</h3>
+                            <h3 class="project-title">In-House SOC Implementation Roadmap</h3>
                             <p class="project-summary">
-                                Enterprise-style AD environment with multi-VM setup simulating real-world attacks — Kerberoasting, lateral movement, and BloodHound attack path analysis.
+                                Designed a phased roadmap for establishing an in-house Security Operations Center, covering SOC architecture, technology selection, monitoring operations, incident response, staffing, and scalability toward 24/7 operations.
                             </p>
-                            <button class="cyber-btn-sm open-project-modal" data-project="1">
-                                <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
-                            </button>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="1">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-lock"></i> Confidential</span>
+                                </span>
+                            </div>
                         </div>
                     </article>
 
-                    <!-- Project 2: SIEM SOC Lab -->
+                    <!-- Project 2: Microsoft Sentinel SOC Architecture -->
+                    <article class="project-card glass-card hover-glow" data-category="soc">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-sitemap"></i>
+                                <span class="grid-text-bg">MS_SENTINEL</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Microsoft Sentinel</span>
+                                <span class="tag">SIEM</span>
+                                <span class="tag">SOAR</span>
+                                <span class="tag">KQL</span>
+                                <span class="tag">Defender XDR</span>
+                            </div>
+                            <h3 class="project-title">Microsoft Sentinel SOC Architecture</h3>
+                            <p class="project-summary">
+                                Designed a Microsoft Sentinel-based SOC architecture for centralized security monitoring, threat detection, investigation, and response. Planned integration with Microsoft Defender and cloud services.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="2">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-eye-slash"></i> Private</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Wazuh SIEM Home Lab -->
                     <article class="project-card glass-card hover-glow" data-category="soc">
                         <div class="project-media">
                             <div class="cyber-scan-effect"></div>
                             <div class="media-placeholder">
                                 <i class="fas fa-tower-broadcast"></i>
-                                <span class="grid-text-bg">SOC_LAB_WAZUH</span>
+                                <span class="grid-text-bg">WAZUH_LAB</span>
                             </div>
                         </div>
                         <div class="project-content">
                             <div class="project-tags">
-                                <span class="tag">Wazuh SIEM</span>
+                                <span class="tag">Wazuh</span>
+                                <span class="tag">SIEM</span>
+                                <span class="tag">Sysmon</span>
+                                <span class="tag">Windows Server</span>
                                 <span class="tag">Ubuntu</span>
-                                <span class="tag">SOC</span>
-                                <span class="tag">Blue Team</span>
                             </div>
-                            <h3 class="project-title">SIEM-Based SOC Lab (Wazuh)</h3>
+                            <h3 class="project-title">Wazuh SIEM Home Lab</h3>
                             <p class="project-summary">
-                                Full SOC environment on Wazuh — agent integration, brute-force attack simulation, Event ID 4625 investigation, and monitoring dashboards aligned with SOC workflows.
+                                Built a hands-on SIEM lab using Wazuh, Ubuntu Server, Windows Server 2022, Sysmon, and VMware. Configured endpoint monitoring and telemetry to simulate real-world SOC detection workflows.
                             </p>
-                            <button class="cyber-btn-sm open-project-modal" data-project="2">
-                                <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
-                            </button>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="3">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fab fa-github"></i> Coming Soon</span>
+                                </span>
+                            </div>
                         </div>
                     </article>
 
-                    <!-- Project 3: OSINT Tool -->
+                    <!-- Project 4: Microsoft 365 Security Hardening -->
+                    <article class="project-card glass-card hover-glow" data-category="security">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-shield-halved"></i>
+                                <span class="grid-text-bg">M365_SEC</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Microsoft 365</span>
+                                <span class="tag">Defender for O365</span>
+                                <span class="tag">Anti-Phishing</span>
+                                <span class="tag">DLP</span>
+                                <span class="tag">Email Security</span>
+                            </div>
+                            <h3 class="project-title">Microsoft 365 Security Hardening</h3>
+                            <p class="project-summary">
+                                Implemented and documented Microsoft 365 security controls focused on email and identity protection, including anti-phishing, impersonation protection, mailbox intelligence, and DLP controls.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="4">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-lock"></i> Confidential</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5: Check Point Email Security Hardening -->
+                    <article class="project-card glass-card hover-glow" data-category="security">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-envelope"></i>
+                                <span class="grid-text-bg">CHECK_POINT</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Check Point</span>
+                                <span class="tag">Email Security</span>
+                                <span class="tag">Anti-Phishing</span>
+                                <span class="tag">DMARC</span>
+                                <span class="tag">Impersonation</span>
+                            </div>
+                            <h3 class="project-title">Check Point Email Security Hardening</h3>
+                            <p class="project-summary">
+                                Configured and documented Check Point email security controls across multiple client environments, including impersonation detection, newly registered domain protection, and DMARC handling.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="5">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-lock"></i> Confidential</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 6: Incident Response Playbook Framework -->
+                    <article class="project-card glass-card hover-glow" data-category="soc">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-book-skull"></i>
+                                <span class="grid-text-bg">IR_PLAYBOOKS</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Incident Response</span>
+                                <span class="tag">SOC</span>
+                                <span class="tag">MITRE ATT&CK</span>
+                                <span class="tag">Malware Detection</span>
+                                <span class="tag">Account Compromise</span>
+                            </div>
+                            <h3 class="project-title">Incident Response Playbook Framework</h3>
+                            <p class="project-summary">
+                                Developed structured incident response playbooks for common SOC scenarios, including malware detection and account compromise. Defined investigation, containment, eradication, and escalation procedures.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="6">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-eye-slash"></i> Private</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 7: Security Incident Investigation -->
+                    <article class="project-card glass-card hover-glow" data-category="soc">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-magnifying-glass-chart"></i>
+                                <span class="grid-text-bg">INCIDENT_INV</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Incident Investigation</span>
+                                <span class="tag">Windows Server</span>
+                                <span class="tag">Event Logs</span>
+                                <span class="tag">NTLM Auth</span>
+                                <span class="tag">SOC</span>
+                            </div>
+                            <h3 class="project-title">Security Incident Investigation</h3>
+                            <p class="project-summary">
+                                Investigated repeated Windows authentication failures involving an Administrator account, analyzing NTLM authentication events, Logon Type 3 activity, error codes, and recurring login patterns.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="7">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-lock"></i> Confidential</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 8: VAPT Assessment Framework -->
+                    <article class="project-card glass-card hover-glow" data-category="redteam">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-file-shield"></i>
+                                <span class="grid-text-bg">VAPT_FRAMEWORK</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">VAPT</span>
+                                <span class="tag">Penetration Testing</span>
+                                <span class="tag">OWASP</span>
+                                <span class="tag">Assessment</span>
+                                <span class="tag">Reporting</span>
+                            </div>
+                            <h3 class="project-title">VAPT Assessment Framework</h3>
+                            <p class="project-summary">
+                                Developed a professional VAPT framework covering assessment methodology, scope definition, client questionnaires, proposals, reporting, remediation validation, and retesting.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="8">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-eye-slash"></i> Private</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 9: Web Application Security Lab -->
+                    <article class="project-card glass-card hover-glow" data-category="redteam">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-bug"></i>
+                                <span class="grid-text-bg">WEB_APP_SEC</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">DVWA</span>
+                                <span class="tag">OWASP Juice Shop</span>
+                                <span class="tag">Web Security</span>
+                                <span class="tag">VAPT</span>
+                                <span class="tag">Burp Suite</span>
+                            </div>
+                            <h3 class="project-title">Web Application Security Lab</h3>
+                            <p class="project-summary">
+                                Built a controlled web application security testing environment using DVWA and OWASP Juice Shop to practice vulnerability discovery, exploitation, validation, and security reporting.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="9">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fas fa-flask"></i> Lab Model</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 10: MITRE ATT&CK Detection Mapping -->
+                    <article class="project-card glass-card hover-glow" data-category="soc">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-network-wired"></i>
+                                <span class="grid-text-bg">MITRE_ATTACK</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">MITRE ATT&CK</span>
+                                <span class="tag">Threat Detection</span>
+                                <span class="tag">Detection Engineering</span>
+                                <span class="tag">SOC</span>
+                            </div>
+                            <h3 class="project-title">MITRE ATT&CK Detection Mapping</h3>
+                            <p class="project-summary">
+                                Developed a structured MITRE ATT&CK mapping framework to associate security detections, attack behaviors, and defensive controls with relevant adversary techniques and tactics.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="10">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fas fa-diagram-project"></i> Matrix Model</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 11: OSINT-Based Data Exposure Assessment Tool -->
                     <article class="project-card glass-card hover-glow" data-category="security">
                         <div class="project-media">
                             <div class="cyber-scan-effect"></div>
@@ -708,18 +975,115 @@
                                 <span class="tag">Flask</span>
                                 <span class="tag">OSINT</span>
                                 <span class="tag">VirusTotal API</span>
+                                <span class="tag">HaveIBeenPwned</span>
                             </div>
                             <h3 class="project-title">OSINT-Based Data Exposure Assessment Tool</h3>
                             <p class="project-summary">
-                                Platform to identify publicly exposed information — email breach detection, IP reputation, domain intelligence, and real-time threat dashboard.
+                                Platform to identify publicly exposed information — email breach detection, IP reputation, domain intelligence, and real-time threat dashboard with risk scoring.
                             </p>
-                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
-                                <button class="cyber-btn-sm open-project-modal" data-project="3">
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="11">
                                     <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
                                 </button>
                                 <a href="https://github.com/hameezcam/osint-data-exposure-tool" target="_blank" rel="noopener" class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
                                     <span><i class="fab fa-github"></i> GitHub</span>
                                 </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 12: Active Directory Red Team Lab -->
+                    <article class="project-card glass-card hover-glow" data-category="redteam">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-sitemap"></i>
+                                <span class="grid-text-bg">AD_REDTEAM_LAB</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Active Directory</span>
+                                <span class="tag">BloodHound</span>
+                                <span class="tag">Kerberoasting</span>
+                                <span class="tag">Mimikatz</span>
+                                <span class="tag">Red Team</span>
+                            </div>
+                            <h3 class="project-title">Active Directory Red Team Lab</h3>
+                            <p class="project-summary">
+                                Enterprise-style AD environment with multi-VM setup simulating real-world attacks — Kerberoasting, lateral movement, privilege escalation, and BloodHound attack path analysis.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="12">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fas fa-cubes"></i> Lab Setup</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 13: SOC Infrastructure Scaling Architecture -->
+                    <article class="project-card glass-card hover-glow" data-category="soc">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-server"></i>
+                                <span class="grid-text-bg">SOC_SCALING</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">SOC Architecture</span>
+                                <span class="tag">SIEM</span>
+                                <span class="tag">Infrastructure</span>
+                                <span class="tag">Scalability</span>
+                                <span class="tag">Security Ops</span>
+                            </div>
+                            <h3 class="project-title">SOC Infrastructure Scaling Architecture</h3>
+                            <p class="project-summary">
+                                Designed scalable SOC architecture concepts for environments ranging from 50 to 400 users, evaluating monitoring requirements, infrastructure, SIEM capacity, and telemetry bandwidth.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="13">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-eye-slash"></i> Private</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 14: Security Operations Documentation Framework -->
+                    <article class="project-card glass-card hover-glow" data-category="security">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-folder-tree"></i>
+                                <span class="grid-text-bg">SOC_DOCS</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Security Docs</span>
+                                <span class="tag">SOC</span>
+                                <span class="tag">Checklists</span>
+                                <span class="tag">Version Control</span>
+                                <span class="tag">ISO 27001</span>
+                            </div>
+                            <h3 class="project-title">Security Operations Documentation Framework</h3>
+                            <p class="project-summary">
+                                Created standardized documentation structures for client security configurations, security checklists, version control, ticket resolutions, and recurring SOC operational procedures.
+                            </p>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="14">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);opacity:0.7;cursor:not-allowed;">
+                                    <span><i class="fas fa-lock"></i> Confidential</span>
+                                </span>
                             </div>
                         </div>
                     </article>

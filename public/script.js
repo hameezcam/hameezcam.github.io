@@ -3,7 +3,7 @@
    Interactive CLI, Plexus Canvas, Modals, & Form
    ---------------------------------------------------- */
 
-window.initCyberApp = function() {
+document.addEventListener('DOMContentLoaded', () => {
     // Current date display in terminal
     updateTerminalDate();
 
@@ -19,9 +19,7 @@ window.initCyberApp = function() {
     initContactForm();
     initBackToTop();
     initCVDownload();
-};
-
-document.addEventListener('DOMContentLoaded', window.initCyberApp);
+});
 
 /* --- Update Date in Terminal --- */
 function updateTerminalDate() {
@@ -480,36 +478,88 @@ function initTerminal() {
             if (inputVal.startsWith('projects')) {
                 const parts = inputVal.split(' ');
                 if (parts.length === 1) {
-                    appendTermLine(`--- Deployed Projects Directory ---
-  1. Active Directory Red Team Lab [RED TEAM / SECURITY]
-  2. SIEM-Based SOC Lab (Wazuh) [SOC / BLUE TEAM]
-  3. OSINT-Based Data Exposure Assessment Tool [SECURITY]
+                    appendTermLine(`--- Deployed Projects Directory (14 Active Systems) ---
+  1. In-House SOC Implementation Roadmap [SOC / BLUE TEAM]
+  2. Microsoft Sentinel SOC Architecture [SOC / BLUE TEAM]
+  3. Wazuh SIEM Home Lab [SOC / BLUE TEAM]
+  4. Microsoft 365 Security Hardening [SECURITY]
+  5. Check Point Email Security Hardening [SECURITY]
+  6. Incident Response Playbook Framework [SOC / BLUE TEAM]
+  7. Security Incident Investigation [SOC / BLUE TEAM]
+  8. VAPT Assessment Framework [RED TEAM]
+  9. Web Application Security Lab [RED TEAM]
+  10. MITRE ATT&CK Detection Mapping [SOC / BLUE TEAM]
+  11. OSINT-Based Data Exposure Assessment Tool [SECURITY / OSINT]
+  12. Active Directory Red Team Lab [RED TEAM]
+  13. SOC Infrastructure Scaling Architecture [SOC / BLUE TEAM]
+  14. Security Operations Documentation Framework [SECURITY / GRC]
   
   Type <span class="terminal-highlight">projects &lt;id&gt;</span> (e.g., <span class="terminal-highlight">projects 1</span>) to query detailed architecture notes.`);
                 } else {
                     const id = parts[1];
                     const projectDetails = {
-                        '1': `Project: Active Directory Red Team Lab
-  * Purpose: Simulate corporate AD environment and conduct red team attacks.
-  * Stack: Windows Server 2019/2008, VMware, PowerShell, BloodHound, SharpHound, Mimikatz, Rubeus, Inveigh, Hashcat.
-  * Key Activities: Kerberoasting, password spraying, lateral movement, LLMNR poisoning, BloodHound attack path analysis.
-  * Defense Focus: Event ID investigation, privilege escalation detection, and Group Policy hardening.`,
-                        '2': `Project: SIEM-Based SOC Lab (Wazuh)
-  * Purpose: Build a full Security Operations Center environment using Wazuh SIEM.
-  * Stack: Wazuh SIEM, Ubuntu, Windows Server, Kali Linux.
-  * Key Activities: Agent deployment, brute-force attack simulation, Event ID 4625 (failed login) investigation, log correlation, anomaly detection.
-  * Output: SOC monitoring dashboards aligned with real-world workflows.`,
-                        '3': `Project: OSINT-Based Data Exposure Assessment Tool
+                        '1': `Project: In-House SOC Implementation Roadmap
+  * Focus: Strategic SOC Operating Model & Roadmap
+  * Stack: Microsoft Sentinel, Defender XDR, Draw.io, SOC Frameworks
+  * Highlights: Phased scaling from business-hours toward 24/7 continuous operations, technology evaluation, SLA & escalation matrices.`,
+                        '2': `Project: Microsoft Sentinel SOC Architecture
+  * Focus: Cloud SIEM/SOAR Architecture
+  * Stack: Microsoft Sentinel, Log Analytics, KQL, Microsoft Defender, Logic Apps
+  * Highlights: Custom KQL analytic rules, automated incident triaging playbooks, threat intelligence feeds.`,
+                        '3': `Project: Wazuh SIEM Home Lab
+  * Focus: Endpoint Monitoring & Telemetry
+  * Stack: Wazuh Manager/Indexer, Sysmon, Windows Server 2022, Ubuntu, VMware
+  * Highlights: Sysmon deployment, brute-force simulation, Event ID 4625 forensic triage, custom SOC alert dashboards.`,
+                        '4': `Project: Microsoft 365 Security Hardening
+  * Focus: Email & Identity Protection
+  * Stack: Microsoft 365, Defender for Office 365, EOP, DLP, Secure Score
+  * Highlights: Anti-phishing thresholds, impersonation protection, mailbox intelligence, Safe Attachments/Links dynamic scanning.`,
+                        '5': `Project: Check Point Email Security Hardening
+  * Focus: Multi-tenant Email Security
+  * Stack: Check Point Harmony Email & Collaboration, SPF/DKIM/DMARC, M365 Exchange
+  * Highlights: Inline threat prevention, newly registered domain (NRD) analysis, DMARC quarantine enforcement.`,
+                        '6': `Project: Incident Response Playbook Framework
+  * Focus: SOC Workflow & Response Procedures
+  * Stack: NIST SP 800-61, MITRE ATT&CK, Draw.io, Markdown
+  * Highlights: Phishing, malware outbreak, ransomware, and account takeover playbooks with interactive decision trees.`,
+                        '7': `Project: Security Incident Investigation
+  * Focus: Authentication Failure Analysis & Triage
+  * Stack: Windows Event Logs, NTLMv1/v2, PowerShell, Wireshark
+  * Highlights: Forensic triage of Event ID 4625/4624, Logon Type 3 network logon analysis, root-cause isolation.`,
+                        '8': `Project: VAPT Assessment Framework
+  * Focus: Penetration Testing Methodology & Deliverables
+  * Stack: OWASP OTG, PTES, CVSS v3.1, Markdown Templates
+  * Highlights: Scoping questionnaires, Rules of Engagement, executive proposals, and technical report templates.`,
+                        '9': `Project: Web Application Security Lab
+  * Focus: Offensive Web Exploitation & Mitigation
+  * Stack: DVWA, OWASP Juice Shop, Burp Suite, Docker, sqlmap
+  * Highlights: OWASP Top 10 hands-on practice (SQLi, XSS, CSRF, IDOR, SSRF) with defense verification.`,
+                        '10': `Project: MITRE ATT&CK Detection Mapping
+  * Focus: Threat Detection Engineering
+  * Stack: MITRE ATT&CK Enterprise Matrix, Wazuh Rules, Sentinel KQL
+  * Highlights: Telemetry requirement mapping, detection gap analysis, adversary tactic correlation.`,
+                        '11': `Project: OSINT-Based Data Exposure Assessment Tool
   * GitHub: https://github.com/hameezcam/osint-data-exposure-tool
-  * Purpose: Identify publicly exposed information and assess cyber risks.
-  * Stack: Python, Flask, SQLite, HaveIBeenPwned API, VirusTotal API, AbuseIPDB API.
-  * Features: Email breach detection, IP reputation analysis, domain intelligence, threat analysis, real-time web dashboard.`
+  * Stack: Python, Flask, SQLite, HaveIBeenPwned API, VirusTotal API, AbuseIPDB API
+  * Highlights: Real-time risk scoring dashboard, email breach lookups, malicious IP triage, and domain intelligence.`,
+                        '12': `Project: Active Directory Red Team Lab
+  * Focus: Enterprise AD Attack & Defense
+  * Stack: Windows Server 2019/2008, BloodHound, SharpHound, Mimikatz, Rubeus, Inveigh, Hashcat
+  * Highlights: Kerberoasting, lateral movement, LLMNR poisoning, and defensive event log footprint analysis.`,
+                        '13': `Project: SOC Infrastructure Scaling Architecture
+  * Focus: Capacity Planning & Infrastructure Sizing
+  * Stack: SIEM Sizing Models, Hot-Warm-Cold Storage Tiering, EPS Calculators
+  * Highlights: Architecture blueprints for 50-400 user environments, log retention compliance, HA cluster designs.`,
+                        '14': `Project: Security Operations Documentation Framework
+  * Focus: Governance, Configuration & Standardized Operations
+  * Stack: ISO/IEC 27001 Annex A, IT Service Management, Version Control
+  * Highlights: Daily health-check runbooks, client security baseline templates, and standardized ticket resolution guides.`
                     };
                     
                     if (projectDetails[id]) {
                         appendTermLine(projectDetails[id]);
                     } else {
-                        appendTermLine(`Error: Project ID "${id}" not indexed. Valid range: [1-3]`, 'error-msg');
+                        appendTermLine(`Error: Project ID "${id}" not indexed. Valid range: [1-14]`, 'error-msg');
                     }
                 }
                 return;
@@ -583,101 +633,215 @@ function initModals() {
     const projectsData = {
         '1': {
             title: "In-House SOC Implementation Roadmap",
-            category: "SOC / Blue Team",
+            category: "SOC Operations / Blue Team",
+            timeline: "2025 - 2026",
             tags: ["SOC", "SOCaaS", "SIEM", "Incident Response", "Security Operations", "SOC Architecture"],
-            description: "Designed a phased roadmap for establishing an in-house Security Operations Center, covering SOC architecture, technology selection, monitoring operations, incident response, staffing, and scalability from business-hours monitoring toward 24/7 operations.",
-            linkType: "confidential"
+            description: "Designed a comprehensive, phased roadmap for establishing an in-house Security Operations Center (SOC). Covers operating models, monitoring workflows, SIEM strategy, Microsoft security integration, SLA escalation tiers, and scaling considerations from business-hours monitoring toward 24/7 continuous operations.",
+            status: "Confidential Enterprise Blueprint",
+            features: [
+                "Strategic SOC roadmap covering operating models, monitoring workflows, SIEM strategy, and Microsoft security integration.",
+                "Phased scaling roadmap from initial triage and business-hours monitoring toward 24/7 continuous operations.",
+                "Technology evaluation matrix covering SIEM, SOAR, EDR, and long-term log retention requirements.",
+                "Defined escalation matrices, SLA tiers, and shift handover protocols for Tier 1-3 analysts."
+            ],
+            architecture: "Comprehensive SOC operating model designed in Draw.io detailing SIEM data ingestion pipelines, Tier 1 triage, Tier 2 incident analysis, Tier 3 threat hunting, and threat intelligence feed integration."
         },
         '2': {
             title: "Microsoft Sentinel SOC Architecture",
-            category: "SOC / Blue Team",
+            category: "SOC Operations / Cloud Security",
+            timeline: "2025 - 2026",
             tags: ["Microsoft Sentinel", "SIEM", "SOAR", "KQL", "Microsoft Defender", "Cloud Security"],
-            description: "Designed a Microsoft Sentinel-based SOC architecture for centralized security monitoring, threat detection, investigation, and response. Planned integration with Microsoft Defender and cloud security services to support a scalable SOC environment.",
-            linkType: "private"
+            description: "Designed a Microsoft Sentinel-based SOC architecture for centralized security monitoring, threat detection, investigation, and response. Engineered integrations with Microsoft Defender XDR and cloud security services to support a scalable SOC environment.",
+            status: "Private Architecture Model",
+            features: [
+                "Cloud-native SIEM architecture utilizing Microsoft Sentinel and Log Analytics Workspaces.",
+                "Custom KQL (Kusto Query Language) analytic rules and hunt queries for identity, endpoint, and cloud anomalies.",
+                "Data connector mapping across Microsoft 365, Defender XDR, Azure Activity, and firewall syslog.",
+                "Automated incident triaging and playbook execution with Azure Logic Apps (SOAR)."
+            ],
+            architecture: "Centralized Sentinel workspace ingesting CEF/Syslog, Azure Activity, and Defender XDR telemetry with RBAC segregation, retention tiering, and SOAR automation pipelines."
         },
         '3': {
             title: "Wazuh SIEM Home Lab",
-            category: "SOC / Blue Team",
+            category: "SOC Operations / Blue Team",
+            timeline: "2025 - 2026",
             tags: ["Wazuh", "SIEM", "Sysmon", "Windows Server", "Ubuntu", "VMware", "Threat Detection"],
             description: "Built a hands-on SIEM lab using Wazuh, Ubuntu Server, Windows Server 2022, Sysmon, and VMware. Configured endpoint monitoring and security telemetry to simulate real-world SOC detection and investigation workflows.",
-            linkType: "github_pending"
+            status: "Lab Environment (GitHub Coming Soon)",
+            features: [
+                "Deployed Wazuh Manager and Indexer on Ubuntu Server 24.04 with active response integration.",
+                "Installed and configured Wazuh Agents and SwiftOnSecurity Sysmon configs across Windows Server and client endpoints.",
+                "Simulated brute-force attacks from Kali Linux, validating detection of Windows Event ID 4625 (failed logon) and Event ID 4624.",
+                "Built custom visualization dashboards and alert decoders for rapid alert triage and incident correlation."
+            ],
+            architecture: "VMware virtual lab consisting of Ubuntu Server (Wazuh Manager/Indexer), Windows Server 2022 (Domain Controller + Agent), Windows 10 (Workstation + Agent + Sysmon), and Kali Linux (Threat Simulation Engine)."
         },
         '4': {
             title: "Microsoft 365 Security Hardening",
-            category: "Security",
+            category: "Security Engineering / Identity",
+            timeline: "2025 - 2026",
             tags: ["Microsoft 365", "Defender for Office 365", "Anti-Phishing", "DLP", "Email Security", "Identity Protection"],
-            description: "Implemented and documented Microsoft 365 security controls focused on email and identity protection, including anti-phishing, impersonation protection, mailbox intelligence, phishing thresholds, quarantine policies, and DLP controls.",
-            linkType: "confidential"
+            description: "Implemented and documented enterprise Microsoft 365 security controls focused on email and identity protection, including anti-phishing, impersonation protection, mailbox intelligence, phishing thresholds, quarantine policies, and DLP controls.",
+            status: "Confidential Enterprise Pack",
+            features: [
+                "Configured anti-phishing policies with user & domain impersonation protection and mailbox intelligence.",
+                "Hardened Safe Attachments and Safe Links policies with real-time dynamic delivery and click-time scanning.",
+                "Implemented Data Loss Prevention (DLP) rules safeguarding financial records, PII, and credentials.",
+                "Elevated Microsoft Secure Score by systematically eliminating tenant configuration gaps."
+            ],
+            architecture: "Microsoft 365 Security Center & Exchange Online Protection (EOP) defense-in-depth policy matrix across transport rules, threat policies, and quarantine management."
         },
         '5': {
             title: "Check Point Email Security Hardening",
-            category: "Security",
+            category: "Security Engineering / Email",
+            timeline: "2025 - 2026",
             tags: ["Check Point", "Email Security", "Anti-Phishing", "DMARC", "Impersonation Protection"],
             description: "Configured and documented Check Point email security controls across multiple client environments, including impersonation detection, newly registered domain protection, DMARC failure handling, phishing workflows, and email security policies.",
-            linkType: "confidential"
+            status: "Confidential Client Architecture",
+            features: [
+                "Deployed Check Point Harmony Email & Collaboration security suites across client tenants.",
+                "Enforced strict SPF, DKIM, and DMARC verification and quarantine policies for unauthorized senders.",
+                "Implemented AI-driven anomaly detection for newly registered domains (NRDs) and homograph attacks.",
+                "Streamlined false-positive remediation and user submission triage workflows."
+            ],
+            architecture: "Cloud API-based inline email inspection integrating Check Point Harmony with Microsoft 365 Exchange Online Mailflows."
         },
         '6': {
             title: "Incident Response Playbook Framework",
-            category: "SOC / Blue Team",
+            category: "SOC Operations / Blue Team",
+            timeline: "2025 - 2026",
             tags: ["Incident Response", "SOC", "MITRE ATT&CK", "Malware Detection", "Account Compromise", "Threat Investigation"],
             description: "Developed structured incident response playbooks for common SOC scenarios, including malware detection and account compromise. Defined investigation, containment, eradication, recovery, escalation, and documentation procedures.",
-            linkType: "private"
+            status: "Private Playbook Library",
+            features: [
+                "Created standardized NIST/SANS aligned playbooks for Phishing, Malware Outbreak, Ransomware, and Account Takeover (ATO).",
+                "Detailed step-by-step triage actions, evidence preservation steps, and memory/disk artifact extraction.",
+                "Included interactive Draw.io decision tree flowcharts for Tier 1 and Tier 2 analysts.",
+                "Established communication protocols, legal escalation guidelines, and post-incident review templates."
+            ],
+            architecture: "Structured markdown & visual flowchart documentation library mapped directly to NIST SP 800-61 Rev. 2 phases."
         },
         '7': {
             title: "Security Incident Investigation",
-            category: "SOC / Blue Team",
+            category: "SOC Operations / Forensics",
+            timeline: "2025 - 2026",
             tags: ["Incident Investigation", "Windows Server", "Event Logs", "NTLM Authentication", "SOC"],
             description: "Investigated repeated Windows authentication failures involving an Administrator account, analyzing NTLM authentication events, Logon Type 3 activity, error codes, and recurring login patterns to determine whether the activity represented an attack or an underlying server issue.",
-            linkType: "confidential"
+            status: "Confidential Case Study",
+            features: [
+                "Detailed forensic triage of hundreds of Event ID 4625 occurrences across domain controllers.",
+                "Isolated NTLMv1/NTLMv2 authentications, Logon Type 3 (Network logon), and sub-status error codes (0xC000006A, 0xC0000234).",
+                "Correlated source workstations, scheduled tasks, and legacy service accounts causing credential locks.",
+                "Published comprehensive post-incident analysis report with remediation steps to prevent domain lockouts."
+            ],
+            architecture: "Windows Event Log forensics, PowerShell telemetry parsing scripts, and network packet correlation."
         },
         '8': {
             title: "VAPT Assessment Framework",
-            category: "Red Team",
+            category: "Red Team / Offensive Security",
+            timeline: "2025 - 2026",
             tags: ["VAPT", "Penetration Testing", "OWASP", "Security Assessment", "Reporting", "Retesting"],
             description: "Developed a professional VAPT framework covering assessment methodology, scope definition, client questionnaires, proposals, reporting, remediation validation, and retesting. Structured the process for delivering repeatable penetration testing engagements.",
-            linkType: "private"
+            status: "Private Framework Pack",
+            features: [
+                "Standardized OWASP Testing Guide (OTG) and PTES-aligned vulnerability assessment methodology.",
+                "Complete document pack: scoping questionnaire, rules of engagement (RoE), executive proposal, and technical report template.",
+                "CVSS v3.1 severity rating calculator and actionable risk prioritization matrix.",
+                "Structured re-testing protocol for verifying customer remediation effectiveness."
+            ],
+            architecture: "Complete offensive assessment delivery toolkit and reporting system for network, infrastructure, and application assessments."
         },
         '9': {
             title: "Web Application Security Lab",
-            category: "Red Team",
+            category: "Red Team / Offensive Security",
+            timeline: "2025 - 2026",
             tags: ["DVWA", "OWASP Juice Shop", "Web Security", "VAPT", "OWASP", "Penetration Testing"],
             description: "Built a controlled web application security testing environment using DVWA and OWASP Juice Shop to practice vulnerability discovery, exploitation, validation, and security reporting against intentionally vulnerable applications.",
-            linkType: "none"
+            status: "Lab Environment",
+            features: [
+                "Practiced exploiting and mitigating OWASP Top 10 vulnerabilities (SQL Injection, XSS, CSRF, IDOR, SSRF, Broken Auth).",
+                "Utilized Burp Suite for request interception, repeater testing, and intruder fuzzing.",
+                "Extracted database schemas via manual SQLi payloads and automated sqlmap validation.",
+                "Formulated remediation code snippets and defense mechanisms in PHP, Node.js, and Python."
+            ],
+            architecture: "Docker containerized environment hosting DVWA, OWASP Juice Shop, and Mutillidae with Burp Suite proxy routing."
         },
         '10': {
             title: "MITRE ATT&CK Detection Mapping",
-            category: "SOC / Blue Team",
+            category: "SOC Operations / Detection Engineering",
+            timeline: "2025 - 2026",
             tags: ["MITRE ATT&CK", "Threat Detection", "Detection Engineering", "SOC", "Threat Intelligence"],
             description: "Developed a structured MITRE ATT&CK mapping framework to associate security detections, attack behaviors, and defensive controls with relevant adversary techniques and tactics.",
-            linkType: "none"
+            status: "Matrix Mapping Model",
+            features: [
+                "Mapped Enterprise Matrix techniques across Initial Access, Execution, Persistence, Privilege Escalation, and Lateral Movement.",
+                "Identified telemetry sources required for high-risk adversary techniques (e.g. T1003 OS Credential Dumping, T1059 Command Interpreters).",
+                "Constructed detection coverage gap analysis to identify blind spots in SIEM and EDR rule sets.",
+                "Enhanced alert priority scoring based on ATT&CK technique severity and threat group profiles."
+            ],
+            architecture: "Matrix mapping model correlating Wazuh/Sentinel detection rules with ATT&CK IDs, data sources, and mitigation techniques."
         },
         '11': {
-            title: "OSINT & Threat Intelligence Toolkit",
-            category: "Security",
-            tags: ["OSINT", "Threat Intelligence", "Shodan", "Censys", "Have I Been Pwned", "AbuseIPDB"],
-            description: "Built an OSINT investigation workflow using services such as Have I Been Pwned, Shodan, Censys, Spyse, and AbuseIPDB to support domain, IP, exposure, and threat intelligence investigations.",
-            linkType: "private"
+            title: "OSINT-Based Data Exposure Assessment Tool",
+            category: "Cybersecurity / OSINT",
+            timeline: "2025 - 2026",
+            tags: ["Python", "Flask", "SQLite", "HaveIBeenPwned API", "VirusTotal API", "AbuseIPDB API", "OSINT"],
+            description: "Developed an open-source OSINT security exposure assessment platform integrating threat intelligence APIs to detect breached credentials, malicious IPs, domain indicators, and calculate risk scores via a real-time web dashboard.",
+            github: "https://github.com/hameezcam/osint-data-exposure-tool",
+            status: "Public Open Source Project",
+            features: [
+                "Email breach detection via HaveIBeenPwned API checking compromised credentials and breach timelines.",
+                "IP reputation scoring and malicious report aggregation via AbuseIPDB API.",
+                "Multi-engine domain & URL scanning powered by VirusTotal API.",
+                "Interactive Flask web dashboard displaying scan history, threat radar, and downloadable risk summary reports."
+            ],
+            architecture: "Python backend with Flask REST API, SQLite database, async threat intelligence fetchers, and responsive web dashboard."
         },
         '12': {
-            title: "SOC Infrastructure Scaling Architecture",
-            category: "SOC / Blue Team",
-            tags: ["SOC Architecture", "SIEM", "Infrastructure", "Scalability", "Security Operations"],
-            description: "Designed scalable SOC architecture concepts for environments ranging from 50 to 400 users, evaluating monitoring requirements, infrastructure, SIEM capacity, endpoint telemetry, and future expansion.",
-            linkType: "private"
+            title: "Active Directory Red Team Lab",
+            category: "Red Team / Active Directory Security",
+            timeline: "2025 - 2026",
+            tags: ["Windows Server 2019", "Active Directory", "BloodHound", "Kerberoasting", "Mimikatz", "PowerShell", "Red Team"],
+            description: "Designed and deployed an enterprise-style Active Directory lab using multiple Windows Server and client virtual machines to simulate a real corporate environment and execute hands-on red team operations and defensive event log investigations.",
+            status: "Lab Environment",
+            features: [
+                "Configured AD DS, DNS, Group Policy Objects (GPOs), Service Principal Names (SPNs), and SQL Server across virtual machines.",
+                "Executed Kerberoasting, AS-REP roasting, password spraying, and token impersonation attacks.",
+                "Used BloodHound and SharpHound to map complex attack paths to Domain Admin.",
+                "Simulated LLMNR/NBT-NS poisoning with Inveigh and cracked captured hashes offline with Hashcat and John the Ripper.",
+                "Investigated Windows Security Event IDs (4625, 4768, 4769, 4672) to understand attacker footprints."
+            ],
+            architecture: "Multi-VM lab built in VMware: Windows Server 2019 (Domain Controller), Windows Server 2008 (legacy target), Windows 10 (client workstation), and Kali Linux (attacker node)."
         },
         '13': {
-            title: "Cybersecurity Knowledge Base",
-            category: "Security",
-            tags: ["Cybersecurity", "Documentation", "Knowledge Base", "Zoho Desk", "Security Awareness", "Technical Documentation"],
-            description: "Developed cybersecurity knowledge-base content and operational documentation for common security topics, including internet safety, security procedures, troubleshooting guidance, and standardized ticket resolutions.",
-            linkType: "confidential"
+            title: "SOC Infrastructure Scaling Architecture",
+            category: "SOC Operations / Blue Team",
+            timeline: "2025 - 2026",
+            tags: ["SOC Architecture", "SIEM", "Infrastructure", "Scalability", "Security Operations"],
+            description: "Designed scalable SOC architecture concepts for organizations ranging from 50 to 400 users, evaluating log ingestion volume, storage retention tiers, SIEM processing capacity, and endpoint telemetry bandwidth.",
+            status: "Private Architecture Model",
+            features: [
+                "Formulated EPS (Events Per Second) and daily GB ingestion calculations based on user count and endpoint densities.",
+                "Designed hot-warm-cold storage lifecycle policies ensuring compliance with long-term retention mandates.",
+                "Planned high-availability (HA) cluster configurations for SIEM forwarders and indexing nodes.",
+                "Established bandwidth throttling models to protect remote WAN links during peak telemetry bursts."
+            ],
+            architecture: "High-availability SOC telemetry pipeline architecture diagrammed for multi-tier corporate networks."
         },
         '14': {
             title: "Security Operations Documentation Framework",
-            category: "SOC / Blue Team",
-            tags: ["Security Documentation", "SOC", "Checklists", "Version Control", "Operations"],
-            description: "Created standardized documentation structures for client security configurations, security checklists, version control, ticket resolutions, and recurring SOC operational procedures.",
-            linkType: "confidential"
+            category: "Security Engineering / GRC",
+            timeline: "2025 - 2026",
+            tags: ["Security Documentation", "SOC", "Checklists", "Version Control", "Operations", "ISO 27001"],
+            description: "Created standardized documentation structures for client security configurations, security checklists, version control, ticket resolutions, and recurring SOC operational procedures aligned with industry standards.",
+            status: "Confidential Enterprise Package",
+            features: [
+                "Standardized technical runbooks for daily health checks, log source verification, and certificate expiration tracking.",
+                "Created structured client security configuration baseline templates and change control logs.",
+                "Established ticketing documentation standards for incident escalations in IT service management platforms.",
+                "Integrated ISO/IEC 27001 Annex A control references into operational procedures."
+            ],
+            architecture: "Standardized operational documentation repository and change management hierarchy."
         }
     };
 
@@ -847,47 +1011,30 @@ function initModals() {
             const data = projectsData[id];
             
             if (data) {
-                let tagsHtml = data.tags ? data.tags.map(t => `<span class="tag">${t}</span>`).join('') : '';
-                
-                // Only render features if they exist
-                let featuresHtml = data.features ? data.features.map(f => `<li><i class="fas fa-check-circle"></i> <span>${f}</span></li>`).join('') : '';
-                let featuresSection = data.features ? `<h4>KEY DETAILS</h4><ul>${featuresHtml}</ul>` : '';
-                
-                // Only render architecture if it exists
-                let architectureSection = data.architecture ? `<h4>SYSTEM ARCHITECTURE</h4><p>${data.architecture}</p>` : '';
-                
-                // Render timeline if exists
-                let timelineHtml = data.timeline ? `<span><i class="far fa-calendar-alt"></i> ${data.timeline}</span>` : '';
-
-                // Handle Link Types
-                let actionBtnHtml = '';
-                if (data.linkType === 'confidential') {
-                    actionBtnHtml = `<span class="cyber-btn primary-btn" style="opacity:0.7; cursor:not-allowed;"><span class="btn-text"><i class="fas fa-lock"></i> Confidential</span></span>`;
-                } else if (data.linkType === 'private') {
-                    actionBtnHtml = `<span class="cyber-btn primary-btn" style="opacity:0.7; cursor:not-allowed;"><span class="btn-text"><i class="fas fa-eye-slash"></i> Private Repository</span></span>`;
-                } else if (data.linkType === 'github_pending') {
-                    actionBtnHtml = `<span class="cyber-btn primary-btn" style="opacity:0.8; cursor:wait;"><span class="btn-text"><i class="fab fa-github"></i> Coming Soon</span></span>`;
-                } else if (data.github) {
-                    actionBtnHtml = `<a href="${data.github}" target="_blank" class="cyber-btn primary-btn"><span class="btn-text"><i class="fab fa-github"></i> Repository</span></a>`;
-                }
+                let tagsHtml = data.tags.map(t => `<span class="tag">${t}</span>`).join('');
+                let featuresHtml = data.features.map(f => `<li><i class="fas fa-check-circle"></i> <span>${f}</span></li>`).join('');
                 
                 projectModalBody.innerHTML = `
                     <h3 class="modal-project-title">${data.title}</h3>
                     <div class="modal-project-meta">
                         <span><i class="fas fa-folder"></i> ${data.category}</span>
-                        ${timelineHtml}
+                        <span><i class="far fa-calendar-alt"></i> ${data.timeline}</span>
                     </div>
                     <div class="modal-project-tags">${tagsHtml}</div>
                     <div class="modal-project-body">
                         <h4>PROJECT DESCRIPTION</h4>
                         <p>${data.description}</p>
                         
-                        ${featuresSection}
-                        ${architectureSection}
+                        <h4>KEY FEATURES</h4>
+                        <ul>${featuresHtml}</ul>
+                        
+                        <h4>SYSTEM ARCHITECTURE</h4>
+                        <p>${data.architecture}</p>
                     </div>
-                    <div class="modal-project-actions">
-                        ${actionBtnHtml}
-                        <button class="cyber-btn secondary-btnClose modal-close-action"><span class="btn-text">Close</span></button>
+                    <div class="modal-project-actions" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+                        ${data.github ? `<a href="${data.github}" target="_blank" rel="noopener" class="cyber-btn primary-btn"><span class="btn-text"><i class="fab fa-github"></i> Repository</span></a>` : ''}
+                        ${data.status ? `<span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-secondary);background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);padding:8px 14px;border-radius:4px;"><i class="fas fa-shield-halved" style="color:var(--cyber-blue);margin-right:6px;"></i>${data.status}</span>` : ''}
+                        <button class="cyber-btn secondary-btn modal-close-action" style="margin-left:auto;"><span class="btn-text">Close</span></button>
                     </div>
                 `;
                 
@@ -1069,76 +1216,35 @@ function initContactForm() {
             return;
         }
 
-        // --- EMAIL INTEGRATION (Web3Forms) ---
-        // Get your free access key by entering your email at https://web3forms.com/
-        // Then replace the string below with your key.
-        const ACCESS_KEY = "262a1b3c-5fc7-4702-9e60-a5973dc973b2";
-        
-        const formData = new FormData(form);
-        formData.append("access_key", ACCESS_KEY);
-
-        // UI: Start Transmission
+        // Simulating packet transmission
         submitBtn.disabled = true;
         logsBox.style.display = 'flex';
         logStatusText.textContent = '&gt; Connecting to Node UAE_NODE_09...';
         
-        // Helper to play the cyberpunk animation
-        const playAnimation = (isSuccess) => {
-            let sequences = isSuccess ? [
-                { t: 800, txt: '&gt; Socket connection established. Exchanging certificates...' },
-                { t: 1500, txt: '&gt; Tunnel established. Encrypting message bytes via AES-256...' },
-                { t: 2300, txt: '&gt; Transmitting payload hashes... 100%' },
-                { t: 3000, txt: '&gt; Transmission successful! Response code: 200 OK.' },
-                { t: 3500, txt: '&gt; Message sent securely. Hameez will review the packet shortly.' }
-            ] : [
-                { t: 800, txt: '&gt; Socket connection established...' },
-                { t: 1500, txt: '&gt; <span style="color:#ff3366">ERROR: API Key Invalid or Network Failure.</span>' },
-                { t: 2000, txt: '&gt; <span style="color:#ff3366">Transmission aborted.</span>' }
-            ];
+        let sequences = [
+            { t: 800, txt: '&gt; Socket connection established. Exchanging certificates...' },
+            { t: 1500, txt: '&gt; Tunnel established. Encrypting message bytes via AES-256...' },
+            { t: 2300, txt: '&gt; Transmitting payload hashes... 100%' },
+            { t: 3000, txt: '&gt; Transmission successful! Response code: 200 OK.' },
+            { t: 3500, txt: '&gt; Message sent securely. Hameez will review the packet shortly.' }
+        ];
 
-            sequences.forEach(step => {
-                setTimeout(() => {
-                    const logLine = document.createElement('div');
-                    logLine.className = step.txt.includes('ERROR') || step.txt.includes('aborted') ? 'log-line' : 'log-line text-success';
-                    logLine.innerHTML = step.txt;
-                    logsBox.appendChild(logLine);
-                    logsBox.scrollTop = logsBox.scrollHeight;
-                    
-                    if (step.txt.includes('Response code: 200')) {
-                        logStatusText.style.display = 'none';
-                        form.reset();
-                        generateCaptcha();
-                        submitBtn.disabled = false;
-                    } else if (step.txt.includes('aborted')) {
-                        logStatusText.style.display = 'none';
-                        submitBtn.disabled = false;
-                    }
-                }, step.t);
-            });
-        };
-
-        // If user hasn't put their key yet, just run the success animation for demo purposes
-        if (ACCESS_KEY === "YOUR_WEB3FORMS_ACCESS_KEY_HERE") {
-            console.warn("Web3Forms API Key is missing. Simulating success for demo. Emails will NOT be sent until you add the key.");
-            playAnimation(true);
-            return;
-        }
-
-        // Execute API Call
-        fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            body: formData
-        })
-        .then(async (response) => {
-            if (response.status === 200) {
-                playAnimation(true);
-            } else {
-                playAnimation(false);
-            }
-        })
-        .catch(error => {
-            console.error("Form error:", error);
-            playAnimation(false);
+        sequences.forEach(step => {
+            setTimeout(() => {
+                const logLine = document.createElement('div');
+                logLine.className = 'log-line text-success';
+                logLine.innerHTML = step.txt;
+                logsBox.appendChild(logLine);
+                logsBox.scrollTop = logsBox.scrollHeight;
+                
+                if (step.txt.includes('Response code: 200')) {
+                    logStatusText.style.display = 'none';
+                    // Reset form fields
+                    form.reset();
+                    generateCaptcha();
+                    submitBtn.disabled = false;
+                }
+            }, step.t);
         });
     });
 }

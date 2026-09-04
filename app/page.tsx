@@ -13,10 +13,10 @@ const PORTFOLIO_PROJECTS = [
   { id: 8, category: "redteam", icon: "fa-file-shield", bgText: "VAPT_FRAMEWORK", tags: ["VAPT", "Penetration Testing", "OWASP", "Security Assessment", "Reporting", "Retesting"], title: "VAPT Assessment Framework", summary: "Developed a professional VAPT framework covering assessment methodology, scope definition, client questionnaires, proposals, reporting, remediation validation, and retesting. Structured the process for delivering repeatable penetration testing engagements.", linkType: "private" },
   { id: 9, category: "redteam", icon: "fa-bug", bgText: "WEB_APP_SEC", tags: ["DVWA", "OWASP Juice Shop", "Web Security", "VAPT", "OWASP", "Penetration Testing"], title: "Web Application Security Lab", summary: "Built a controlled web application security testing environment using DVWA and OWASP Juice Shop to practice vulnerability discovery, exploitation, validation, and security reporting against intentionally vulnerable applications.", linkType: "none" },
   { id: 10, category: "soc", icon: "fa-network-wired", bgText: "MITRE_ATTACK", tags: ["MITRE ATT&CK", "Threat Detection", "Detection Engineering", "SOC", "Threat Intelligence"], title: "MITRE ATT&CK Detection Mapping", summary: "Developed a structured MITRE ATT&CK mapping framework to associate security detections, attack behaviors, and defensive controls with relevant adversary techniques and tactics.", linkType: "none" },
-  { id: 11, category: "security", icon: "fa-globe", bgText: "OSINT_TOOLKIT", tags: ["OSINT", "Threat Intelligence", "Shodan", "Censys", "Have I Been Pwned", "AbuseIPDB"], title: "OSINT & Threat Intelligence Toolkit", summary: "Built an OSINT investigation workflow using services such as Have I Been Pwned, Shodan, Censys, Spyse, and AbuseIPDB to support domain, IP, exposure, and threat intelligence investigations.", linkType: "private" },
-  { id: 12, category: "soc", icon: "fa-server", bgText: "SOC_SCALING", tags: ["SOC Architecture", "SIEM", "Infrastructure", "Scalability", "Security Operations"], title: "SOC Infrastructure Scaling Architecture", summary: "Designed scalable SOC architecture concepts for environments ranging from 50 to 400 users, evaluating monitoring requirements, infrastructure, SIEM capacity, endpoint telemetry, and future expansion.", linkType: "private" },
-  { id: 13, category: "security", icon: "fa-book", bgText: "CYBER_KB", tags: ["Cybersecurity", "Documentation", "Knowledge Base", "Zoho Desk", "Security Awareness", "Technical Documentation"], title: "Cybersecurity Knowledge Base", summary: "Developed cybersecurity knowledge-base content and operational documentation for common security topics, including internet safety, security procedures, troubleshooting guidance, and standardized ticket resolutions.", linkType: "confidential" },
-  { id: 14, category: "soc", icon: "fa-folder-tree", bgText: "SOC_DOCS", tags: ["Security Documentation", "SOC", "Checklists", "Version Control", "Operations"], title: "Security Operations Documentation Framework", summary: "Created standardized documentation structures for client security configurations, security checklists, version control, ticket resolutions, and recurring SOC operational procedures.", linkType: "confidential" }
+  { id: 11, category: "security", icon: "fa-microchip", bgText: "OSINT_CORE_V1", tags: ["Python", "Flask", "SQLite", "HaveIBeenPwned API", "VirusTotal API", "AbuseIPDB API", "OSINT"], title: "OSINT-Based Data Exposure Assessment Tool", summary: "Platform to identify publicly exposed information — email breach detection, IP reputation, domain intelligence, and real-time threat dashboard with risk scoring.", linkType: "github", githubUrl: "https://github.com/hameezcam/osint-data-exposure-tool" },
+  { id: 12, category: "redteam", icon: "fa-sitemap", bgText: "AD_REDTEAM_LAB", tags: ["Windows Server 2019", "Active Directory", "BloodHound", "Kerberoasting", "Mimikatz", "PowerShell", "Red Team"], title: "Active Directory Red Team Lab", summary: "Enterprise-style AD environment with multi-VM setup simulating real-world attacks — Kerberoasting, lateral movement, privilege escalation, and BloodHound attack path analysis.", linkType: "lab" },
+  { id: 13, category: "soc", icon: "fa-server", bgText: "SOC_SCALING", tags: ["SOC Architecture", "SIEM", "Infrastructure", "Scalability", "Security Ops"], title: "SOC Infrastructure Scaling Architecture", summary: "Designed scalable SOC architecture concepts for environments ranging from 50 to 400 users, evaluating monitoring requirements, infrastructure, SIEM capacity, and telemetry bandwidth.", linkType: "private" },
+  { id: 14, category: "security", icon: "fa-folder-tree", bgText: "SOC_DOCS", tags: ["Security Docs", "SOC", "Checklists", "Version Control", "ISO 27001"], title: "Security Operations Documentation Framework", summary: "Created standardized documentation structures for client security configurations, security checklists, version control, ticket resolutions, and recurring SOC operational procedures.", linkType: "confidential" }
 ];
 
 export default function Portfolio() {
@@ -189,7 +189,7 @@ export default function Portfolio() {
                   <span className="stat-label">Verified Certs</span>
                 </div>
                 <div className="stat-card glass-card">
-                  <span className="stat-number cyber-accent-purple">04</span>
+                  <span className="stat-number cyber-accent-purple">14</span>
                   <span className="stat-label">Core Projects</span>
                 </div>
                 <div className="stat-card glass-card">
@@ -518,10 +518,15 @@ export default function Portfolio() {
                     </div>
                     <h3 className="project-title">{p.title}</h3>
                     <p className="project-summary">{p.summary}</p>
-                    <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", flexWrap: "wrap", marginTop: "auto" }}>
                       <button className="cyber-btn-sm open-project-modal" data-project={p.id}>
                         <span>DEEP_DIVE <i className="fas fa-arrow-right"></i></span>
                       </button>
+                      {(p as any).githubUrl && (
+                        <a href={(p as any).githubUrl} target="_blank" rel="noopener" className="cyber-btn-sm" style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.2)" }}>
+                          <span><i className="fab fa-github"></i> GitHub</span>
+                        </a>
+                      )}
                       {p.linkType === 'confidential' && (
                         <span className="cyber-btn-sm" style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)", opacity: 0.7, cursor: "not-allowed" }}>
                           <span><i className="fas fa-lock"></i> Confidential</span>
@@ -530,6 +535,11 @@ export default function Portfolio() {
                       {p.linkType === 'private' && (
                         <span className="cyber-btn-sm" style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)", opacity: 0.7, cursor: "not-allowed" }}>
                           <span><i className="fas fa-eye-slash"></i> Private</span>
+                        </span>
+                      )}
+                      {p.linkType === 'lab' && (
+                        <span className="cyber-btn-sm" style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.2)" }}>
+                          <span><i className="fas fa-cubes"></i> Lab Setup</span>
                         </span>
                       )}
                       {p.linkType === 'github_pending' && (

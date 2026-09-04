@@ -1,6 +1,5 @@
-import { type Config } from 'tailwindcss';
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   darkMode: 'class', // enable class-based dark mode
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
