@@ -1,0 +1,4 @@
+/* Minimal reset — the full design lives in /style.css loaded by page.tsx */
+*, *::before, *::after {
+  box-sizing: border-box;
+}

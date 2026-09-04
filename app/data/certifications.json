@@ -1,0 +1,38 @@
+[
+  {
+    "name": "BSc (Hons) Cybersecurity and Digital Forensics",
+    "issuer": "Kingston University",
+    "status": "completed",
+    "badge": "kingston_university.png"
+  },
+  {
+    "name": "CCNA 200-301",
+    "issuer": "Cisco",
+    "status": "completed",
+    "badge": "ccna.png"
+  },
+  {
+    "name": "Microsoft Azure AZ-900",
+    "issuer": "Microsoft",
+    "status": "completed",
+    "badge": "az900.png"
+  },
+  {
+    "name": "Advanced Diploma in Hardware & Networking Professional",
+    "issuer": "Institute",
+    "status": "completed",
+    "badge": "hardware_networking.png"
+  },
+  {
+    "name": "Certified Ethical Hacker (CEH v13)",
+    "issuer": "EC-Council",
+    "status": "pursuing",
+    "badge": "ceh.png"
+  },
+  {
+    "name": "ISC2 Certified in Cybersecurity (CC)",
+    "issuer": "ISC2",
+    "status": "pursuing",
+    "badge": "isc2_cc.png"
+  }
+]
