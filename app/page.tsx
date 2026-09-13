@@ -464,7 +464,7 @@ export default function Portfolio() {
               <div className="timeline-item glass-card hover-glow">
                 <div className="timeline-header">
                   <div className="timeline-title-group">
-                    <h3>SOC Intern</h3>
+                    <h3>Cyber Security Intern</h3>
                     <span className="company-tag"><i className="fas fa-building"></i> Supercad Trading LLC</span>
                   </div>
                   <span className="timeline-date"><i className="far fa-calendar-alt"></i> Present</span>
