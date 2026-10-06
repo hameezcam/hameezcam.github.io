@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hameez Cambal | Cybersecurity Analyst & Specialist Portfolio",
+  title: "Hameez Cambal | Cybersecurity Analyst",
   description:
-    "Professional portfolio of Hameez Cambal, a Cybersecurity Analyst, SOC Enthusiast, and Network Security Specialist.",
+    "Cybersecurity Analyst specializing in security operations, SIEM, threat detection, incident response, vulnerability assessment, Microsoft security, and cybersecurity tooling.",
 };
 
 export default function RootLayout({

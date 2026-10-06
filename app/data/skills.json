@@ -1,46 +1,59 @@
 [
   {
-    "group": "SOC Operations",
-    "skills": ["SOC Monitoring","Alert Triage","Security Event Analysis","Incident Investigation","Incident Response","Threat Detection","Threat Hunting","Log Analysis","Escalation Procedures","Security Reporting"]
-  },
-  {
-    "group": "SIEM Technologies",
-    "skills": ["Microsoft Sentinel","Wazuh","Elastic Stack","Splunk"]
+    "group": "Security Operations",
+    "skills": [
+      "SOC Operations",
+      "SIEM",
+      "Security Monitoring",
+      "Alert Investigation",
+      "Incident Response",
+      "Threat Detection",
+      "Threat Hunting",
+      "Detection Engineering"
+    ]
   },
   {
     "group": "Microsoft Security",
-    "skills": ["Microsoft Defender for Endpoint","Microsoft Defender for Office 365","Microsoft 365 Security","Microsoft Sentinel","Microsoft Security Copilot concepts","Secure Score Improvement"]
+    "skills": [
+      "Microsoft Sentinel",
+      "Microsoft Defender",
+      "Microsoft 365 Security",
+      "Microsoft Entra",
+      "Identity Security",
+      "Conditional Access"
+    ]
   },
   {
-    "group": "Endpoint Security",
-    "skills": ["Endpoint Detection and Response (EDR)","Antivirus Configuration","Attack Surface Reduction","Device Security Policies","Security Baselines"]
+    "group": "Network Security",
+    "skills": [
+      "Check Point",
+      "Fortinet",
+      "WatchGuard",
+      "Cisco Meraki",
+      "Firewall Security",
+      "VPN Security"
+    ]
   },
   {
-    "group": "Vulnerability Management",
-    "skills": ["Vulnerability Assessment","OWASP Top 10","Web Application Security","Security Testing","Risk Assessment"]
+    "group": "Security Assessment",
+    "skills": [
+      "VAPT",
+      "Vulnerability Assessment",
+      "Security Auditing",
+      "Security Posture Assessment",
+      "Risk Assessment",
+      "Compliance Mapping"
+    ]
   },
   {
-    "group": "Networking",
-    "skills": ["TCP/IP","DNS","Firewalls","VPN","Routing","Switching","Network Security"]
-  },
-  {
-    "group": "Cloud Security",
-    "skills": ["Microsoft Azure","Azure Security Concepts","Cloud Identity Security"]
-  },
-  {
-    "group": "Documentation",
-    "skills": ["Incident Response Playbooks","Security Procedures","Security Policies","Technical Documentation","Security Reports","Compliance Documentation"]
-  },
-  {
-    "group": "SOC Operations",
-    "skills": ["Alert Triage","Security Monitoring","Incident Escalation","Root Cause Analysis"]
-  },
-  {
-    "group": "Threat Intelligence",
-    "skills": ["IOC Analysis","OSINT","Threat Intelligence Platforms"]
-  },
-  {
-    "group": "Security Frameworks",
-    "skills": ["MITRE ATT&CK","NIST Cybersecurity Framework","Incident Response Lifecycle"]
+    "group": "Security Development",
+    "skills": [
+      "Cybersecurity Tool Development",
+      "Authentication",
+      "RBAC",
+      "Multi-Tenant Architecture",
+      "Security Automation",
+      "Threat Intelligence Integration"
+    ]
   }
 ]

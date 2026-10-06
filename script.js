@@ -21,6 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
     initCVDownload();
 });
 
+// Global init export for Next.js hydration
+window.initCyberApp = function() {
+    updateTerminalDate();
+    initPlexusCanvas();
+    initTypewriter();
+    initMobileNav();
+    initHeaderScroll();
+    initTerminal();
+    initSkillsTabs();
+    initProjectsFilter();
+    initModals();
+    initContactForm();
+    initBackToTop();
+    initCVDownload();
+};
+
 /* --- Update Date in Terminal --- */
 function updateTerminalDate() {
     const dates = document.querySelectorAll('.current-date-placeholder');
@@ -187,49 +203,66 @@ function initPlexusCanvas() {
     });
 }
 
-/* --- Hero Section Typing Animation --- */
+/* --- Hero Section Professional Role Typing Animation --- */
 function initTypewriter() {
-    const textTarget = document.getElementById('typed-text');
+    const textTarget = document.getElementById('role-typewriter-text') || document.getElementById('typed-text');
     if (!textTarget) return;
 
     const roles = [
         "Cybersecurity Analyst",
-        "SOC Enthusiast",
-        "Network Security Specialist"
+        "Penetration Tester",
+        "Security Operations Analyst",
+        "Vulnerability Assessment Analyst",
+        "Security Assessment Analyst",
+        "Threat Detection Analyst",
+        "Incident Response Analyst",
+        "Security Operations Specialist",
+        "Network Security Analyst",
+        "Microsoft Security Analyst",
+        "Cybersecurity Tools Developer"
     ];
-    
+
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        textTarget.textContent = "Cybersecurity Analyst";
+        return;
+    }
+
     let currentRoleIdx = 0;
-    let currentCharIdx = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-    
+    let currentCharIdx = roles[0].length;
+    let isDeleting = true; // starts on first role, pauses, then cycles
+    let typingSpeed = 65;
+
+    textTarget.textContent = roles[0];
+
     function type() {
         const fullText = roles[currentRoleIdx];
-        
+
         if (isDeleting) {
             textTarget.textContent = fullText.substring(0, currentCharIdx - 1);
             currentCharIdx--;
-            typingSpeed = 50; // Faster deleting
+            typingSpeed = 35; // smooth backspacing speed
         } else {
             textTarget.textContent = fullText.substring(0, currentCharIdx + 1);
             currentCharIdx++;
-            typingSpeed = 100; // Normal typing
+            typingSpeed = 65; // realistic smooth typing
         }
-        
+
         // Handle transitions
         if (!isDeleting && currentCharIdx === fullText.length) {
-            typingSpeed = 2000; // Pause at the end of typing
+            typingSpeed = 1800; // Pause 1.8 seconds after role is fully typed
             isDeleting = true;
         } else if (isDeleting && currentCharIdx === 0) {
             isDeleting = false;
             currentRoleIdx = (currentRoleIdx + 1) % roles.length;
-            typingSpeed = 500; // Pause before starting next word
+            typingSpeed = 350; // Short pause before starting next role
         }
-        
+
         setTimeout(type, typingSpeed);
     }
-    
-    setTimeout(type, 1000);
+
+    // Initial pause on Cybersecurity Analyst before beginning the cycle
+    setTimeout(type, 1800);
 }
 
 /* --- Mobile Navigation Hamburger & Drawer --- */
@@ -261,6 +294,17 @@ function initHeaderScroll() {
     
     if (!navbar) return;
     
+    // Auto-highlight active link based on current page URL
+    const currentPath = window.location.pathname.toLowerCase();
+    const currentPage = (currentPath.split('/').pop() || 'index.html');
+    navLinks.forEach(link => {
+        const href = (link.getAttribute('href') || '').toLowerCase();
+        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        }
+    });
+
     // Sticky Header Scroll
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -269,26 +313,31 @@ function initHeaderScroll() {
             navbar.classList.remove('scrolled');
         }
         
-        // Active scrollspy highlight
-        let currentSectionId = '';
-        const scrollPos = window.scrollY + 100;
-        
-        sections.forEach(sec => {
-            const top = sec.offsetTop;
-            const height = sec.offsetHeight;
+        // Active scrollspy highlight ONLY if nav contains anchor links matching sections on the same page
+        const hasAnchorNav = Array.from(navLinks).some(link => link.getAttribute('href')?.startsWith('#'));
+        if (hasAnchorNav) {
+            let currentSectionId = '';
+            const scrollPos = window.scrollY + 100;
             
-            if (scrollPos >= top && scrollPos < top + height) {
-                currentSectionId = sec.getAttribute('id');
-            }
-        });
-        
-        if (currentSectionId) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active');
+            sections.forEach(sec => {
+                const top = sec.offsetTop;
+                const height = sec.offsetHeight;
+                
+                if (scrollPos >= top && scrollPos < top + height) {
+                    currentSectionId = sec.getAttribute('id');
                 }
             });
+            
+            if (currentSectionId) {
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href')?.startsWith('#')) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentSectionId}`) {
+                            link.classList.add('active');
+                        }
+                    }
+                });
+            }
         }
     });
 }
@@ -332,9 +381,9 @@ function initProjectsFilter() {
             
             // Filter cards
             projectCards.forEach(card => {
-                const category = card.getAttribute('data-category');
+                const cardCategories = (card.getAttribute('data-category') || '').split(/\s+/);
                 
-                if (filterValue === 'all' || category === filterValue) {
+                if (filterValue === 'all' || cardCategories.includes(filterValue)) {
                     card.style.display = 'flex';
                     setTimeout(() => {
                         card.style.opacity = '1';
@@ -352,266 +401,300 @@ function initProjectsFilter() {
     });
 }
 
-/* --- Interactive CLI Terminal Shell Engine --- */
+/* --- Interactive Security Operations Terminal (SOC Simulation) --- */
 function initTerminal() {
-    const termBody = document.getElementById('terminal-body');
-    const termInput = document.getElementById('terminal-input');
+    const termBody = document.getElementById('soc-terminal-body') || document.getElementById('terminal-body');
+    const termInput = document.getElementById('soc-terminal-input') || document.getElementById('terminal-input');
+    const termWindow = document.getElementById('soc-terminal-window') || document.querySelector('.soc-terminal-window');
+    const closeBtn = document.getElementById('soc-terminal-close');
     
     if (!termBody || !termInput) return;
-    
-    // Command database
-    const commandResponses = {
-        'help': `Available commands:
-  <span class="terminal-highlight">about</span>      - Detail Hameez's background and core mission.
-  <span class="terminal-highlight">skills</span>     - List technical matrices (Cybersecurity, Networking).
-  <span class="terminal-highlight">projects</span>   - Display custom security tools and architectures.
-  <span class="terminal-highlight">certs</span>      - View verified compliance & cybersecurity certs.
-  <span class="terminal-highlight">services</span>   - Review freelance consulting/advisory services.
-  <span class="terminal-highlight">contact</span>    - Output encrypted mail and profile handles.
-  <span class="terminal-highlight">resume</span>     - Print download links for PDF and Text resumes.
-  <span class="terminal-highlight">neofetch</span>   - Draw system spec block & ascii node banner.
-  <span class="terminal-highlight">system</span>     - Display security parameters diagnostic report.
-  <span class="terminal-highlight">hack</span>       - Simulates firewall penetration on current local node.
-  <span class="terminal-highlight">clear</span>      - Clean console display buffer.`,
-  
-        'about': `Hameez Cambal - Cybersecurity Analyst | SOC Enthusiast | Network Security Specialist
-  
-  "Security is not just technology - it is trust, resilience, and continuous improvement."
-  
-  Focus Areas: Network hardening, GRC, Threat Hunting, ISMS design, and Incident Response.
-  Currently located in the United Arab Emirates. Passionate about architecting defense-in-depth frameworks.`,
-  
-        'skills': `--- Technical Skill Matrix ---
-  
-  [Cybersecurity]
-  * SIEM (Splunk, Chronicle) : [|||||||||||||||||...] 85%
-  * OSINT (Shodan, Spiderfoot): [||||||||||||||||||...] 90%
-  * Threat Hunting            : [||||||||||||||||...] 80%
-  * Risk Assessment (ISO27001): [|||||||||||||||||||.] 95%
-  
-  [Networking]
-  * TCP/IP Stack & Arch       : [||||||||||||||||||...] 90%
-  * VPNs (IPsec, OpenVPN)     : [||||||||||||||||...] 80%
-  * Hardening Firewalls/ACLs  : [||||||||||||||||||...] 90%
-  
-  [Programming]
-  * Python (Automation, ML)   : [|||||||||||||||||...] 85%
-  * Bash Scripting            : [||||||||||||||||...] 80%`,
-  
-        'certs': `--- Verified Credentials ---
-  * SOC Fundamentals (LetsDefend) [COMPLETED 2026]
-  * Cyber Security Fundamentals (University of London) [COMPLETED 2026]
-  * CEH - Certified Ethical Hacker (EC-Council) [CERTIFIED]
-  * Microsoft Cybersecurity Professional Certificate [CERTIFIED]
-  * Google Cybersecurity Certificate (Google/Coursera) [CERTIFIED]`,
-  
-        'services': `--- Professional Services ---
-  * Security Audits           - Infrastructure integrity assessments.
-  * Risk Assessments          - Threat modeling and vulnerability scoping.
-  * Vulnerability Assessment  - Passive/Active pentesting and patch planning.
-  * ISMS Consulting (ISO27001)- ISO compliant framework drafting and design.
-  * Network Security Solutions- Hardened firewall configurations, IPS setup, and segmentation.`,
-  
-        'contact': `--- Comms Handshake Matrix ---
-  * Email     : <a href="mailto:hameez.cam@gmail.com" class="terminal-highlight">hameez.cam@gmail.com</a>
-  * LinkedIn  : <a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank" class="terminal-highlight">linkedin.com/in/hameez-cambal-988a2b314</a>
-  * GitHub    : <a href="https://github.com/hameezcam" target="_blank" class="terminal-highlight">github.com/hameezcam</a>
-  * Location  : United Arab Emirates`,
-  
-        'resume': `--- Credentials Retrieval ---
-  * PDF Resume : <a href="Hameez_Cambal_Resume.pdf" download="Hameez_Cambal_Resume.pdf" class="terminal-highlight">Download PDF CV</a>
-  * Text Resume: <a href="javascript:void(0)" onclick="document.getElementById('download-cv-btn').click();" class="terminal-highlight">Download Text CV (.txt)</a>
-  
-  (Type <span class="terminal-highlight">projects</span> or <span class="terminal-highlight">certs</span> for detailed credential blocks.)`,
-  
-        'system': `--- UAE_NODE_09 System Report ---
-  * Node Name    : HC-SEC-NODE-09
-  * CPU Load     : Dynamic (Antigravity CPU Scale)
-  * Network Band : Gigabit Fiber Handshake (SSL ON)
-  * Integrity    : 100% OK
-  * Threat Level : ZERO_EXPOSURE_DETECTED
-  * Firewall     : ACTIVE // SHIELD GENERATORS ENGAGED`
-    };
 
-    function appendTermLine(text, className = '') {
+    // Focus input on terminal click
+    if (termWindow) {
+        termWindow.addEventListener('click', (e) => {
+            // Don't focus if user selected text or clicked a link
+            if (window.getSelection().toString().length === 0 && e.target.tagName !== 'A') {
+                termInput.focus();
+            }
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            termBody.innerHTML = '';
+            appendLine('<span class="term-cmd">[SESSION CLEARED]</span> Type <span class="term-cmd">help</span> for available commands.');
+            termInput.focus();
+        });
+    }
+
+    function appendLine(htmlContent, className = '') {
         const line = document.createElement('div');
-        line.className = `terminal-line ${className}`;
-        line.innerHTML = text;
+        line.className = `term-line ${className}`;
+        line.innerHTML = htmlContent;
         termBody.appendChild(line);
         termBody.scrollTop = termBody.scrollHeight;
     }
 
-    // Interactive Terminal Commands parsing
+    // Initial sequence script definition
+    const initialSequence = [
+        { type: 'cmd', text: '$ initialize_security_profile', delay: 80 },
+        { type: 'blank', delay: 120 },
+        { type: 'log', text: '[+] Security profile loaded', delay: 100 },
+        { type: 'log', text: '[+] Analyst: Hameez Cambal', delay: 90 },
+        { type: 'log', text: '[+] Role: Cybersecurity Analyst', delay: 90 },
+        { type: 'log', text: '[+] Focus: Security Operations', delay: 80 },
+        { type: 'log', text: '[+] Focus: Threat Detection', delay: 80 },
+        { type: 'log', text: '[+] Focus: Incident Response', delay: 80 },
+        { type: 'log', text: '[+] Focus: Security Assessment', delay: 80 },
+        { type: 'blank', delay: 140 },
+        { type: 'cmd', text: '$ security_status', delay: 80 },
+        { type: 'blank', delay: 120 },
+        { type: 'status', text: '<span class="term-online">[ONLINE]</span> SIEM Monitoring', delay: 80 },
+        { type: 'status', text: '<span class="term-online">[ONLINE]</span> Threat Detection', delay: 80 },
+        { type: 'status', text: '<span class="term-online">[ONLINE]</span> Security Assessment', delay: 80 },
+        { type: 'status', text: '<span class="term-online">[ONLINE]</span> Network Security', delay: 80 },
+        { type: 'status', text: '<span class="term-online">[ONLINE]</span> Microsoft Security', delay: 80 },
+        { type: 'status', text: '<span class="term-online">[ONLINE]</span> Security Tool Development', delay: 80 },
+        { type: 'blank', delay: 150 },
+        { type: 'cmd', text: '$ current_mode', delay: 80 },
+        { type: 'blank', delay: 120 },
+        { type: 'mode', text: '<span class="term-mode">MONITOR → DETECT → INVESTIGATE → ASSESS → DEFEND</span>', delay: 120 },
+        { type: 'blank', delay: 100 }
+    ];
+
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Render initial sequence
+    if (prefersReducedMotion) {
+        initialSequence.forEach(item => {
+            if (item.type === 'blank') {
+                appendLine('&nbsp;');
+            } else if (item.type === 'cmd') {
+                appendLine(`<span class="term-cmd">${item.text}</span>`);
+            } else {
+                appendLine(item.text, `term-${item.type}`);
+            }
+        });
+        startRotatingEvents();
+    } else {
+        let stepIdx = 0;
+        function runNextStep() {
+            if (stepIdx >= initialSequence.length) {
+                startRotatingEvents();
+                return;
+            }
+            const item = initialSequence[stepIdx];
+            stepIdx++;
+
+            if (item.type === 'blank') {
+                appendLine('&nbsp;');
+                setTimeout(runNextStep, item.delay || 100);
+            } else if (item.type === 'cmd') {
+                // Smooth typewriter effect for command input
+                typeCommand(item.text, () => {
+                    setTimeout(runNextStep, 150);
+                });
+            } else {
+                appendLine(item.text, `term-${item.type}`);
+                setTimeout(runNextStep, item.delay || 80);
+            }
+        }
+
+        function typeCommand(fullCmd, onComplete) {
+            const line = document.createElement('div');
+            line.className = 'term-line term-cmd';
+            termBody.appendChild(line);
+            
+            let charIdx = 0;
+            const typeInterval = setInterval(() => {
+                charIdx++;
+                line.textContent = fullCmd.slice(0, charIdx);
+                termBody.scrollTop = termBody.scrollHeight;
+                if (charIdx >= fullCmd.length) {
+                    clearInterval(typeInterval);
+                    onComplete();
+                }
+            }, 25);
+        }
+
+        runNextStep();
+    }
+
+    // Rotating simulated security events
+    let eventTimer = null;
+    function startRotatingEvents() {
+        if (eventTimer) clearInterval(eventTimer);
+        
+        const simulatedEvents = [
+            '[SIMULATION MODE] [MONITOR] Security telemetry synchronized',
+            '[SIMULATION MODE] [DETECT] Authentication anomaly identified',
+            '[SIMULATION MODE] [ANALYZE] Event correlation in progress',
+            '[SIMULATION MODE] [ASSESS] Security control review initiated',
+            '[SIMULATION MODE] [DEFEND] Recommended response generated',
+            '[SIMULATION MODE] [SIEM] New event stream received',
+            '[SIMULATION MODE] [THREAT] Suspicious authentication pattern detected',
+            '[SIMULATION MODE] [NETWORK] Firewall telemetry analyzed',
+            '[SIMULATION MODE] [IDENTITY] Authentication activity reviewed',
+            '[SIMULATION MODE] [EMAIL] Phishing indicators analyzed',
+            '[SIMULATION MODE] [ENDPOINT] Security telemetry evaluated'
+        ];
+        let eventIdx = 0;
+
+        eventTimer = setInterval(() => {
+            // Prune excess lines to preserve performance
+            if (termBody.children.length > 50) {
+                const firstChild = termBody.firstElementChild;
+                if (firstChild) firstChild.remove();
+            }
+
+            const evtText = simulatedEvents[eventIdx % simulatedEvents.length];
+            eventIdx++;
+            appendLine(evtText, 'term-sim-event');
+        }, 12000);
+    }
+
+    // Predefined safe commands dictionary
+    const commands = {
+        'help': `Available commands:
+  <span class="term-cmd">about</span>       → Analyst profile & background
+  <span class="term-cmd">skills</span>      → Security capabilities
+  <span class="term-cmd">projects</span>    → Featured security projects
+  <span class="term-cmd">experience</span>  → Professional experience
+  <span class="term-cmd">certs</span>       → Professional certifications
+  <span class="term-cmd">contact</span>     → Contact information
+  <span class="term-cmd">status</span>      → Security capability status
+  <span class="term-cmd">whoami</span>      → Current analyst profile
+  <span class="term-cmd">clear</span>       → Clear terminal output`,
+
+        'whoami': `Hameez Cambal
+Cybersecurity Analyst
+Security Operations • Threat Detection • Defense
+SuperCAD | Dubai, UAE`,
+
+        'skills': `--- TECHNICAL CAPABILITIES ---
+• Security Operations (SOC, SIEM, Alert Triage, Incident Response)
+• Threat Detection (Threat Hunting, Detection Engineering, MITRE ATT&CK)
+• Security Assessment (VAPT, Posture Auditing, Risk Assessment)
+• Microsoft Security (Sentinel, Defender, M365 Security, Entra ID)
+• Network Security (Check Point, Fortinet, WatchGuard, Cisco Meraki)
+• Cybersecurity Tool Development (Python, RBAC, Multi-Tenant Systems)
+
+→ <a href="skills.html" class="term-link">Open Full Skills Page &rarr;</a>`,
+
+        'projects': `--- FEATURED SECURITY WORK ---
+[01] Port Scanner (Network Security • Tool Development)
+[02] Cybersecurity Assessment & Reporting SaaS (Assessment • Reporting)
+[03] SOC Detection Engineering & MITRE ATT&CK Mapping (Threat Detection)
+[04] SIEM-Based SOC Lab (Wazuh • Security Monitoring)
+[05] In-House SOC Development (Architecture • Incident Response)
+[06] Active Directory Red Team Lab (Red Teaming • Penetration Testing)
+
+→ <a href="projects.html" class="term-link">Open Projects Page &rarr;</a>`,
+
+        'experience': `--- PROFESSIONAL EXPERIENCE ---
+Role: Cybersecurity Analyst
+Company: SuperCAD
+Location: Dubai, UAE
+Period: 2026 – Present
+
+Focus: Security operations, SIEM monitoring, threat detection, Microsoft security, network security, and security assessments.
+
+→ <a href="experience.html" class="term-link">Open Experience Page &rarr;</a>`,
+
+        'certs': `--- PROFESSIONAL CERTIFICATIONS ---
+• Microsoft Copilot for Security — Completed, 2026
+• CEH — In Progress
+
+→ <a href="certifications.html" class="term-link">Open Certifications Page &rarr;</a>`,
+
+        'status': `--- SECURITY CAPABILITY STATUS ---
+[OK] Security Operations
+[OK] SIEM & Monitoring
+[OK] Threat Detection
+[OK] Incident Response
+[OK] Vulnerability Assessment
+[OK] Microsoft Security
+[OK] Network Security
+[OK] Security Tool Development`,
+
+        'contact': `Interested in connecting?
+Reach out for security operations, assessments, or professional inquiries.
+
+→ <a href="contact.html" class="term-link">Open Contact Page &rarr;</a>
+• Email: <a href="mailto:hameez.cam@gmail.com" class="term-link">hameez.cam@gmail.com</a>
+• LinkedIn: <a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank" class="term-link">LinkedIn Profile</a>
+• GitHub: <a href="https://github.com/hameezcam" target="_blank" class="term-link">GitHub Profile</a>`,
+
+        'about': `Hameez Cambal
+Cybersecurity Analyst based in Dubai, UAE.
+Focusing on security operations, threat detection, incident response, vulnerability assessment, and building practical cybersecurity solutions.
+
+→ <a href="about.html" class="term-link">Open About Page &rarr;</a>`,
+
+        // Easter eggs
+        'sudo': `Nice try.
+
+Privilege escalation is not available in this portfolio.`,
+
+        'scan': `PORTFOLIO SCAN INITIATED...
+
+[OPEN] Security Operations
+[OPEN] Threat Detection
+[OPEN] Incident Response
+[OPEN] Security Assessment
+[OPEN] Cybersecurity Tool Development
+
+No unauthorized activity detected.`,
+
+        'matrix': `This portfolio has standards.
+
+Matrix mode denied.`,
+
+        'hack': `Ethical security testing only.
+
+Try:
+projects
+skills
+status`
+    };
+
+    // Keyboard input submission
     termInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            const inputVal = termInput.value.trim().toLowerCase();
+            const rawVal = termInput.value;
+            const inputVal = rawVal.trim().toLowerCase();
             termInput.value = '';
-            
+
             if (!inputVal) return;
-            
-            // Print command echo
-            appendTermLine(`guest@hc-sec-node:~$ ${inputVal}`, 'command-echo');
-            
-            // Command Logic
+
+            // Echo input
+            appendLine(`<span class="prompt">visitor@hameez:~$</span> ${escapeHtml(rawVal)}`, 'term-echo');
+
             if (inputVal === 'clear') {
                 termBody.innerHTML = '';
                 return;
             }
-            
-            if (inputVal === 'neofetch') {
-                const browserOS = getBrowserOS();
-                const neofetchOutput = `
-                 <span class="cyber-accent-blue">.---.</span>          Hameez Cambal@HC-SEC-NODE
-                <span class="cyber-accent-blue">/     \\</span>         -------------------------
-                <span class="cyber-accent-blue">| <span class="cyber-accent-purple">●   ●</span> |</span>        OS: Antigravity Secure Shell (ASH v1.4.2)
-                <span class="cyber-accent-blue">\\  <span class="cyber-accent-purple">===</span>  /</span>        Host: Web-Client-Node (${browserOS})
-                 <span class="cyber-accent-blue">'---'</span>         Kernel: JS Engine v8.0.3
-                               Uptime: ${Math.floor(performance.now() / 1000)}s
-                               Shell: ASH (Terminal Sim)
-                               Resolution: ${window.screen.width}x${window.screen.height}
-                               Accents: <span class="cyber-accent-blue">Blue</span> // <span class="cyber-accent-purple">Purple</span>
-                `;
-                appendTermLine(neofetchOutput);
-                return;
-            }
-            
-            if (inputVal.startsWith('projects')) {
-                const parts = inputVal.split(' ');
-                if (parts.length === 1) {
-                    appendTermLine(`--- Deployed Projects Directory (14 Active Systems) ---
-  1. In-House SOC Implementation Roadmap [SOC / BLUE TEAM]
-  2. Microsoft Sentinel SOC Architecture [SOC / BLUE TEAM]
-  3. Wazuh SIEM Home Lab [SOC / BLUE TEAM]
-  4. Microsoft 365 Security Hardening [SECURITY]
-  5. Check Point Email Security Hardening [SECURITY]
-  6. Incident Response Playbook Framework [SOC / BLUE TEAM]
-  7. Security Incident Investigation [SOC / BLUE TEAM]
-  8. VAPT Assessment Framework [RED TEAM]
-  9. Web Application Security Lab [RED TEAM]
-  10. MITRE ATT&CK Detection Mapping [SOC / BLUE TEAM]
-  11. OSINT-Based Data Exposure Assessment Tool [SECURITY / OSINT]
-  12. Active Directory Red Team Lab [RED TEAM]
-  13. SOC Infrastructure Scaling Architecture [SOC / BLUE TEAM]
-  14. Security Operations Documentation Framework [SECURITY / GRC]
-  
-  Type <span class="terminal-highlight">projects &lt;id&gt;</span> (e.g., <span class="terminal-highlight">projects 1</span>) to query detailed architecture notes.`);
-                } else {
-                    const id = parts[1];
-                    const projectDetails = {
-                        '1': `Project: In-House SOC Implementation Roadmap
-  * Focus: Strategic SOC Operating Model & Roadmap
-  * Stack: Microsoft Sentinel, Defender XDR, Draw.io, SOC Frameworks
-  * Highlights: Phased scaling from business-hours toward 24/7 continuous operations, technology evaluation, SLA & escalation matrices.`,
-                        '2': `Project: Microsoft Sentinel SOC Architecture
-  * Focus: Cloud SIEM/SOAR Architecture
-  * Stack: Microsoft Sentinel, Log Analytics, KQL, Microsoft Defender, Logic Apps
-  * Highlights: Custom KQL analytic rules, automated incident triaging playbooks, threat intelligence feeds.`,
-                        '3': `Project: Wazuh SIEM Home Lab
-  * Focus: Endpoint Monitoring & Telemetry
-  * Stack: Wazuh Manager/Indexer, Sysmon, Windows Server 2022, Ubuntu, VMware
-  * Highlights: Sysmon deployment, brute-force simulation, Event ID 4625 forensic triage, custom SOC alert dashboards.`,
-                        '4': `Project: Microsoft 365 Security Hardening
-  * Focus: Email & Identity Protection
-  * Stack: Microsoft 365, Defender for Office 365, EOP, DLP, Secure Score
-  * Highlights: Anti-phishing thresholds, impersonation protection, mailbox intelligence, Safe Attachments/Links dynamic scanning.`,
-                        '5': `Project: Check Point Email Security Hardening
-  * Focus: Multi-tenant Email Security
-  * Stack: Check Point Harmony Email & Collaboration, SPF/DKIM/DMARC, M365 Exchange
-  * Highlights: Inline threat prevention, newly registered domain (NRD) analysis, DMARC quarantine enforcement.`,
-                        '6': `Project: Incident Response Playbook Framework
-  * Focus: SOC Workflow & Response Procedures
-  * Stack: NIST SP 800-61, MITRE ATT&CK, Draw.io, Markdown
-  * Highlights: Phishing, malware outbreak, ransomware, and account takeover playbooks with interactive decision trees.`,
-                        '7': `Project: Security Incident Investigation
-  * Focus: Authentication Failure Analysis & Triage
-  * Stack: Windows Event Logs, NTLMv1/v2, PowerShell, Wireshark
-  * Highlights: Forensic triage of Event ID 4625/4624, Logon Type 3 network logon analysis, root-cause isolation.`,
-                        '8': `Project: VAPT Assessment Framework
-  * Focus: Penetration Testing Methodology & Deliverables
-  * Stack: OWASP OTG, PTES, CVSS v3.1, Markdown Templates
-  * Highlights: Scoping questionnaires, Rules of Engagement, executive proposals, and technical report templates.`,
-                        '9': `Project: Web Application Security Lab
-  * Focus: Offensive Web Exploitation & Mitigation
-  * Stack: DVWA, OWASP Juice Shop, Burp Suite, Docker, sqlmap
-  * Highlights: OWASP Top 10 hands-on practice (SQLi, XSS, CSRF, IDOR, SSRF) with defense verification.`,
-                        '10': `Project: MITRE ATT&CK Detection Mapping
-  * Focus: Threat Detection Engineering
-  * Stack: MITRE ATT&CK Enterprise Matrix, Wazuh Rules, Sentinel KQL
-  * Highlights: Telemetry requirement mapping, detection gap analysis, adversary tactic correlation.`,
-                        '11': `Project: OSINT-Based Data Exposure Assessment Tool
-  * GitHub: https://github.com/hameezcam/osint-data-exposure-tool
-  * Stack: Python, Flask, SQLite, HaveIBeenPwned API, VirusTotal API, AbuseIPDB API
-  * Highlights: Real-time risk scoring dashboard, email breach lookups, malicious IP triage, and domain intelligence.`,
-                        '12': `Project: Active Directory Red Team Lab
-  * Focus: Enterprise AD Attack & Defense
-  * Stack: Windows Server 2019/2008, BloodHound, SharpHound, Mimikatz, Rubeus, Inveigh, Hashcat
-  * Highlights: Kerberoasting, lateral movement, LLMNR poisoning, and defensive event log footprint analysis.`,
-                        '13': `Project: SOC Infrastructure Scaling Architecture
-  * Focus: Capacity Planning & Infrastructure Sizing
-  * Stack: SIEM Sizing Models, Hot-Warm-Cold Storage Tiering, EPS Calculators
-  * Highlights: Architecture blueprints for 50-400 user environments, log retention compliance, HA cluster designs.`,
-                        '14': `Project: Security Operations Documentation Framework
-  * Focus: Governance, Configuration & Standardized Operations
-  * Stack: ISO/IEC 27001 Annex A, IT Service Management, Version Control
-  * Highlights: Daily health-check runbooks, client security baseline templates, and standardized ticket resolution guides.`
-                    };
-                    
-                    if (projectDetails[id]) {
-                        appendTermLine(projectDetails[id]);
-                    } else {
-                        appendTermLine(`Error: Project ID "${id}" not indexed. Valid range: [1-14]`, 'error-msg');
-                    }
-                }
-                return;
-            }
-            
-            if (inputVal === 'hack') {
-                termInput.disabled = true;
-                appendTermLine('[+] Initiating Local Network Audit...', 'system-msg');
-                
-                let steps = [
-                    { t: 300, txt: '[-] Connecting to socket layer... established.' },
-                    { t: 800, txt: '[-] Injecting tracer packets into local node gateway...' },
-                    { t: 1400, txt: '[-] Resolving firewall headers... [WARNING: SECURITY STACK ACTIVE]' },
-                    { t: 1900, txt: '[-] Bypass payload injected. Scanning port vectors...' },
-                    { t: 2400, txt: '[!] Port 80 (HTTP): OPEN' },
-                    { t: 2600, txt: '[!] Port 443 (HTTPS): OPEN' },
-                    { t: 2800, txt: '[-] Extracting browser user agent: ' + navigator.userAgent.substring(0, 50) + '...' },
-                    { t: 3200, txt: '[-] Decrypting temporary cache registries...' },
-                    { t: 3800, txt: '[SUCCESS] Audit Complete. Vulnerabilities Found: 0. System Security Checked.' },
-                    { t: 4200, txt: '<span class="text-glow" style="color: #00ff66; font-weight: bold;">UAE_NODE_09 // SECURED_BY_HAMEEZ_CAMBAL</span>' }
-                ];
-                
-                steps.forEach(step => {
-                    setTimeout(() => {
-                        appendTermLine(step.txt);
-                        if (step.txt.includes('SECURED_BY_HAMEEZ')) {
-                            termInput.disabled = false;
-                            termInput.focus();
-                        }
-                    }, step.t);
-                });
-                return;
-            }
-            
-            // Standard static response
-            if (commandResponses[inputVal]) {
-                appendTermLine(commandResponses[inputVal]);
+
+            if (commands[inputVal]) {
+                appendLine(commands[inputVal]);
             } else {
-                appendTermLine(`Command not found: "${inputVal}". Type <span class="terminal-highlight">help</span> for commands dictionary.`, 'error-msg');
+                appendLine(`Command not recognized: "${escapeHtml(rawVal)}"<br>Type <span class="term-cmd">help</span> to view available commands.`, 'term-error');
             }
         }
     });
 
-    // Helper for Neofetch
-    function getBrowserOS() {
-        const userAgent = navigator.userAgent;
-        if (userAgent.indexOf("Win") !== -1) return "Windows OS";
-        if (userAgent.indexOf("Mac") !== -1) return "macOS";
-        if (userAgent.indexOf("Linux") !== -1) return "Linux OS";
-        if (userAgent.indexOf("Android") !== -1) return "Android OS";
-        if (userAgent.indexOf("like Mac") !== -1) return "iOS";
-        return "Unknown Node OS";
+    function escapeHtml(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag] || tag)
+        );
     }
 }
 
@@ -629,263 +712,388 @@ function initModals() {
     const blogModalBody = document.getElementById('blog-modal-body');
     const blogClose = document.getElementById('blog-modal-close');
 
-    // Projects Database
+    // Projects Database - Complete 20 Projects (Numbered 01 to 20)
     const projectsData = {
         '1': {
-            title: "In-House SOC Implementation Roadmap",
-            category: "SOC Operations / Blue Team",
-            timeline: "2025 - 2026",
-            tags: ["SOC", "SOCaaS", "SIEM", "Incident Response", "Security Operations", "SOC Architecture"],
-            description: "Designed a comprehensive, phased roadmap for establishing an in-house Security Operations Center (SOC). Covers operating models, monitoring workflows, SIEM strategy, Microsoft security integration, SLA escalation tiers, and scaling considerations from business-hours monitoring toward 24/7 continuous operations.",
-            status: "Confidential Enterprise Blueprint",
+            title: "Port Scanner",
+            category: "Cybersecurity Tool / Network Security",
+            timeline: "Sep 2026",
+            tags: ["Application Security", "Port Scanning", "Network Security", "RBAC", "Multi-Tenant Architecture", "Tauri 2", "TypeScript"],
+            description: "Developed a cross-platform network security assessment platform designed to help authorized users discover and assess network services through controlled port scanning.",
+            status: "Featured Tool",
             features: [
-                "Strategic SOC roadmap covering operating models, monitoring workflows, SIEM strategy, and Microsoft security integration.",
-                "Phased scaling roadmap from initial triage and business-hours monitoring toward 24/7 continuous operations.",
-                "Technology evaluation matrix covering SIEM, SOAR, EDR, and long-term log retention requirements.",
-                "Defined escalation matrices, SLA tiers, and shift handover protocols for Tier 1-3 analysts."
+                "Cross-platform port scanning with dedicated multi-threaded scanning engine.",
+                "Configurable scan parameters and structured service/port discovery output.",
+                "Enterprise application architecture supporting user authentication and RBAC.",
+                "Multi-tenant organization management and license entitlement engine.",
+                "Administrative approval workflows, secure activation, and centralized reporting."
             ],
-            architecture: "Comprehensive SOC operating model designed in Draw.io detailing SIEM data ingestion pipelines, Tier 1 triage, Tier 2 incident analysis, Tier 3 threat hunting, and threat intelligence feed integration."
+            architecture: "Cross-platform desktop application architecture built on Tauri 2, TypeScript, secure local runtime, and modular scanning core."
         },
         '2': {
-            title: "Microsoft Sentinel SOC Architecture",
-            category: "SOC Operations / Cloud Security",
-            timeline: "2025 - 2026",
-            tags: ["Microsoft Sentinel", "SIEM", "SOAR", "KQL", "Microsoft Defender", "Cloud Security"],
-            description: "Designed a Microsoft Sentinel-based SOC architecture for centralized security monitoring, threat detection, investigation, and response. Engineered integrations with Microsoft Defender XDR and cloud security services to support a scalable SOC environment.",
-            status: "Private Architecture Model",
+            title: "Cybersecurity Assessment & Reporting SaaS",
+            category: "Cybersecurity Platform / Vulnerability Management",
+            timeline: "Sep 2026",
+            tags: ["Vulnerability Management", "IT Security Assessments", "Security Reporting", "Risk Assessment", "NVD", "CISA KEV"],
+            description: "A multi-tenant cybersecurity assessment and reporting platform designed to help organizations perform assessments, identify vulnerabilities, generate professional reports, and track remediation. (Standalone project presented independently).",
+            status: "Featured Platform",
             features: [
-                "Cloud-native SIEM architecture utilizing Microsoft Sentinel and Log Analytics Workspaces.",
-                "Custom KQL (Kusto Query Language) analytic rules and hunt queries for identity, endpoint, and cloud anomalies.",
-                "Data connector mapping across Microsoft 365, Defender XDR, Azure Activity, and firewall syslog.",
-                "Automated incident triaging and playbook execution with Azure Logic Apps (SOAR)."
+                "End-to-end vulnerability assessment workflows and risk scoring.",
+                "Integration with National Vulnerability Database (NVD) and CISA Known Exploited Vulnerabilities (KEV).",
+                "Multi-tenant architecture with robust Role-Based Access Control.",
+                "Automated professional PDF executive and technical report generation.",
+                "Structured remediation milestone tracking and verification workflows."
             ],
-            architecture: "Centralized Sentinel workspace ingesting CEF/Syslog, Azure Activity, and Defender XDR telemetry with RBAC segregation, retention tiering, and SOAR automation pipelines."
+            architecture: "Full-stack vulnerability assessment and intelligence platform with automated CVE feeds and PDF generation microservices."
         },
         '3': {
-            title: "Wazuh SIEM Home Lab",
-            category: "SOC Operations / Blue Team",
-            timeline: "2025 - 2026",
-            tags: ["Wazuh", "SIEM", "Sysmon", "Windows Server", "Ubuntu", "VMware", "Threat Detection"],
-            description: "Built a hands-on SIEM lab using Wazuh, Ubuntu Server, Windows Server 2022, Sysmon, and VMware. Configured endpoint monitoring and security telemetry to simulate real-world SOC detection and investigation workflows.",
-            status: "Lab Environment (GitHub Coming Soon)",
+            title: "SOC Detection Engineering & MITRE ATT&CK Mapping",
+            category: "Detection Engineering / SOC",
+            timeline: "Sep 2026",
+            organization: "Supercad Trading LLC",
+            tags: ["SOC", "SIEM", "Detection Engineering", "MITRE ATT&CK", "Threat Detection", "Incident Response"],
+            description: "Developed a structured detection catalogue covering enterprise threats such as impossible travel, password spraying, MFA fatigue, PowerShell activity, ransomware, OAuth abuse, and mass file deletion.",
+            status: "Featured Engineering",
             features: [
-                "Deployed Wazuh Manager and Indexer on Ubuntu Server 24.04 with active response integration.",
-                "Installed and configured Wazuh Agents and SwiftOnSecurity Sysmon configs across Windows Server and client endpoints.",
-                "Simulated brute-force attacks from Kali Linux, validating detection of Windows Event ID 4625 (failed logon) and Event ID 4624.",
-                "Built custom visualization dashboards and alert decoders for rapid alert triage and incident correlation."
+                "Detection logic definition and query formulation across telemetry feeds.",
+                "Direct mapping of detection scenarios to MITRE ATT&CK techniques and sub-techniques.",
+                "Step-by-step investigation procedures and analyst containment runbooks.",
+                "False-positive analysis, severity scoring, and client environment applicability ratings."
             ],
-            architecture: "VMware virtual lab consisting of Ubuntu Server (Wazuh Manager/Indexer), Windows Server 2022 (Domain Controller + Agent), Windows 10 (Workstation + Agent + Sysmon), and Kali Linux (Threat Simulation Engine)."
+            architecture: "Enterprise detection engineering library linking threat intelligence, behavioral indicators, and automated response actions."
         },
         '4': {
-            title: "Microsoft 365 Security Hardening",
-            category: "Security Engineering / Identity",
-            timeline: "2025 - 2026",
-            tags: ["Microsoft 365", "Defender for Office 365", "Anti-Phishing", "DLP", "Email Security", "Identity Protection"],
-            description: "Implemented and documented enterprise Microsoft 365 security controls focused on email and identity protection, including anti-phishing, impersonation protection, mailbox intelligence, phishing thresholds, quarantine policies, and DLP controls.",
-            status: "Confidential Enterprise Pack",
+            title: "SIEM-Based SOC Lab (Wazuh)",
+            category: "SOC / SIEM / Security Monitoring",
+            timeline: "Apr 2026 – May 2026",
+            tags: ["Wazuh SIEM", "Ubuntu Linux", "Windows Server", "Kali Linux", "Event Logs", "Security Monitoring"],
+            description: "Designed and implemented a Security Operations Center (SOC) laboratory environment using Wazuh SIEM for centralized security monitoring and log analysis.",
+            status: "Featured SOC Project",
             features: [
-                "Configured anti-phishing policies with user & domain impersonation protection and mailbox intelligence.",
-                "Hardened Safe Attachments and Safe Links policies with real-time dynamic delivery and click-time scanning.",
-                "Implemented Data Loss Prevention (DLP) rules safeguarding financial records, PII, and credentials.",
-                "Elevated Microsoft Secure Score by systematically eliminating tenant configuration gaps."
+                "Deployed and configured Wazuh SIEM on Ubuntu Linux.",
+                "Integrated Windows Server endpoints for centralized log collection and monitoring.",
+                "Simulated brute-force authentication attacks to generate security events.",
+                "Investigated Windows Event ID 4625 and authentication anomalies.",
+                "Built custom dashboards for monitoring suspicious activity and security alerts.",
+                "Performed log correlation and threat detection aligned with SOC analyst workflows.",
+                "Developed hands-on experience in incident investigation, alert triage, and security monitoring."
             ],
-            architecture: "Microsoft 365 Security Center & Exchange Online Protection (EOP) defense-in-depth policy matrix across transport rules, threat policies, and quarantine management."
+            architecture: "Centralized Wazuh manager with distributed Windows and Linux agents, correlating Sysmon and authentication telemetry for automated alert generation."
         },
         '5': {
-            title: "Check Point Email Security Hardening",
-            category: "Security Engineering / Email",
-            timeline: "2025 - 2026",
-            tags: ["Check Point", "Email Security", "Anti-Phishing", "DMARC", "Impersonation Protection"],
-            description: "Configured and documented Check Point email security controls across multiple client environments, including impersonation detection, newly registered domain protection, DMARC failure handling, phishing workflows, and email security policies.",
-            status: "Confidential Client Architecture",
+            title: "In-House Security Operations Center (SOC) Development",
+            category: "SOC / Security Operations",
+            timeline: "Jul 2026 – Sep 2026",
+            organization: "Supercad Trading LLC",
+            tags: ["Security Operations Center", "Incident Response", "SIEM", "SOC Architecture", "Splunk"],
+            description: "Contributed to the planning and development of an in-house Security Operations Center (SOC), including SOC architecture, monitoring strategy, operational processes, scalability planning, and proof-of-concept implementation. Built and worked with a SOC lab using Splunk and security monitoring technologies, while developing foundational SOC processes and incident-response playbooks.",
+            status: "Featured SOC Development",
             features: [
-                "Deployed Check Point Harmony Email & Collaboration security suites across client tenants.",
-                "Enforced strict SPF, DKIM, and DMARC verification and quarantine policies for unauthorized senders.",
-                "Implemented AI-driven anomaly detection for newly registered domains (NRDs) and homograph attacks.",
-                "Streamlined false-positive remediation and user submission triage workflows."
+                "Developed SOC technical architecture and log ingestion strategy.",
+                "Built and operated a SOC testbed utilizing Splunk and security telemetry collectors.",
+                "Authored foundational SOC operational procedures and tier-1 triage guidelines.",
+                "Drafted initial incident response playbooks for common attack scenarios."
             ],
-            architecture: "Cloud API-based inline email inspection integrating Check Point Harmony with Microsoft 365 Exchange Online Mailflows."
+            architecture: "Tiered SOC operating model integrating centralized log management, real-time alert triage pipelines, and structured escalation paths."
         },
         '6': {
-            title: "Incident Response Playbook Framework",
-            category: "SOC Operations / Blue Team",
-            timeline: "2025 - 2026",
-            tags: ["Incident Response", "SOC", "MITRE ATT&CK", "Malware Detection", "Account Compromise", "Threat Investigation"],
-            description: "Developed structured incident response playbooks for common SOC scenarios, including malware detection and account compromise. Defined investigation, containment, eradication, recovery, escalation, and documentation procedures.",
-            status: "Private Playbook Library",
+            title: "Active Directory Red Team Lab",
+            category: "Red Team / Active Directory / Penetration Testing",
+            timeline: "Apr 2026 – May 2026",
+            tags: ["Windows Server", "Active Directory", "BloodHound", "PowerView", "Mimikatz", "Rubeus", "Hashcat"],
+            description: "Designed and deployed an enterprise-style Active Directory lab environment using multiple Windows Server and Windows Client virtual machines to simulate a realistic corporate network.",
+            status: "Featured Lab",
             features: [
-                "Created standardized NIST/SANS aligned playbooks for Phishing, Malware Outbreak, Ransomware, and Account Takeover (ATO).",
-                "Detailed step-by-step triage actions, evidence preservation steps, and memory/disk artifact extraction.",
-                "Included interactive Draw.io decision tree flowcharts for Tier 1 and Tier 2 analysts.",
-                "Established communication protocols, legal escalation guidelines, and post-incident review templates."
+                "Configured Active Directory Domain Services (AD DS), DNS, Group Policy, Organizational Units, Users, and Security Groups.",
+                "Integrated Windows clients and servers into the domain infrastructure.",
+                "Deployed Microsoft SQL Server and Metasploitable3 for attack simulation scenarios.",
+                "Performed Active Directory enumeration using BloodHound, SharpHound, PowerView, PowerUpSQL, and SQLRecon.",
+                "Simulated credential attacks, Kerberoasting, privilege escalation, lateral movement, and password spraying techniques.",
+                "Conducted post-exploitation exercises using Mimikatz, Rubeus, PsExec, Inveigh, Netcat, Hashcat, and John the Ripper.",
+                "Analyzed authentication events, network activity, and attack paths to identify security weaknesses and detection opportunities."
             ],
-            architecture: "Structured markdown & visual flowchart documentation library mapped directly to NIST SP 800-61 Rev. 2 phases."
+            architecture: "Multi-tier virtualized forest with domain controllers, member servers, and workstations instrumented for attack path graphing and defense validation."
         },
         '7': {
-            title: "Security Incident Investigation",
-            category: "SOC Operations / Forensics",
-            timeline: "2025 - 2026",
-            tags: ["Incident Investigation", "Windows Server", "Event Logs", "NTLM Authentication", "SOC"],
-            description: "Investigated repeated Windows authentication failures involving an Administrator account, analyzing NTLM authentication events, Logon Type 3 activity, error codes, and recurring login patterns to determine whether the activity represented an attack or an underlying server issue.",
-            status: "Confidential Case Study",
+            title: "OSINT-Based Data Exposure Assessment Tool",
+            category: "OSINT / Threat Intelligence / Cybersecurity Tool",
+            timeline: "Feb 2025 – Dec 2025",
+            tags: ["OSINT", "Threat Intelligence", "Have I Been Pwned", "VirusTotal", "AbuseIPDB", "Python"],
+            description: "Developed an OSINT-based cybersecurity tool to analyze publicly available data and identify potential exposure risks. Integrated APIs such as Have I Been Pwned, VirusTotal, and AbuseIPDB to perform threat intelligence and security analysis.",
+            github: "https://github.com/hameezcam/osint-data-exposure-tool",
+            contributors: "Jethendri",
+            status: "Open Source Tool",
             features: [
-                "Detailed forensic triage of hundreds of Event ID 4625 occurrences across domain controllers.",
-                "Isolated NTLMv1/NTLMv2 authentications, Logon Type 3 (Network logon), and sub-status error codes (0xC000006A, 0xC0000234).",
-                "Correlated source workstations, scheduled tasks, and legacy service accounts causing credential locks.",
-                "Published comprehensive post-incident analysis report with remediation steps to prevent domain lockouts."
+                "Automated ingestion of breach intelligence using Have I Been Pwned API.",
+                "Malicious IP reputation scoring via AbuseIPDB API integration.",
+                "Domain and URL risk analysis powered by VirusTotal API.",
+                "Consolidated exposure risk report generation for security analysts."
             ],
-            architecture: "Windows Event Log forensics, PowerShell telemetry parsing scripts, and network packet correlation."
+            architecture: "Python engine querying multiple threat intelligence APIs, performing data correlation and scoring exposure severity."
         },
         '8': {
-            title: "VAPT Assessment Framework",
-            category: "Red Team / Offensive Security",
-            timeline: "2025 - 2026",
-            tags: ["VAPT", "Penetration Testing", "OWASP", "Security Assessment", "Reporting", "Retesting"],
-            description: "Developed a professional VAPT framework covering assessment methodology, scope definition, client questionnaires, proposals, reporting, remediation validation, and retesting. Structured the process for delivering repeatable penetration testing engagements.",
-            status: "Private Framework Pack",
+            title: "Vulnerability Assessment & Penetration Testing (VAPT) Service Development",
+            category: "VAPT / Security Services",
+            timeline: "Jul 2026 – Sep 2026",
+            organization: "Supercad Trading LLC",
+            tags: ["Vulnerability Assessment", "Penetration Testing", "OWASP", "Security Testing", "Security Services"],
+            description: "Contributed to the development of a VAPT service offering, including scope-based service structures, pricing frameworks, client questionnaires, proposals, and testing methodologies. Worked with intentionally vulnerable environments including DVWA and OWASP Juice Shop to support security testing and demonstrations.",
+            status: "Enterprise Service Framework",
             features: [
-                "Standardized OWASP Testing Guide (OTG) and PTES-aligned vulnerability assessment methodology.",
-                "Complete document pack: scoping questionnaire, rules of engagement (RoE), executive proposal, and technical report template.",
-                "CVSS v3.1 severity rating calculator and actionable risk prioritization matrix.",
-                "Structured re-testing protocol for verifying customer remediation effectiveness."
+                "Formulated scope-based service structures and client intake assessment questionnaires.",
+                "Developed end-to-end testing methodologies covering network and web application layers.",
+                "Configured vulnerable testing environments (DVWA, OWASP Juice Shop) for attack simulations.",
+                "Created standardized technical remediation guidance and proposal frameworks."
             ],
-            architecture: "Complete offensive assessment delivery toolkit and reporting system for network, infrastructure, and application assessments."
+            architecture: "Structured VAPT delivery framework encompassing scoping, discovery, vulnerability validation, risk assessment, and executive reporting."
         },
         '9': {
-            title: "Web Application Security Lab",
-            category: "Red Team / Offensive Security",
-            timeline: "2025 - 2026",
-            tags: ["DVWA", "OWASP Juice Shop", "Web Security", "VAPT", "OWASP", "Penetration Testing"],
-            description: "Built a controlled web application security testing environment using DVWA and OWASP Juice Shop to practice vulnerability discovery, exploitation, validation, and security reporting against intentionally vulnerable applications.",
-            status: "Lab Environment",
+            title: "Check Point Email Security & Anti-Phishing Standardization",
+            category: "Email Security / Security Operations",
+            timeline: "Aug 2026",
+            organization: "Supercad Trading LLC",
+            tags: ["Email Security", "Anti-Phishing", "Check Point", "DMARC", "SPF", "DLP", "Security Hardening"],
+            description: "Configured and standardized email security controls across multiple client environments using Check Point Email Security.",
+            status: "Production Hardening",
             features: [
-                "Practiced exploiting and mitigating OWASP Top 10 vulnerabilities (SQL Injection, XSS, CSRF, IDOR, SSRF, Broken Auth).",
-                "Utilized Burp Suite for request interception, repeater testing, and intruder fuzzing.",
-                "Extracted database schemas via manual SQLi payloads and automated sqlmap validation.",
-                "Formulated remediation code snippets and defense mechanisms in PHP, Node.js, and Python."
+                "Anti-phishing and impersonation detection policy tuning.",
+                "Strict SPF, DKIM, and DMARC verification and alignment enforcement.",
+                "URL reputation analysis, anomaly detection, and Click-Time Protection configuration.",
+                "Data Loss Prevention (DLP) policy formulation and compliance rule sets.",
+                "Developed consolidated security documentation and configuration standards."
             ],
-            architecture: "Docker containerized environment hosting DVWA, OWASP Juice Shop, and Mutillidae with Burp Suite proxy routing."
+            architecture: "Cloud email security gateway inline inspection architecture with anomaly detection and automated threat remediation."
         },
         '10': {
-            title: "MITRE ATT&CK Detection Mapping",
-            category: "SOC Operations / Detection Engineering",
-            timeline: "2025 - 2026",
-            tags: ["MITRE ATT&CK", "Threat Detection", "Detection Engineering", "SOC", "Threat Intelligence"],
-            description: "Developed a structured MITRE ATT&CK mapping framework to associate security detections, attack behaviors, and defensive controls with relevant adversary techniques and tactics.",
-            status: "Matrix Mapping Model",
+            title: "Microsoft Security Architecture & Protection",
+            category: "Microsoft Security",
+            timeline: "Aug 2026 – Sep 2026",
+            organization: "Supercad Trading LLC",
+            tags: ["Microsoft Defender", "EDR", "Microsoft 365 Security", "Identity Security", "Safe Links", "Safe Attachments"],
+            description: "Designed and implemented Microsoft security controls covering endpoint, identity, email, phishing, malicious URLs, attachments, and security monitoring.",
+            status: "Enterprise Protection",
             features: [
-                "Mapped Enterprise Matrix techniques across Initial Access, Execution, Persistence, Privilege Escalation, and Lateral Movement.",
-                "Identified telemetry sources required for high-risk adversary techniques (e.g. T1003 OS Credential Dumping, T1059 Command Interpreters).",
-                "Constructed detection coverage gap analysis to identify blind spots in SIEM and EDR rule sets.",
-                "Enhanced alert priority scoring based on ATT&CK technique severity and threat group profiles."
+                "Configured Microsoft Defender for Endpoint with automated investigation and EDR policies.",
+                "Implemented Microsoft 365 Security policies including Safe Links and Safe Attachments.",
+                "Engineered identity protection controls and Conditional Access policies.",
+                "Established unified telemetry ingestion into Microsoft Sentinel for centralized visibility."
             ],
-            architecture: "Matrix mapping model correlating Wazuh/Sentinel detection rules with ATT&CK IDs, data sources, and mitigation techniques."
+            architecture: "Integrated Microsoft 365 Defender XDR ecosystem spanning identities, endpoints, email communications, and cloud workloads."
         },
         '11': {
-            title: "OSINT-Based Data Exposure Assessment Tool",
-            category: "Cybersecurity / OSINT",
-            timeline: "2025 - 2026",
-            tags: ["Python", "Flask", "SQLite", "HaveIBeenPwned API", "VirusTotal API", "AbuseIPDB API", "OSINT"],
-            description: "Developed an open-source OSINT security exposure assessment platform integrating threat intelligence APIs to detect breached credentials, malicious IPs, domain indicators, and calculate risk scores via a real-time web dashboard.",
-            github: "https://github.com/hameezcam/osint-data-exposure-tool",
-            status: "Public Open Source Project",
+            title: "Client Cybersecurity Posture Assessment",
+            category: "Security Assessment / Governance",
+            timeline: "Sep 2026",
+            organization: "Supercad Trading LLC",
+            tags: ["Risk Assessment", "Information Security Governance", "Security Assessment", "Security Posture Management"],
+            description: "Developed a standardized security posture assessment framework for evaluating client environments across identity, endpoint, email, network, cloud, SIEM, vulnerability management, backup, incident response, and security governance.",
+            status: "Governance Framework",
             features: [
-                "Email breach detection via HaveIBeenPwned API checking compromised credentials and breach timelines.",
-                "IP reputation scoring and malicious report aggregation via AbuseIPDB API.",
-                "Multi-engine domain & URL scanning powered by VirusTotal API.",
-                "Interactive Flask web dashboard displaying scan history, threat radar, and downloadable risk summary reports."
+                "Evaluation matrices spanning 10 critical security domains.",
+                "Assessment of identity security, endpoint hardening, and email defenses.",
+                "Evaluation of backup resilience, incident response readiness, and governance policies.",
+                "Actionable gap analysis and executive remediation roadmap generation."
             ],
-            architecture: "Python backend with Flask REST API, SQLite database, async threat intelligence fetchers, and responsive web dashboard."
+            architecture: "Standardized posture evaluation model mapping technical control audits against risk management frameworks."
         },
         '12': {
-            title: "Active Directory Red Team Lab",
-            category: "Red Team / Active Directory Security",
-            timeline: "2025 - 2026",
-            tags: ["Windows Server 2019", "Active Directory", "BloodHound", "Kerberoasting", "Mimikatz", "PowerShell", "Red Team"],
-            description: "Designed and deployed an enterprise-style Active Directory lab using multiple Windows Server and client virtual machines to simulate a real corporate environment and execute hands-on red team operations and defensive event log investigations.",
-            status: "Lab Environment",
+            title: "Enterprise Network Security Assessment",
+            category: "Network Security / Security Audit",
+            timeline: "Sep 2026 – Present",
+            organization: "Supercad Trading LLC",
+            tags: ["Cisco Meraki", "Network Security", "Security Auditing", "Firewall Security", "VPN Security"],
+            description: "Conducted security assessments across multiple Cisco Meraki client environments, reviewing administrative access, MFA, firewall policies, VLANs, wireless security, VPN configuration, firmware, IDS/IPS, logging, and overall security posture.",
+            status: "Ongoing Engagements",
             features: [
-                "Configured AD DS, DNS, Group Policy Objects (GPOs), Service Principal Names (SPNs), and SQL Server across virtual machines.",
-                "Executed Kerberoasting, AS-REP roasting, password spraying, and token impersonation attacks.",
-                "Used BloodHound and SharpHound to map complex attack paths to Domain Admin.",
-                "Simulated LLMNR/NBT-NS poisoning with Inveigh and cracked captured hashes offline with Hashcat and John the Ripper.",
-                "Investigated Windows Security Event IDs (4625, 4768, 4769, 4672) to understand attacker footprints."
+                "Comprehensive audit of administrative access controls and MFA enforcement.",
+                "Firewall policy, access rule, and network segmentation (VLAN) analysis.",
+                "Wireless security configuration and rogue AP detection review.",
+                "VPN encryption standards, client VPN authentication, and firmware currency audits.",
+                "IDS/IPS alert tuning and centralized security logging validation."
             ],
-            architecture: "Multi-VM lab built in VMware: Windows Server 2019 (Domain Controller), Windows Server 2008 (legacy target), Windows 10 (client workstation), and Kali Linux (attacker node)."
+            architecture: "Multi-branch cloud-managed perimeter network audit framework evaluating edge defenses, secure segmentation, and operational logging."
         },
         '13': {
-            title: "SOC Infrastructure Scaling Architecture",
-            category: "SOC Operations / Blue Team",
-            timeline: "2025 - 2026",
-            tags: ["SOC Architecture", "SIEM", "Infrastructure", "Scalability", "Security Operations"],
-            description: "Designed scalable SOC architecture concepts for organizations ranging from 50 to 400 users, evaluating log ingestion volume, storage retention tiers, SIEM processing capacity, and endpoint telemetry bandwidth.",
-            status: "Private Architecture Model",
+            title: "Multi-Tenant Finance & Business Management ERP",
+            category: "Business Application / SaaS / Software Development",
+            timeline: "Sep 2026",
+            tags: ["ERP Development", "Financial Management", "RBAC", "Multi-Tenant Architecture", "User Management", "Workflow Automation"],
+            description: "Designed and developed a multi-tenant Finance ERP platform for managing financial and operational workflows across multiple organizations. (Business software development project, presented independently of security tooling).",
+            status: "Software / SaaS Application",
             features: [
-                "Formulated EPS (Events Per Second) and daily GB ingestion calculations based on user count and endpoint densities.",
-                "Designed hot-warm-cold storage lifecycle policies ensuring compliance with long-term retention mandates.",
-                "Planned high-availability (HA) cluster configurations for SIEM forwarders and indexing nodes.",
-                "Established bandwidth throttling models to protect remote WAN links during peak telemetry bursts."
+                "Role-based access control (Super Admin, Finance Manager, Senior Accountant, Operations, Auditor).",
+                "Centralized user and organization access management and suspension controls.",
+                "End-to-end financial workflows: Invoices, Delivery notes, Petty cash, Expense management, Approvals.",
+                "Organization-specific document templates, financial reporting, and audit logs."
             ],
-            architecture: "High-availability SOC telemetry pipeline architecture diagrammed for multi-tier corporate networks."
+            architecture: "Multi-tenant cloud SaaS architecture with tenant-isolated database schemas and granular role authorization pipelines."
         },
         '14': {
-            title: "Security Operations Documentation Framework",
-            category: "Security Engineering / GRC",
-            timeline: "2025 - 2026",
-            tags: ["Security Documentation", "SOC", "Checklists", "Version Control", "Operations", "ISO 27001"],
-            description: "Created standardized documentation structures for client security configurations, security checklists, version control, ticket resolutions, and recurring SOC operational procedures aligned with industry standards.",
-            status: "Confidential Enterprise Package",
+            title: "AI-Assisted Scam & Threat Analysis Platform",
+            category: "Threat Intelligence / Security Analysis",
+            timeline: "Sep 2026",
+            tags: ["Threat Analysis", "Cyber Threat Intelligence", "Application Security", "SSRF Protection", "Multi-Tenancy"],
+            description: "A cybersecurity platform designed to analyze potentially malicious URLs, messages, emails, QR codes, and other digital content.",
+            status: "Intelligence Platform",
             features: [
-                "Standardized technical runbooks for daily health checks, log source verification, and certificate expiration tracking.",
-                "Created structured client security configuration baseline templates and change control logs.",
-                "Established ticketing documentation standards for incident escalations in IT service management platforms.",
-                "Integrated ISO/IEC 27001 Annex A control references into operational procedures."
+                "Multi-vector threat analysis for suspicious URLs, SMS, emails, and QR codes.",
+                "Built-in Server-Side Request Forgery (SSRF) protection and sandboxed inspection.",
+                "Cyber Threat Intelligence (CTI) feed correlation and risk scoring.",
+                "AI-assisted threat pattern recognition and explanation.",
+                "Secure multi-tenant authentication and security telemetry logging."
             ],
-            architecture: "Standardized operational documentation repository and change management hierarchy."
+            architecture: "Sandboxed inspection microservice with threat intelligence cache, automated URL unpacker, and AI classification layer."
+        },
+        '15': {
+            title: "Incident Response Playbook Framework",
+            category: "Incident Response / Security Operations",
+            timeline: "2026",
+            tags: ["Incident Response", "BEC", "Account Compromise", "PowerShell", "Data Exfiltration", "Playbooks"],
+            description: "Developed structured incident response playbooks covering common enterprise security incidents and investigation workflows.",
+            status: "Operational Framework",
+            features: [
+                "Business Email Compromise (BEC) investigation and containment runbook.",
+                "Account Compromise and session termination workflows.",
+                "Malicious URL and phishing campaign analysis procedures.",
+                "Suspicious PowerShell activity and execution triage protocols.",
+                "Data Exfiltration, Privileged Activity abuse, and Vulnerability Exploitation response paths."
+            ],
+            architecture: "Standardized incident handling frameworks aligned with NIST SP 800-61 Rev. 2 phases from detection to post-incident review."
+        },
+        '16': {
+            title: "Security Posture Assessment Framework",
+            category: "Security Assessment",
+            timeline: "2026",
+            tags: ["Security Posture", "Identity Security", "Endpoint Defense", "Network Hardening", "Assessment"],
+            description: "Developed a structured security posture assessment methodology covering identity, endpoint, email, network, SIEM, administrative access, authentication, and security controls.",
+            status: "Assessment Methodology",
+            features: [
+                "Comprehensive audit checklists for enterprise identity and access controls.",
+                "Endpoint security posture and EDR deployment verification criteria.",
+                "Email security gateway and perimeter firewall policy inspection.",
+                "Administrative access governance, privileged identity controls, and MFA enforcement review."
+            ],
+            architecture: "Structured assessment matrix delivering quantitative maturity scores and prioritized mitigation checklists."
+        },
+        '17': {
+            title: "Detection Catalogue",
+            category: "Detection Engineering",
+            timeline: "2026",
+            tags: ["Detection Logic", "Data Sources", "Threat Scenarios", "Investigation Guidance", "Detection Gaps"],
+            description: "Developed a structured catalogue of security detections mapped to threat scenarios, telemetry sources, investigation requirements, security controls, and detection gaps.",
+            status: "Detection Engineering Library",
+            features: [
+                "Detection query logic and analytic rule definitions.",
+                "Telemetry source requirement mapping (Windows Security Events, Sysmon, Firewall logs).",
+                "Threat scenario playbooks and triage analyst guidance.",
+                "Identification of telemetry blind spots and recommended sensor configurations."
+            ],
+            architecture: "Living detection catalogue bridging threat modeling, query engineering, and operational alert verification."
+        },
+        '18': {
+            title: "NESA Security Roadmap",
+            category: "Security / Compliance",
+            timeline: "2026",
+            tags: ["Security Governance", "Controls Maturity", "Compliance Planning", "NESA IAS", "Roadmap"],
+            description: "Developed a structured cybersecurity roadmap covering security governance, controls, maturity, and compliance-oriented security planning.",
+            status: "Governance Roadmap",
+            features: [
+                "Control framework alignment addressing foundational and advanced security measures.",
+                "Phased implementation timeline prioritizing critical security baseline controls.",
+                "Maturity assessment checklists and technical audit preparation guidance.",
+                "Documentation workflows for tracking governance and defensive compliance progress."
+            ],
+            architecture: "Strategic security roadmap establishing a path from baseline security controls to enterprise compliance readiness."
+        },
+        '19': {
+            title: "SOC Implementation Roadmap",
+            category: "SOC / Security Operations",
+            timeline: "2026",
+            tags: ["SOC Architecture", "Security Operations", "Monitoring Strategy", "Processes", "Operational Maturity"],
+            description: "Developed a practical roadmap for establishing and maturing a Security Operations Center, covering architecture, technology, processes, monitoring, detection, incident response, and operational maturity.",
+            status: "SOC Blueprint",
+            features: [
+                "Phased SOC buildout covering core architecture, telemetry ingestion, and tooling.",
+                "Standard operating procedure definitions for alert handling, escalation, and shift handovers.",
+                "Technology evaluation framework for SIEM, EDR, and log management platforms.",
+                "Metrics and KPI framework for measuring SOC operational maturity and detection coverage."
+            ],
+            architecture: "End-to-end SOC development blueprint detailing infrastructure, process engineering, and analyst operational workflows."
+        },
+        '20': {
+            title: "SOCaaS Planning",
+            category: "Security Operations",
+            timeline: "2026",
+            tags: ["SOCaaS", "Security Services", "Client Onboarding", "Monitoring Architecture", "Service Delivery"],
+            description: "Developed a framework for planning a managed Security Operations service, including client onboarding, monitoring architecture, security tooling, detection capabilities, operational workflows, and service delivery.",
+            status: "Managed Service Architecture",
+            features: [
+                "Client onboarding lifecycle covering log source identification, agent rollout, and scope validation.",
+                "Multi-tenant monitoring architecture ensuring strict tenant data isolation.",
+                "Service Level Agreement (SLA) models for alert response, investigation, and reporting.",
+                "Recurring client security reporting cadence and remediation advisory workflows."
+            ],
+            architecture: "Managed security service delivery model connecting remote client telemetry to centralized monitoring and analyst response."
         }
     };
 
-    // Certifications Badges Database
+    // Certifications Database
     const certsData = {
+        'copilot': {
+            title: "Microsoft Copilot for Security",
+            issuer: "Microsoft",
+            date: "Completed — 2026",
+            id: "Microsoft Certified",
+            status: "COMPLETED // 2026",
+            details: "Specialized certification covering Microsoft Copilot for Security architecture, natural language security prompts, incident investigation enrichment, KQL integration, and automated threat triage."
+        },
+        'kingston': {
+            title: "BSc (Hons) Cybersecurity & Digital Forensics",
+            issuer: "Kingston University",
+            date: "Completed",
+            id: "Kingston University London",
+            status: "COMPLETED",
+            details: "Comprehensive degree program covering network security, digital forensics, cryptographic foundations, operating systems, malware analysis, incident response, and security governance frameworks."
+        },
+        'ccna': {
+            title: "Cisco Certified Network Associate (CCNA 200-301)",
+            issuer: "Cisco",
+            date: "Completed",
+            id: "Cisco Certification",
+            status: "COMPLETED",
+            details: "Network fundamentals, IP connectivity, IP services, enterprise security fundamentals, ACLs, VPN architectures, and network automation."
+        },
+        'az900': {
+            title: "Microsoft Azure Fundamentals (AZ-900)",
+            issuer: "Microsoft",
+            date: "Completed",
+            id: "Microsoft Certified",
+            status: "COMPLETED",
+            details: "Cloud concepts, Azure architectural components, Azure security services, identity, governance, compliance, and privacy controls."
+        },
+        'hardware': {
+            title: "Advanced Diploma in Hardware & Networking Professional",
+            issuer: "Hardware & Networking Institute",
+            date: "Completed",
+            id: "Professional Diploma",
+            status: "COMPLETED",
+            details: "Enterprise hardware troubleshooting, server architecture, switching, routing, firewalls, and network operating system administration."
+        },
         'letsdefend': {
             title: "SOC Fundamentals",
             issuer: "LetsDefend",
-            date: "2026 - 2026",
+            date: "Completed — 2026",
             id: "LetsDefend · SOC Track",
             status: "COMPLETED // 2026",
-            details: "Hands-on SOC analyst training platform. Covers alert triage, SIEM usage, log analysis, malware analysis, phishing investigation, and real-world incident response workflows based on actual attack scenarios."
-        },
-        'uol': {
-            title: "Cyber Security Fundamentals",
-            issuer: "University of London",
-            date: "2026 - 2026",
-            id: "University of London · 2026",
-            status: "COMPLETED // 2026",
-            details: "Comprehensive cybersecurity foundations program from the University of London. Covers threat landscapes, cryptography principles, network security, risk management, and practical digital defence strategies."
+            details: "Hands-on SOC analyst training platform. Covers alert triage, SIEM usage, log analysis, malware analysis, phishing investigation, and real-world incident response workflows."
         },
         'ceh': {
             title: "Certified Ethical Hacker (CEH)",
             issuer: "EC-Council",
-            date: "2026 - 2026",
-            id: "EC-Council CEH",
-            status: "CERTIFIED",
-            details: "Covers dynamic ethical hacking methodologies. Includes vulnerability scanning, reconnaissance (OSINT), system hacking, web application penetration, Trojan analyses, and firewall evasion techniques."
-        },
-        'microsoft': {
-            title: "Microsoft Cybersecurity Professional Certificate",
-            issuer: "Microsoft",
-            date: "2026 - 2026",
-            id: "Microsoft Professional Certificate",
-            status: "CERTIFIED",
-            details: "Microsoft's professional cybersecurity certificate program covering threat protection, security management, identity and access management (IAM), cloud security fundamentals, and compliance."
-        },
-        'google': {
-            title: "Google Cybersecurity Certificate",
-            issuer: "Google / Coursera",
-            date: "2026 - 2026",
-            id: "Google Professional Certificate",
-            status: "CERTIFIED",
-            details: "Professional program validating practical skills. Focuses on SIEM monitoring with Splunk, vulnerability scanning with Nmap, cybersecurity scripting with Python, and packet capture triage with Wireshark."
+            date: "In Progress",
+            id: "EC-Council Track",
+            status: "IN PROGRESS",
+            details: "Active preparation for Certified Ethical Hacker covering vulnerability assessment, penetration testing methodologies, network scanning, and offensive security analysis."
         }
     };
 
@@ -897,26 +1105,26 @@ function initModals() {
             date: "June 2026",
             readTime: "8 min read",
             content: `
-                <p>Entering the security operations center (SOC) requires a structured approach to systems, networks, and telemetry tracking. As a SOC analyst, your role is to act as the primary defense vector, identifying events before they become critical breaches.</p>
+                <p>Entering the Security Operations Center (SOC) requires a structured approach to systems, networks, and telemetry tracking. As a SOC analyst, your role is to act as the primary defense line, identifying and investigating threats before they become critical breaches.</p>
                 
                 <h4>1. Solidify Network Foundations</h4>
                 <p>You cannot defend what you don't understand. A SOC analyst must comprehend how packets traverse networks. Focus on:</p>
                 <ul>
-                    <li>The TCP/IP model in depth (packet headers, Handshake sequences, windowing).</li>
+                    <li>The TCP/IP model in depth (packet headers, 3-way handshakes, TCP flags).</li>
                     <li>DNS operations, DHCP, ARP, and routing configurations.</li>
-                    <li>Network scanning protocols using tools like Wireshark and TCPdump.</li>
+                    <li>Network traffic analysis using tools like Wireshark and TCPdump.</li>
                 </ul>
 
-                <h4>2. Master SIEM Operations</h4>
-                <p>Security Information and Event Management (SIEM) systems act as the brain of the SOC. You must understand:</p>
+                <h4>2. Master SIEM & Telemetry Operations</h4>
+                <p>Security Information and Event Management (SIEM) systems act as the brain of the SOC. Key focus areas:</p>
                 <ul>
-                    <li>Log collection, normalization, and parsing formats.</li>
+                    <li>Log collection, normalization, and KQL query writing in Microsoft Sentinel.</li>
                     <li>Constructing correlation rules to trigger alerts under specific threat heuristics.</li>
-                    <li>Running analysis scripts on platforms like Splunk or Chronicle.</li>
+                    <li>Wazuh and Sysmon telemetry for endpoint event correlation (Event ID 1, 3, 11, 4625, 4624).</li>
                 </ul>
 
-                <h4>3. Understand System Log Analysis</h4>
-                <p>Learn how to read Windows Event Logs (Security, System, Application) and Linux syslog files. Focus on identifying lateral movements, privilege escalations, and abnormal service starts.</p>
+                <h4>3. Incident Response Playbooks</h4>
+                <p>Learn structured triage and containment steps for phishing, malware outbreaks, and account compromises following NIST SP 800-61 frameworks.</p>
             `
         },
         'siem-intro': {
@@ -925,19 +1133,18 @@ function initModals() {
             date: "May 2026",
             readTime: "6 min read",
             content: `
-                <p>SIEM (Security Information and Event Management) forms the backbone of security analytics. By collecting data from multiple nodes, it provides an aggregated dashboard of security events.</p>
+                <p>SIEM (Security Information and Event Management) forms the backbone of modern security operations. By collecting and correlating data from endpoints, cloud services, and network perimeters, it provides centralized threat visibility.</p>
                 
                 <h4>Data Ingestion Pipelines</h4>
-                <p>Logs from endpoints, firewalls, and active directories are sent to forwarders. The SIEM normalizes this data, translating disparate log formats into structured, queryable data fields.</p>
+                <p>Logs from endpoints, firewalls, and Active Directory domains are collected by forwarders or cloud connectors (CEF, Syslog, Graph API). The SIEM normalizes this data into structured schemas.</p>
 
-                <h4>Correlation Engines</h4>
-                <p>Correlation rules map multiple events to detect threat structures. For example: if Node A experiences 50 failed SSH logins within 1 minute, followed by 1 successful login, and then initiates an outbound connection to an unknown IP - the correlation engine triggers a high-priority incident alert.</p>
+                <h4>Correlation Engines & Detection Rules</h4>
+                <p>Correlation rules map disparate events to uncover adversary tactics. For example: multiple Event ID 4625 failed logons within 60 seconds followed by a successful Event ID 4624 and subsequent PowerShell execution triggers a high-severity alert.</p>
 
-                <h4>Best Practices for SIEM Rules</h4>
+                <h4>Best Practices for SOC Rule Tuning</h4>
                 <ul>
-                    <li>Reduce Alert Fatigue: Continuously tune rules to minimize false positives.</li>
-                    <li>Log Source Hardening: Ensure logging forwarders are secured and logs cannot be deleted by local attackers.</li>
-                    <li>Performance Tuning: Optimize indexing queries to maintain dashboard responsiveness.</li>
+                    <li>Reduce Alert Fatigue: Continuously tune rules to minimize false positives and elevate signal-to-noise ratio.</li>
+                    <li>Align with MITRE ATT&CK: Map detections to specific adversary techniques to identify coverage blind spots.</li>
                 </ul>
             `
         },
@@ -947,254 +1154,195 @@ function initModals() {
             date: "May 2026",
             readTime: "10 min read",
             content: `
-                <p>Passive monitoring is no longer sufficient. Modern adversaries utilize advanced techniques to hide within legitimate traffic. Threat hunting is the proactive search for attackers who have bypassed traditional security layers.</p>
+                <p>Passive alert triage is no longer sufficient against sophisticated threat actors. Proactive threat hunting searches for adversaries who have evaded automated detections.</p>
                 
-                <h4>The Threat Hunting Loop</h4>
-                <p>1. Formulate Hypothesis: Assume a specific breach vector based on intelligence (e.g. 'Attackers are utilizing DNS tunneling to exfiltrate database records').</p>
-                <p>2. Query Telemetry: Filter DNS query logs for anomalies (e.g. unusually long subdomains, TXT record queries, high volume queries to unknown registrars).</p>
-                <p>3. Analyze Anomalies: Triage findings using Wireshark to inspect packet content.</p>
-                <p>4. Remediate & Automate: Block threat nodes and translate the hunting query into a permanent SIEM correlation rule.</p>
+                <h4>Hypothesis-Driven Hunting</h4>
+                <p>Formulate actionable hypotheses based on threat intelligence reports, MITRE ATT&CK techniques, and environment-specific risks (e.g. searching for unmanaged scheduled tasks or living-off-the-land binaries).</p>
 
-                <h4>Key Indicators of Compromise (IOCs)</h4>
-                <ul>
-                    <li>Unexpected outward network traffic spikes.</li>
-                    <li>Unusual user login times and geographical origins.</li>
-                    <li>Modification of core system files (hashes changed).</li>
-                </ul>
+                <h4>Endpoint & Network Telemetry Triangulation</h4>
+                <p>Correlate process execution logs (Sysmon Event ID 1) with outbound network connections (Event ID 3) and DNS queries to trace command-and-control beacons.</p>
             `
         },
         'ad-security': {
-            title: "Active Directory Security Basics: Common Weaknesses",
+            title: "Active Directory Security & Attack Paths",
             category: "Active Directory",
             date: "April 2026",
             readTime: "7 min read",
             content: `
-                <p>Active Directory (AD) manages assets and access inside corporate networks, making it the highest-value target for adversaries seeking domain domination.</p>
+                <p>Active Directory remains the primary target for lateral movement and privilege escalation in enterprise environments.</p>
                 
-                <h4>Common AD Attack Vectors</h4>
-                <p><strong>Kerberoasting:</strong> Attackers request Kerberos service tickets for accounts linked to Service Principal Names (SPNs) and attempt to crack user passwords offline.</p>
-                <p><strong>LLMNR/NBT-NS Poisoning:</strong> Attackers listen to multicast resolution queries and poison responses to capture credentials hashes.</p>
-                <p><strong>Over-Privileged Accounts:</strong> Service accounts with domain administrator access present an easy compromise vector if password hygiene is weak.</p>
+                <h4>Key Vulnerability Surfaces</h4>
+                <ul>
+                    <li><strong>Kerberoasting:</strong> Requesting TGS tickets for accounts with SPNs and cracking them offline.</li>
+                    <li><strong>AS-REP Roasting:</strong> Exploiting user accounts that do not require Kerberos pre-authentication.</li>
+                    <li><strong>LLMNR / NBT-NS Poisoning:</strong> Capturing NetNTLM hashes by responding to broadcast name resolution requests.</li>
+                </ul>
 
                 <h4>Defensive Mitigations</h4>
-                <ul>
-                    <li>Implement Least Privilege access control models.</li>
-                    <li>Enforce strong, long passwords for SPN service accounts and rotate keys regularly.</li>
-                    <li>Disable LLMNR and NetBIOS protocols on local servers.</li>
-                </ul>
+                <p>Enforce strong AES-256 Kerberos encryption, disable LLMNR/NBT-NS via GPO, implement Tiered Administration models, and monitor Event IDs 4768 and 4769 for anomalies.</p>
             `
         },
         'osint-techniques': {
-            title: "OSINT Techniques for Security Audits & Reconnaissance",
+            title: "OSINT & External Attack Surface Management",
             category: "OSINT",
             date: "March 2026",
             readTime: "5 min read",
             content: `
-                <p>OSINT (Open Source Intelligence) is the collection and analysis of publicly available data. In security audits, OSINT is used to identify exposed data vectors before malicious actors exploit them.</p>
+                <p>Understanding an organization's public-facing attack surface is crucial for both offensive penetration testing and defensive exposure management.</p>
                 
-                <h4>Key OSINT Datasets</h4>
-                <p><strong>Domain Mapping:</strong> Utilizing sub-domain enumerators to discover forgotten staging sites and testing portals.</p>
-                <p><strong>Metadata Extraction:</strong> Scanning corporate PDFs and files for software versions, hostnames, and employee emails.</p>
-                <p><strong>Search Engine Dorking:</strong> Using advanced operators (e.g., 'filetype:sql' or 'inurl:admin') to isolate database backups or open admin portals.</p>
-
-                <h4>Defensive Applications</h4>
-                <p>Conduct regular self-auditing OSINT campaigns to map public footprints and promptly take down exposed code repositories or development folders.</p>
+                <h4>Asset Discovery & Exposure Assessment</h4>
+                <p>Utilize Certificate Transparency logs, DNS enumeration, Shodan queries, and breach intelligence APIs to identify exposed credentials, leaked endpoints, and misconfigured perimeter services before threat actors can target them.</p>
             `
         }
     };
 
-    // Open Project Modals
-    const projectTriggers = document.querySelectorAll('.open-project-modal');
-    projectTriggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
-            const id = trigger.getAttribute('data-project');
-            const data = projectsData[id];
+    // Open Project Modal
+    document.querySelectorAll('.open-project-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const pid = btn.getAttribute('data-project');
+            const data = projectsData[pid];
+            if (!data || !projectModal || !projectModalBody) return;
             
-            if (data) {
-                let tagsHtml = data.tags.map(t => `<span class="tag">${t}</span>`).join('');
-                let featuresHtml = data.features.map(f => `<li><i class="fas fa-check-circle"></i> <span>${f}</span></li>`).join('');
-                
-                projectModalBody.innerHTML = `
-                    <h3 class="modal-project-title">${data.title}</h3>
-                    <div class="modal-project-meta">
-                        <span><i class="fas fa-folder"></i> ${data.category}</span>
-                        <span><i class="far fa-calendar-alt"></i> ${data.timeline}</span>
+            projectModalBody.innerHTML = `
+                <div class="modal-header-info">
+                    <span class="modal-category">${data.category}</span>
+                    <h2 class="modal-project-title">${data.title}</h2>
+                    <div class="modal-meta-row">
+                        <span><i class="far fa-calendar"></i> ${data.timeline}</span>
+                        <span><i class="fas fa-shield-halved"></i> ${data.status}</span>
                     </div>
-                    <div class="modal-project-tags">${tagsHtml}</div>
-                    <div class="modal-project-body">
-                        <h4>PROJECT DESCRIPTION</h4>
-                        <p>${data.description}</p>
-                        
-                        <h4>KEY FEATURES</h4>
-                        <ul>${featuresHtml}</ul>
-                        
-                        <h4>SYSTEM ARCHITECTURE</h4>
-                        <p>${data.architecture}</p>
-                    </div>
-                    <div class="modal-project-actions" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-                        ${data.github ? `<a href="${data.github}" target="_blank" rel="noopener" class="cyber-btn primary-btn"><span class="btn-text"><i class="fab fa-github"></i> Repository</span></a>` : ''}
-                        ${data.status ? `<span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-secondary);background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);padding:8px 14px;border-radius:4px;"><i class="fas fa-shield-halved" style="color:var(--cyber-blue);margin-right:6px;"></i>${data.status}</span>` : ''}
-                        <button class="cyber-btn secondary-btn modal-close-action" style="margin-left:auto;"><span class="btn-text">Close</span></button>
-                    </div>
-                `;
-                
-                // Add closing trigger inside modal
-                projectModalBody.querySelector('.modal-close-action').addEventListener('click', () => {
-                    projectModal.classList.remove('active');
-                });
-                
-                projectModal.classList.add('active');
-            }
+                </div>
+                <div class="modal-tags">
+                    ${data.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                </div>
+                <div class="modal-body-section">
+                    <h3>Project Overview</h3>
+                    <p>${data.description}</p>
+                </div>
+                <div class="modal-body-section">
+                    <h3>Key Technical Highlights</h3>
+                    <ul class="modal-feature-list">
+                        ${data.features.map(f => `<li><i class="fas fa-check-circle"></i> <span>${f}</span></li>`).join('')}
+                    </ul>
+                </div>
+                <div class="modal-body-section">
+                    <h3>Architecture &amp; Methodology</h3>
+                    <p>${data.architecture}</p>
+                </div>
+                ${data.github ? `
+                <div class="modal-footer-cta">
+                    <a href="${data.github}" target="_blank" rel="noopener" class="cyber-btn primary-btn">
+                        <span class="btn-text"><i class="fab fa-github"></i> View GitHub Repository</span>
+                    </a>
+                </div>` : ''}
+            `;
+            projectModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
     });
 
-    // Open Certifications Modals
-    const certTriggers = document.querySelectorAll('.verify-cert-link');
-    certTriggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
-            const id = trigger.getAttribute('data-cert');
-            const data = certsData[id];
-            
-            if (data) {
-                let iconClass = 'fa-shield-halved';
-                if (id === 'cisco') iconClass = 'fa-network-wired';
-                if (id === 'google') iconClass = 'fa-google';
-                
-                certModalBody.innerHTML = `
-                    <div class="modal-cert-body">
-                        <div class="modal-cert-badge-wrapper">
-                            <i class="fas ${iconClass}"></i>
-                        </div>
-                        <h3>${data.title}</h3>
-                        <p class="cert-desc" style="font-size: 0.95rem;">${data.details}</p>
-                        
-                        <div class="modal-cert-details">
-                            <div class="row">
-                                <span class="label">ISSUER:</span>
-                                <span class="val">${data.issuer}</span>
-                            </div>
-                            <div class="row">
-                                <span class="label">DATE:</span>
-                                <span class="val">${data.date}</span>
-                            </div>
-                            <div class="row">
-                                <span class="label">CREDENTIAL_ID:</span>
-                                <span class="val">${data.id}</span>
-                            </div>
-                            <div class="row">
-                                <span class="label">STATUS:</span>
-                                <span class="val text-success">${data.status}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="modal-project-actions" style="margin-top: 10px; width: 100%; display: flex; justify-content: center;">
-                            <button class="cyber-btn primary-btn cert-close-action"><span class="btn-text">Done Verification</span></button>
-                        </div>
-                    </div>
-                `;
-                
-                certModalBody.querySelector('.cert-close-action').addEventListener('click', () => {
-                    certModal.classList.remove('remove');
-                    certModal.classList.remove('active');
-                });
-                
-                certModal.classList.add('active');
-            }
-        });
-    });
-
-    // Open Blog Modals
-    const blogTriggers = document.querySelectorAll('.read-blog-btn');
-    blogTriggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
-            const id = trigger.getAttribute('data-post');
-            const data = blogData[id];
-            
-            if (data) {
-                blogModalBody.innerHTML = `
-                    <h3 class="modal-project-title">${data.title}</h3>
-                    <div class="modal-project-meta">
-                        <span><i class="fas fa-tag"></i> ${data.category}</span>
-                        <span><i class="far fa-calendar-alt"></i> ${data.date}</span>
-                        <span><i class="far fa-clock"></i> ${data.readTime}</span>
-                    </div>
-                    <div class="modal-project-body blog-modal-text-flow">
-                        ${data.content}
-                    </div>
-                    <div class="modal-project-actions">
-                        <button class="cyber-btn primary-btn blog-close-action"><span class="btn-text">Finished Reading</span></button>
-                    </div>
-                `;
-                
-                blogModalBody.querySelector('.blog-close-action').addEventListener('click', () => {
-                    blogModal.classList.remove('active');
-                });
-                
-                blogModal.classList.add('active');
-            }
-        });
-    });
-
-    // Close Modals triggers
-    [projectClose, certClose, blogClose].forEach(btn => {
-        if (btn) {
-            btn.addEventListener('click', () => {
-                projectModal.classList.remove('active');
-                certModal.classList.remove('active');
-                blogModal.classList.remove('active');
-            });
-        }
-    });
-
-    // Close modals on clicking overlay background
-    [projectModal, certModal, blogModal].forEach(modal => {
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                }
-            });
-        }
-    });
-
-    // Press escape key to close active modal
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+    // Close Project Modal
+    if (projectClose && projectModal) {
+        projectClose.addEventListener('click', () => {
             projectModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Open Cert Modal
+    document.querySelectorAll('.verify-cert-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const cid = link.getAttribute('data-cert');
+            const cert = certsData[cid];
+            if (!cert || !certModal || !certModalBody) return;
+
+            certModalBody.innerHTML = `
+                <div class="cert-modal-header">
+                    <div class="cert-modal-icon"><i class="fas fa-award"></i></div>
+                    <h3>${cert.title}</h3>
+                    <span class="cert-modal-issuer">${cert.issuer}</span>
+                </div>
+                <div class="cert-modal-details">
+                    <p class="cert-id-badge"><i class="fas fa-check-circle text-success"></i> ${cert.id}</p>
+                    <p class="cert-desc-text">${cert.details}</p>
+                </div>
+            `;
+            certModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    if (certClose && certModal) {
+        certClose.addEventListener('click', () => {
             certModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Open Blog Modal
+    document.querySelectorAll('.read-blog-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const bid = btn.getAttribute('data-post');
+            const blog = blogData[bid];
+            if (!blog || !blogModal || !blogModalBody) return;
+
+            blogModalBody.innerHTML = `
+                <div class="blog-modal-header">
+                    <span class="blog-category">${blog.category}</span>
+                    <h2>${blog.title}</h2>
+                    <div class="blog-meta">
+                        <span><i class="far fa-calendar"></i> ${blog.date}</span>
+                        <span><i class="far fa-clock"></i> ${blog.readTime}</span>
+                    </div>
+                </div>
+                <div class="blog-modal-article">
+                    ${blog.content}
+                </div>
+            `;
+            blogModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    if (blogClose && blogModal) {
+        blogClose.addEventListener('click', () => {
             blogModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Close on overlay click
+    window.addEventListener('click', (e) => {
+        if (e.target === projectModal) {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        if (e.target === certModal) {
+            certModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        if (e.target === blogModal) {
+            blogModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
     });
 }
 
-/* --- Contact Form Handling & Math verification --- */
+/* --- Contact Form Simulation with Math Captcha --- */
 function initContactForm() {
     const form = document.getElementById('contact-form');
-    const logsBox = document.getElementById('contact-log-box');
-    const logStatusText = document.getElementById('log-transmitting-status');
-    const submitBtn = document.getElementById('contact-submit-btn');
-    
     const captchaNum1 = document.getElementById('challenge-num1');
     const captchaNum2 = document.getElementById('challenge-num2');
     const captchaInput = document.getElementById('form-captcha');
-    
-    // Direct inquiry from services list
-    const serviceButtons = document.querySelectorAll('.service-action-btn');
-    const subjectInput = document.getElementById('form-subject');
-    
-    serviceButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const serviceName = btn.getAttribute('data-service');
-            if (subjectInput && serviceName) {
-                subjectInput.value = `Inquiry: ${serviceName}`;
-            }
-        });
-    });
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const logsBox = document.getElementById('contact-log-box');
+    const logStatusText = document.getElementById('log-transmitting-status');
 
     if (!form || !captchaNum1 || !captchaNum2) return;
 
-    let num1 = 0;
-    let num2 = 0;
+    let num1, num2;
 
     function generateCaptcha() {
         num1 = Math.floor(Math.random() * 9) + 2; // [2-10]
@@ -1219,14 +1367,14 @@ function initContactForm() {
         // Simulating packet transmission
         submitBtn.disabled = true;
         logsBox.style.display = 'flex';
-        logStatusText.textContent = '&gt; Connecting to Node UAE_NODE_09...';
+        logStatusText.textContent = '> Connecting to SuperCAD Security Node...';
         
         let sequences = [
-            { t: 800, txt: '&gt; Socket connection established. Exchanging certificates...' },
-            { t: 1500, txt: '&gt; Tunnel established. Encrypting message bytes via AES-256...' },
-            { t: 2300, txt: '&gt; Transmitting payload hashes... 100%' },
-            { t: 3000, txt: '&gt; Transmission successful! Response code: 200 OK.' },
-            { t: 3500, txt: '&gt; Message sent securely. Hameez will review the packet shortly.' }
+            { t: 800, txt: '> Socket connection established. Exchanging certificates...' },
+            { t: 1500, txt: '> Tunnel established. Encrypting message bytes via AES-256-GCM...' },
+            { t: 2300, txt: '> Transmitting payload hashes... 100%' },
+            { t: 3000, txt: '> Transmission successful! Response code: 200 OK.' },
+            { t: 3500, txt: '> Message transmitted securely. Hameez will review the packet shortly.' }
         ];
 
         sequences.forEach(step => {
@@ -1277,74 +1425,101 @@ function initCVDownload() {
         e.preventDefault();
         
         const cvText = `========================================================================
-                      HAMEEZ CAMBAL - SECURITY CV
+                      HAMEEZ CAMBAL - CYBERSECURITY CV
 ========================================================================
-Title: Cybersecurity Analyst | SOC Enthusiast | Network Security Specialist
-Location: United Arab Emirates
+Title: Cybersecurity Analyst
+Company: SuperCAD — Dubai, UAE
+Employment: 2026 – Present
+Location: Dubai, United Arab Emirates
 Contact: hameez.cam@gmail.com
-Website: https://hameezcambal.cyber
+Website: https://hameezcam.github.io
 GitHub: https://github.com/hameezcam
 LinkedIn: https://www.linkedin.com/in/hameez-cambal-988a2b314/
 
 ------------------------------------------------------------------------
-MISSION STATEMENT
+PROFESSIONAL SUMMARY
 ------------------------------------------------------------------------
-Cybersecurity is about trust, resilience, and enabling organizations 
-to operate securely in an increasingly connected world. I am passionate 
-about solving complex problems, building practical solutions, and 
-continuously improving my knowledge to help organizations strengthen 
-their security posture.
+Cybersecurity Analyst focused on Security Operations, Threat Detection, 
+SIEM, Incident Response, Security Assessments and Cybersecurity Tool 
+Development. Working across practical enterprise security operations,
+monitoring capabilities, assessment methodologies, and security applications.
 
 ------------------------------------------------------------------------
 PROFESSIONAL EXPERIENCE
 ------------------------------------------------------------------------
-Junior Network Security Specialist | Technology Infrastructure Node
-Timeline: Present
-Focus: Enterprise Defense, Risk Management, Hardening Protocols
-Duties & Achievements:
-- Security Audits: Conducted configuration and code reviews, identifying
-  asset vulnerabilities and misconfigured services.
-- Risk Assessments: Modeled threat profiles, calculated exposure indexes,
-  and presented business mitigation paths.
-- Disaster Recovery: Drafted business continuity blueprints and data recovery
-  playbooks for critical network segments.
-- ISMS Design: Co-designed Information Security Management Systems aligned
-  with ISO/IEC 27001 compliance criteria.
-- Security Integration: Deployed hardware/software security controls (Firewalls,
-  VPN tunnels, IDS sensors).
+Cybersecurity Analyst
+SuperCAD — Dubai, UAE
+2026 – Present
+Description:
+Working across security operations, monitoring, security assessments, 
+incident investigation, Microsoft security, network security, vulnerability 
+management, and cybersecurity service development within a managed security 
+environment.
+
+Key Responsibilities & Operational Areas:
+* Security alert investigation and event analysis across SIEM environments
+* Centralized telemetry monitoring using Microsoft Sentinel and Wazuh
+* Threat detection, incident investigation, and containment procedures
+* Microsoft Defender security operations (Endpoint, Office 365, Identity, XDR)
+* Microsoft Sentinel SIEM detection rules and Log Analytics queries
+* Microsoft 365 and Entra ID security hardening (MFA, Conditional Access)
+* Check Point security operations, email security, and perimeter firewalls
+* Fortinet and WatchGuard security management
+* Cisco Meraki security assessments and audits
+* Security posture assessments and gap evaluations
+* Vulnerability assessment and VAPT documentation
+* Security audit activities and remediation tracking
+* Authoring incident response playbooks and detection catalogues
+* SOC implementation planning and SOCaaS service delivery planning
+* Client security reporting and executive deliverables
 
 ------------------------------------------------------------------------
 TECHNICAL SKILL MATRIX
 ------------------------------------------------------------------------
-- Cybersecurity: SIEM, OSINT, Threat Hunting, Incident Response, 
-                 Vulnerability Assessment, Risk Assessment, ISMS (ISO 27001)
-- Networking:    TCP/IP, Routing & Switching, VPN, DNS, Firewalls
-- Toolset:       Splunk, Wireshark, Nmap, Burp Suite, Nessus, Shodan, Metasploit
-- Programming:   Python, Flask, JavaScript, SQL
+* Security Operations: SOC Operations, SIEM, Security Monitoring, Alert Investigation,
+                       Incident Response, Threat Detection, Threat Hunting, Detection Engineering.
+* Microsoft Security:  Microsoft Sentinel, Microsoft Defender, Microsoft 365 Security,
+                       Microsoft Entra, Identity Security, Conditional Access.
+* Network Security:    Check Point, Fortinet, WatchGuard, Cisco Meraki, Firewall Security, VPN Security.
+* Security Assessment: VAPT, Vulnerability Assessment, Security Auditing, Security Posture Assessment,
+                       Risk Assessment, Compliance Mapping.
+* Security Dev:        Cybersecurity Tool Development, Authentication, RBAC, Multi-Tenant Architecture,
+                       Security Automation, Threat Intelligence Integration.
 
 ------------------------------------------------------------------------
-VERIFIED CERTIFICATIONS
+VERIFIED CERTIFICATIONS & EDUCATION
 ------------------------------------------------------------------------
-- ISC2 Certified in Cybersecurity (CC)        [ID: ISC2-CC-83921]
-- CompTIA Security+                           [ID: COMP-SEC-92019]
-- Certified Ethical Hacker (CEH)              [ID: ECC-CEH-39103]
-- Cisco Certified Network Associate (CCNA)     [ID: CISCO-CS-38291]
-- Google Professional Cybersecurity Certificate [ID: GOOG-CYBER-71029]
+* Microsoft Copilot for Security [Completed — 2026]
+* BSc (Hons) Cybersecurity & Digital Forensics — Kingston University London
+* Cisco Certified Network Associate (CCNA 200-301) — Cisco
+* Microsoft Azure Fundamentals (AZ-900) — Microsoft
+* Advanced Diploma in Hardware & Networking Professional — Institute
+* Certified Ethical Hacker (CEH) [In Progress]
 
 ------------------------------------------------------------------------
-FEATURED PROJECTS
+SECURITY PROJECTS PORTFOLIO
 ------------------------------------------------------------------------
-1. OSINT Data Exposure Assessment Tool
-   - Real-time leak scanning, ML threat scoring, Differential Privacy.
-2. WhatsApp Business Automation Bot
-   - Webhook parsing, automated operator fallbacks, CRM sync logic.
-3. Secure Encrypted Chat Application
-   - TCP Socket multi-client transport using AES-256 and RSA key sync.
-4. IoT mesh networking Research
-   - NS-3 simulated mesh routing persistence in remote telemetry zones.
+1. Microsoft Sentinel SOC Architecture [SOC / SIEM] ★ FEATURED
+   - Focus: SIEM • Detection • SOC Architecture
+2. Port Scanner [Cybersecurity Tool] ★ FEATURED
+   - Focus: Network Security • Security Tooling • Multi-Tenant Architecture
+3. Security Reporting Platform [Cybersecurity Platform] ★ FEATURED
+   - Focus: Security Assessments • Vulnerability Intelligence • Reporting
+4. Wazuh SIEM Home Lab [SIEM / Security Monitoring]
+5. SOC Implementation Roadmap [SOC / Security Operations]
+6. SOCaaS Planning [Security Operations]
+7. Microsoft Security Implementation [Microsoft Security]
+8. Security Posture Assessment Framework [Security Assessment]
+9. VAPT Documentation Framework [VAPT]
+10. Incident Response Playbook Framework [Incident Response]
+11. Detection Catalogue [Detection Engineering]
+12. NESA Security Roadmap [Compliance / Security]
+13. Threat Analysis Platform [Threat Intelligence / Security Analysis]
+14. Web Application Security Lab [Application Security]
+15. OSINT & Threat Intelligence Toolkit [Threat Intelligence]
 
 ========================================================================
-STATUS: SECURED // VERIFIED // UAE_NODE_09
+STATUS: ACTIVE // CYBERSECURITY ANALYST // SUPERCAD (DUBAI, UAE)
 ========================================================================`;
 
         const blob = new Blob([cvText], { type: 'text/plain' });

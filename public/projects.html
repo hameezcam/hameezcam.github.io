@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Hameez Cambal — Cybersecurity Analyst</title>
+    <meta name="description" content="Technical cybersecurity projects, SOC labs, detection engineering frameworks, security tools, and assessment methodologies built by Hameez Cambal.">
+    <meta name="author" content="Hameez Cambal">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hameezcam.github.io/projects.html">
+    <meta property="og:title" content="Projects | Hameez Cambal — Cybersecurity Analyst">
+    <meta property="og:description" content="Technical cybersecurity projects, SOC labs, detection engineering frameworks, security tools, and assessment methodologies built by Hameez Cambal.">
+    <meta property="og:image" content="https://hameezcam.github.io/hameez.jpg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="cyber-theme">
+    <!-- Background Canvas for Particles -->
+    <canvas id="plexus-canvas"></canvas>
+    
+    <!-- Cyberpunk grid overlays -->
+    <div class="cyber-grid"></div>
+    <div class="scanlines"></div>
+    <div class="cyber-terminal-overlay"></div>
+
+    <!-- Navigation Header -->
+    <header class="main-header" id="navbar">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="cyber-accent-blue">&lt;</span>H.CAMBAL<span class="cursor-blink">_</span><span class="cyber-accent-purple">/&gt;</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+                    <li><a href="about.html" class="nav-link" id="nav-about">About</a></li>
+                    <li><a href="experience.html" class="nav-link" id="nav-experience">Experience</a></li>
+                    <li><a href="projects.html" class="nav-link active" id="nav-projects">Projects</a></li>
+                    <li><a href="certifications.html" class="nav-link" id="nav-certifications">Certifications</a></li>
+                    <li><a href="education.html" class="nav-link" id="nav-education">Education</a></li>
+                    <li><a href="skills.html" class="nav-link" id="nav-skills">Skills</a></li>
+                    <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+                </ul>
+                <div class="mobile-socials">
+                    <a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/hameezcam" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:hameez.cam@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="Hameez_Cambal_Resume.pdf" target="_blank" class="terminal-btn-nav" title="Download Resume">
+                    <i class="fas fa-file-pdf"></i> Resume
+                </a>
+                <button class="hamburger-menu" id="menu-toggle" aria-label="Toggle navigation menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Hero Banner -->
+        <section class="page-hero">
+            <div class="page-hero-inner">
+                <div class="page-breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> HOME</a>
+                    <span class="sep">/</span>
+                    <span>PROJECTS</span>
+                </div>
+                <span class="page-hero-badge">TECHNICAL_SHOWCASE</span>
+                <h1 class="page-hero-title text-glow">Cybersecurity Projects</h1>
+                <p class="page-hero-subtitle">
+                    Technical solutions, enterprise detection architectures, hands-on security labs, and assessment tooling demonstrating practical cybersecurity engineering.
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Projects Grid Section -->
+        <section class="page-content-section">
+            <div class="section-container">
+                <!-- 12 Category Filters -->
+                <div class="project-filters-wrap">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="soc-siem">SOC &amp; SIEM</button>
+                    <button class="filter-btn" data-filter="sec-ops">Security Operations</button>
+                    <button class="filter-btn" data-filter="detection-eng">Detection Engineering</button>
+                    <button class="filter-btn" data-filter="vapt">VAPT</button>
+                    <button class="filter-btn" data-filter="network-sec">Network Security</button>
+                    <button class="filter-btn" data-filter="ms-sec">Microsoft Security</button>
+                    <button class="filter-btn" data-filter="threat-intel">Threat Intelligence</button>
+                    <button class="filter-btn" data-filter="sec-assess">Security Assessment</button>
+                    <button class="filter-btn" data-filter="cyber-tools">Cybersecurity Tools</button>
+                    <button class="filter-btn" data-filter="software-saas">Software / SaaS</button>
+                    <button class="filter-btn" data-filter="app-sec">Application Security</button>
+                </div>
+
+                <!-- Projects Grid (All 20 Projects with 6 Prioritized Featured Projects) -->
+                <div class="projects-grid">
+                    
+                    <!-- ==============================================
+                         FEATURED 1: Port Scanner (Project 01)
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow featured-project-card" data-category="cyber-tools network-sec app-sec">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-network-wired"></i>
+                                <span class="grid-text-bg">PORT_SCANNER</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">FEATURED PROJECT</span>
+                                <span class="tag">Cybersecurity Tool</span>
+                                <span class="tag">Network Security</span>
+                            </div>
+                            <h3 class="project-title">01 — Port Scanner</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Sep 2026
+                            </div>
+                            <p class="project-summary">
+                                Developed a cross-platform network security assessment platform designed to help authorized users discover and assess network services through controlled port scanning. Features a dedicated scanning engine with configurable scan parameters, service/port discovery, result visualization, and structured security assessment output. Incorporates secure application architecture supporting user authentication, role-based access control (RBAC), multi-tenant organization management, and license-based access controls.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">TECHNOLOGIES:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Tauri 2</span>
+                                    <span class="tag">TypeScript/JavaScript</span>
+                                    <span class="tag">Desktop App Architecture</span>
+                                    <span class="tag">RBAC</span>
+                                    <span class="tag">Multi-Tenancy</span>
+                                    <span class="tag">Licensing Engine</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Application Security • Port Scanning • Network Security • RBAC • Multi-Tenant Architecture • Security Tool Development</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="1">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(0,255,204,0.1);border-color:rgba(0,255,204,0.3);color:var(--cyber-blue);">
+                                    <span><i class="fas fa-cube"></i> Security Tooling</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         FEATURED 2: Cybersecurity Assessment & Reporting SaaS (Project 02)
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow featured-project-card" data-category="sec-assess cyber-tools">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-file-shield"></i>
+                                <span class="grid-text-bg">SEC_ASSESS_SAAS</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">FEATURED PROJECT</span>
+                                <span class="tag">Cybersecurity Platform</span>
+                                <span class="tag">Vulnerability Management</span>
+                            </div>
+                            <h3 class="project-title">02 — Cybersecurity Assessment &amp; Reporting SaaS</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Sep 2026 · Standalone Project
+                            </div>
+                            <p class="project-summary">
+                                A multi-tenant cybersecurity assessment and reporting platform designed to help organizations perform assessments, identify vulnerabilities, generate professional reports, and track remediation. Includes integrations with the National Vulnerability Database (NVD) and CISA Known Exploited Vulnerabilities (KEV).
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">TECHNOLOGIES:</div>
+                                <div class="project-tags">
+                                    <span class="tag">NVD API</span>
+                                    <span class="tag">CISA KEV</span>
+                                    <span class="tag">Multi-Tenant Architecture</span>
+                                    <span class="tag">RBAC</span>
+                                    <span class="tag">PDF Reporting</span>
+                                    <span class="tag">Remediation Tracking</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Vulnerability Management • IT Security Assessments • Security Reporting • Risk Assessment</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="2">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(189,0,255,0.1);border-color:rgba(189,0,255,0.3);color:var(--cyber-purple);">
+                                    <span><i class="fas fa-shield"></i> Assessment Platform</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         FEATURED 3: SOC Detection Engineering & MITRE ATT&CK Mapping (Project 03)
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow featured-project-card" data-category="detection-eng soc-siem">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-diagram-project"></i>
+                                <span class="grid-text-bg">MITRE_DETECTION</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">FEATURED PROJECT</span>
+                                <span class="tag">Detection Engineering</span>
+                                <span class="tag">MITRE ATT&amp;CK</span>
+                            </div>
+                            <h3 class="project-title">03 — SOC Detection Engineering &amp; MITRE ATT&amp;CK Mapping</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Sep 2026 · Supercad Trading LLC
+                            </div>
+                            <p class="project-summary">
+                                Developed a structured detection catalogue covering enterprise threats such as impossible travel, password spraying, MFA fatigue, PowerShell activity, ransomware, OAuth abuse, and mass file deletion. Formulated detection logic, MITRE ATT&amp;CK mapping, investigation procedures, response actions, and false-positive considerations.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">KEY AREAS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">SOC</span>
+                                    <span class="tag">SIEM</span>
+                                    <span class="tag">Detection Engineering</span>
+                                    <span class="tag">MITRE ATT&amp;CK</span>
+                                    <span class="tag">Threat Detection</span>
+                                    <span class="tag">Incident Response</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Detection Logic • Threat Scenario Modeling • Investigation Guidance • Gap Mitigation</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="3">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fas fa-code-fork"></i> Detection Matrix</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         FEATURED 4: SIEM-Based SOC Lab (Wazuh) (Project 04)
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow featured-project-card" data-category="soc-siem sec-ops">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-tower-observation"></i>
+                                <span class="grid-text-bg">WAZUH_SOC_LAB</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">FEATURED PROJECT</span>
+                                <span class="tag">SOC / SIEM</span>
+                                <span class="tag">Security Monitoring</span>
+                            </div>
+                            <h3 class="project-title">04 — SIEM-Based SOC Lab (Wazuh)</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Apr 2026 – May 2026
+                            </div>
+                            <p class="project-summary">
+                                Designed and implemented a Security Operations Center (SOC) laboratory environment using Wazuh SIEM for centralized security monitoring and log analysis. Deployed on Ubuntu Linux, integrated Windows Server endpoints, simulated brute-force authentication attacks, investigated Event ID 4625, and built custom alert monitoring dashboards.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">TECHNOLOGIES:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Wazuh SIEM</span>
+                                    <span class="tag">Ubuntu Linux</span>
+                                    <span class="tag">Windows Server</span>
+                                    <span class="tag">Kali Linux</span>
+                                    <span class="tag">Event Logs</span>
+                                    <span class="tag">Security Monitoring</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Threat Detection • Log Analysis • SIEM • Incident Investigation • Security Monitoring</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="4">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fas fa-flask"></i> Hands-on Lab</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         FEATURED 5: In-House Security Operations Center Development (Project 05)
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow featured-project-card" data-category="soc-siem sec-ops">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-sitemap"></i>
+                                <span class="grid-text-bg">IN_HOUSE_SOC</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">FEATURED PROJECT</span>
+                                <span class="tag">SOC</span>
+                                <span class="tag">Security Operations</span>
+                            </div>
+                            <h3 class="project-title">05 — In-House Security Operations Center (SOC) Development</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Jul 2026 – Sep 2026 · Supercad Trading LLC
+                            </div>
+                            <p class="project-summary">
+                                Contributed to the planning and development of an in-house Security Operations Center (SOC), including SOC architecture, monitoring strategy, operational processes, scalability planning, and proof-of-concept implementation. Built a SOC lab using Splunk while developing foundational SOC processes and incident-response playbooks.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">TECHNOLOGIES:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Splunk</span>
+                                    <span class="tag">SOC Architecture</span>
+                                    <span class="tag">SIEM</span>
+                                    <span class="tag">Incident Response</span>
+                                    <span class="tag">Monitoring Strategy</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Security Operations Center • Incident Response • SIEM • SOC Architecture</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="5">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fas fa-building-shield"></i> Enterprise SOC</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         FEATURED 6: Active Directory Red Team Lab (Project 06)
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow featured-project-card" data-category="vapt network-sec detection-eng">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-crosshairs"></i>
+                                <span class="grid-text-bg">AD_RED_TEAM</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">FEATURED PROJECT</span>
+                                <span class="tag">Red Team</span>
+                                <span class="tag">Active Directory</span>
+                            </div>
+                            <h3 class="project-title">06 — Active Directory Red Team Lab</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Apr 2026 – May 2026
+                            </div>
+                            <p class="project-summary">
+                                Designed and deployed an enterprise-style Active Directory lab environment using multiple Windows Server and Windows Client virtual machines. Configured AD DS, DNS, Group Policy, simulated credential attacks, Kerberoasting, privilege escalation, and lateral movement with BloodHound, Mimikatz, Rubeus, and Hashcat.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">TECHNOLOGIES:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Windows Server 2019/2008</span>
+                                    <span class="tag">Windows 10</span>
+                                    <span class="tag">Active Directory</span>
+                                    <span class="tag">BloodHound</span>
+                                    <span class="tag">PowerView</span>
+                                    <span class="tag">Mimikatz</span>
+                                    <span class="tag">Rubeus</span>
+                                    <span class="tag">Hashcat</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Active Directory • Windows Server • Red Teaming • Penetration Testing • Privilege Escalation • Threat Detection</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="6">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <span class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fas fa-bullseye"></i> Attack Path Lab</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 07: OSINT-Based Data Exposure Assessment Tool
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="threat-intel cyber-tools">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-globe"></i>
+                                <span class="grid-text-bg">OSINT_TOOL</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">OSINT</span>
+                                <span class="tag">Threat Intelligence</span>
+                                <span class="tag">Cybersecurity Tool</span>
+                            </div>
+                            <h3 class="project-title">07 — OSINT-Based Data Exposure Assessment Tool</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Feb 2025 – Dec 2025 · Contributors: Jethendri
+                            </div>
+                            <p class="project-summary">
+                                Developed an OSINT-based cybersecurity tool to analyze publicly available data and identify potential exposure risks. Integrated APIs such as Have I Been Pwned, VirusTotal, and AbuseIPDB to perform threat intelligence and security analysis.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">APIs &amp; INTEGRATIONS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Have I Been Pwned API</span>
+                                    <span class="tag">VirusTotal API</span>
+                                    <span class="tag">AbuseIPDB API</span>
+                                    <span class="tag">Python</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Cybersecurity • OSINT • Threat Intelligence • Data Exposure Analysis • Security Analysis</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="7">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                                <a href="https://github.com/hameezcam/osint-data-exposure-tool" target="_blank" rel="noopener" class="cyber-btn-sm" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);">
+                                    <span><i class="fab fa-github"></i> GitHub</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 08: Vulnerability Assessment & Penetration Testing (VAPT) Service Development
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="vapt sec-assess">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-bullseye"></i>
+                                <span class="grid-text-bg">VAPT_SERVICE</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">VAPT</span>
+                                <span class="tag">Security Services</span>
+                            </div>
+                            <h3 class="project-title">08 — Vulnerability Assessment &amp; Penetration Testing (VAPT) Service Development</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Jul 2026 – Sep 2026 · Supercad Trading LLC
+                            </div>
+                            <p class="project-summary">
+                                Contributed to the development of a VAPT service offering, including scope-based service structures, pricing frameworks, client questionnaires, proposals, and testing methodologies. Worked with intentionally vulnerable environments including DVWA and OWASP Juice Shop to support security testing and demonstrations.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">TECHNOLOGIES &amp; LABS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">DVWA</span>
+                                    <span class="tag">OWASP Juice Shop</span>
+                                    <span class="tag">Testing Methodologies</span>
+                                    <span class="tag">Burp Suite</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Vulnerability Assessment • Penetration Testing • OWASP • Security Testing • Security Services</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="8">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 09: Check Point Email Security & Anti-Phishing Standardization
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="sec-ops network-sec">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-envelope-shield"></i>
+                                <span class="grid-text-bg">EMAIL_SEC</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Email Security</span>
+                                <span class="tag">Security Operations</span>
+                            </div>
+                            <h3 class="project-title">09 — Check Point Email Security &amp; Anti-Phishing Standardization</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Aug 2026 · Supercad Trading LLC
+                            </div>
+                            <p class="project-summary">
+                                Configured and standardized email security controls across multiple client environments using Check Point Email Security. Worked with anti-phishing, impersonation detection, DMARC, SPF, URL reputation, anomaly detection, Click-Time Protection, and DLP policies. Developed consolidated security documentation and configuration standards.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">KEY CONTROLS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Anti-Phishing</span>
+                                    <span class="tag">Impersonation Detection</span>
+                                    <span class="tag">DMARC / SPF</span>
+                                    <span class="tag">Click-Time Protection</span>
+                                    <span class="tag">DLP Policies</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Email Security • Security Alert Detection • Anti-Phishing • DLP • Security Hardening</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="9">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 10: Microsoft Security Architecture & Protection
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="ms-sec sec-ops">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fab fa-microsoft"></i>
+                                <span class="grid-text-bg">MS_SECURITY</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Microsoft Security</span>
+                                <span class="tag">EDR</span>
+                            </div>
+                            <h3 class="project-title">10 — Microsoft Security Architecture &amp; Protection</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Aug 2026 – Sep 2026 · Supercad Trading LLC
+                            </div>
+                            <p class="project-summary">
+                                Designed and implemented Microsoft security controls covering endpoint, identity, email, phishing, malicious URLs, attachments, and security monitoring. Configured Microsoft Defender, Microsoft 365 Security, EDR, Safe Links, Safe Attachments, and Identity Security.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">KEY AREAS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Microsoft Defender</span>
+                                    <span class="tag">Microsoft 365 Security</span>
+                                    <span class="tag">EDR</span>
+                                    <span class="tag">Safe Links</span>
+                                    <span class="tag">Safe Attachments</span>
+                                    <span class="tag">Identity Security</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Microsoft Defender • EDR • Microsoft 365 Security • Identity Security</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="10">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 11: Client Cybersecurity Posture Assessment
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="sec-assess">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-clipboard-check"></i>
+                                <span class="grid-text-bg">POSTURE_ASSESS</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Security Assessment</span>
+                                <span class="tag">Governance</span>
+                            </div>
+                            <h3 class="project-title">11 — Client Cybersecurity Posture Assessment</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Sep 2026 · Supercad Trading LLC
+                            </div>
+                            <p class="project-summary">
+                                Developed a standardized security posture assessment framework for evaluating client environments across identity, endpoint, email, network, cloud, SIEM, vulnerability management, backup, incident response, and security governance.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">DOMAINS EVALUATED:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Identity</span>
+                                    <span class="tag">Endpoint</span>
+                                    <span class="tag">Email</span>
+                                    <span class="tag">Network</span>
+                                    <span class="tag">SIEM</span>
+                                    <span class="tag">Governance</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Risk Assessment • Information Security Governance • Security Assessment • Security Posture Management</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="11">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 12: Enterprise Network Security Assessment
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="network-sec sec-assess">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-wifi"></i>
+                                <span class="grid-text-bg">MERAKI_AUDIT</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Network Security</span>
+                                <span class="tag">Security Audit</span>
+                            </div>
+                            <h3 class="project-title">12 — Enterprise Network Security Assessment</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Sep 2026 – Present · Supercad Trading LLC
+                            </div>
+                            <p class="project-summary">
+                                Conducted security assessments across multiple Cisco Meraki client environments, reviewing administrative access, MFA, firewall policies, VLANs, wireless security, VPN configuration, firmware, IDS/IPS, logging, and overall security posture.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">CONTROLS AUDITED:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Cisco Meraki</span>
+                                    <span class="tag">Firewall Policies</span>
+                                    <span class="tag">VLAN Segmentation</span>
+                                    <span class="tag">VPN Encryption</span>
+                                    <span class="tag">IDS/IPS</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Cisco Meraki • Network Security • Security Auditing • Firewall Security • VPN Security</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="12">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 13: Multi-Tenant Finance & Business Management ERP
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="software-saas">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-calculator"></i>
+                                <span class="grid-text-bg">FINANCE_ERP</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Business Application</span>
+                                <span class="tag">SaaS</span>
+                                <span class="tag">Software Development</span>
+                            </div>
+                            <h3 class="project-title">13 — Multi-Tenant Finance &amp; Business Management ERP</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Sep 2026 · Software Engineering Project
+                            </div>
+                            <p class="project-summary">
+                                Designed and developed a multi-tenant Finance ERP platform for managing financial and operational workflows across multiple organizations. Features role-based access control for Super Admin, Finance Manager, Senior Accountant, Operations, and Auditor with centralized user and organization access management. Implemented document workflows including invoices, delivery notes, petty cash, expense management, approvals, and reporting. <em>(Presented strictly as a software and business SaaS application, not a cybersecurity project).</em>
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">SYSTEM ARCHITECTURE:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Multi-Tenant Architecture</span>
+                                    <span class="tag">RBAC</span>
+                                    <span class="tag">Financial Workflows</span>
+                                    <span class="tag">User Management</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">SOFTWARE CAPABILITY:</span>
+                                <span class="project-focus-text">ERP Development • Financial Management • RBAC • Multi-Tenant Architecture • Workflow Automation</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="13">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 14: AI-Assisted Scam & Threat Analysis Platform
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="threat-intel app-sec">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-magnifying-glass-shield"></i>
+                                <span class="grid-text-bg">AI_THREAT_ANALYSIS</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Threat Intelligence</span>
+                                <span class="tag">Security Analysis</span>
+                            </div>
+                            <h3 class="project-title">14 — AI-Assisted Scam &amp; Threat Analysis Platform</h3>
+                            <div class="project-meta-line" style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                <i class="far fa-calendar-alt"></i> Sep 2026
+                            </div>
+                            <p class="project-summary">
+                                A cybersecurity platform designed to analyze potentially malicious URLs, messages, emails, QR codes, and other digital content. Incorporates threat analysis, SSRF protection, threat intelligence correlation, AI-assisted analysis, secure authentication, multi-tenancy, and security telemetry logging.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">CORE CAPABILITIES:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Threat Analysis</span>
+                                    <span class="tag">SSRF Protection</span>
+                                    <span class="tag">Threat Intelligence</span>
+                                    <span class="tag">AI-Assisted Analysis</span>
+                                    <span class="tag">Multi-Tenancy</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Threat Analysis • Cyber Threat Intelligence (CTI) • Application Security • Security Analysis</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="14">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 15: Incident Response Playbook Framework
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="sec-ops">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-fire-extinguisher"></i>
+                                <span class="grid-text-bg">IR_PLAYBOOKS</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Incident Response</span>
+                                <span class="tag">Security Operations</span>
+                            </div>
+                            <h3 class="project-title">15 — Incident Response Playbook Framework</h3>
+                            <p class="project-summary">
+                                Developed structured incident response playbooks covering common enterprise security incidents and investigation workflows: Business Email Compromise (BEC), Account Compromise, Malicious URLs, PowerShell Activity, Data Exfiltration, Privileged Activity, and Vulnerability Exploitation.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">SCENARIOS COVERED:</div>
+                                <div class="project-tags">
+                                    <span class="tag">BEC</span>
+                                    <span class="tag">Account Compromise</span>
+                                    <span class="tag">Malicious URLs</span>
+                                    <span class="tag">PowerShell Activity</span>
+                                    <span class="tag">Data Exfiltration</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Incident Triage • Containment Runbooks • Evidence Preservation • Root Cause Analysis</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="15">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 16: Security Posture Assessment Framework
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="sec-assess">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-shield-virus"></i>
+                                <span class="grid-text-bg">POSTURE_FRAMEWORK</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Security Assessment</span>
+                                <span class="tag">Defensive Hardening</span>
+                            </div>
+                            <h3 class="project-title">16 — Security Posture Assessment Framework</h3>
+                            <p class="project-summary">
+                                Developed a structured security posture assessment methodology covering identity, endpoint, email, network, SIEM, administrative access, authentication, and security controls.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">CORE PILLARS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Identity Security</span>
+                                    <span class="tag">Endpoint EDR</span>
+                                    <span class="tag">Perimeter Controls</span>
+                                    <span class="tag">SIEM Telemetry</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Methodology Formulation • Control Auditing • Gap Identification • Remediation Prioritization</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="16">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 17: Detection Catalogue
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="detection-eng">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-book-bookmark"></i>
+                                <span class="grid-text-bg">DETECTION_CATALOGUE</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Detection Engineering</span>
+                                <span class="tag">Telemetry</span>
+                            </div>
+                            <h3 class="project-title">17 — Detection Catalogue</h3>
+                            <p class="project-summary">
+                                Developed a structured catalogue of security detections mapped to threat scenarios, telemetry sources, investigation requirements, security controls, and detection gaps.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">FOCUS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Detection Logic</span>
+                                    <span class="tag">Data Sources</span>
+                                    <span class="tag">Threat Scenarios</span>
+                                    <span class="tag">Investigation Guidance</span>
+                                    <span class="tag">Detection Gaps</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Detection Rule Formulation • Telemetry Source Mapping • Investigation Procedures</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="17">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 18: NESA Security Roadmap
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="sec-assess">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-stamp"></i>
+                                <span class="grid-text-bg">NESA_ROADMAP</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Security / Compliance</span>
+                                <span class="tag">Governance</span>
+                            </div>
+                            <h3 class="project-title">18 — NESA Security Roadmap</h3>
+                            <p class="project-summary">
+                                Developed a structured cybersecurity roadmap covering security governance, controls, maturity, and compliance-oriented security planning. Aligns organizational defense controls with structured security milestones.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">FRAMEWORK ALIGNMENT:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Security Governance</span>
+                                    <span class="tag">Controls Maturity</span>
+                                    <span class="tag">Compliance Planning</span>
+                                    <span class="tag">Technical Controls</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Governance Alignment • Control Mapping • Phased Implementation • Audit Readiness</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="18">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 19: SOC Implementation Roadmap
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="soc-siem sec-ops">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-map-location-dot"></i>
+                                <span class="grid-text-bg">SOC_ROADMAP</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">SOC</span>
+                                <span class="tag">Security Operations</span>
+                            </div>
+                            <h3 class="project-title">19 — SOC Implementation Roadmap</h3>
+                            <p class="project-summary">
+                                Developed a practical roadmap for establishing and maturing a Security Operations Center, covering architecture, technology, processes, monitoring, detection, incident response, and operational maturity.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">CORE MATURITY PHASES:</div>
+                                <div class="project-tags">
+                                    <span class="tag">SOC Architecture</span>
+                                    <span class="tag">Technology Selection</span>
+                                    <span class="tag">Operational Processes</span>
+                                    <span class="tag">Detection Maturity</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">SOC Architecture Design • Telemetry Strategy • Process Engineering • Operational Maturity</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="19">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==============================================
+                         Project 20: SOCaaS Planning
+                         ============================================== -->
+                    <article class="project-card glass-card hover-glow" data-category="sec-ops soc-siem">
+                        <div class="project-media">
+                            <div class="cyber-scan-effect"></div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-cloud-arrow-up"></i>
+                                <span class="grid-text-bg">SOCAAS_PLANNING</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Security Operations</span>
+                                <span class="tag">Managed Services</span>
+                            </div>
+                            <h3 class="project-title">20 — SOCaaS Planning</h3>
+                            <p class="project-summary">
+                                Developed a framework for planning a managed Security Operations service, including client onboarding, monitoring architecture, security tooling, detection capabilities, operational workflows, and service delivery.
+                            </p>
+                            <div class="project-tech-section">
+                                <div class="project-tech-label">SERVICE PILLARS:</div>
+                                <div class="project-tags">
+                                    <span class="tag">Client Onboarding</span>
+                                    <span class="tag">Monitoring Architecture</span>
+                                    <span class="tag">Operational Workflows</span>
+                                    <span class="tag">Service Delivery</span>
+                                </div>
+                            </div>
+                            <div class="project-focus-box">
+                                <span class="project-focus-label">CYBERSECURITY CAPABILITY:</span>
+                                <span class="project-focus-text">Managed SOC Architecture • Tenant Log Onboarding • Triage SLAs • Service Delivery Framework</span>
+                            </div>
+                            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+                                <button class="cyber-btn-sm open-project-modal" data-project="20">
+                                    <span>DEEP_DIVE <i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Call to action navigation bar -->
+                <div class="services-banner glass-card" style="padding: 30px; text-align: center; margin-top: 50px;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--text-primary);">Want to discuss an architecture or security implementation?</h3>
+                    <p class="banner-text" style="max-width: 650px; margin: 0 auto 20px auto;">
+                        I am open to technical inquiries, cybersecurity collaborations, or professional security operations roles.
+                    </p>
+                    <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+                        <a href="contact.html" class="cyber-btn primary-btn">
+                            <span class="btn-text"><i class="fas fa-envelope"></i> Let's Connect</span>
+                        </a>
+                        <a href="certifications.html" class="cyber-btn secondary-btn">
+                            <span class="btn-text"><i class="fas fa-certificate"></i> View Certifications</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project detail modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-box glass-card">
+            <button class="modal-close" id="project-modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-body-content" id="project-modal-body">
+                <!-- Injected dynamically by script.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-quote-section">
+                <p class="footer-quote">"Security is not just technology — it is trust, resilience, and continuous improvement."</p>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 Hameez Cambal · Cybersecurity Analyst. All rights secured.</p>
+                <div class="footer-system-status">
+                    <span class="status-indicator-light"></span>
+                    <span class="status-text">CORE_SYSTEM: SECURE // SUPERCAD NODE</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

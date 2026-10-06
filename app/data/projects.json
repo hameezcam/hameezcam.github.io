@@ -1,161 +1,287 @@
 [
   {
-    "slug": "soc-as-a-service-planning",
-    "title": "SOC-as-a-Service Planning",
-    "description": "Developed a strategic SOC-as-a-Service roadmap for a managed services environment, covering operating model, monitoring workflows, SIEM strategy, Microsoft security integration, onboarding, maturity roadmap and scaling considerations.",
+    "slug": "microsoft-sentinel-soc-architecture",
+    "title": "Microsoft Sentinel SOC Architecture",
+    "category": "SOC / SIEM",
+    "description": "Designed a Microsoft Sentinel-based SOC architecture focused on centralized security monitoring, detection engineering, incident investigation, and scalable security operations.",
+    "featured": true,
+    "securityFocus": "SIEM • Detection • SOC Architecture",
     "technologies": [
       "Microsoft Sentinel",
-      "Microsoft Defender",
-      "SIEM/XDR Concepts",
-      "Security Operations Frameworks",
-      "Microsoft Security Ecosystem",
-      "Documentation tools",
-      "Draw.io"
+      "SIEM",
+      "Log Analytics",
+      "Detection Rules",
+      "Analytics",
+      "Incident Management",
+      "Security Monitoring",
+      "SOC Architecture"
     ],
-    "images": [
-      "soc_architecture.png",
-      "soc_operating_model.png",
-      "soc_maturity_roadmap.png"
-    ],
-    "link": "#"
-  },
-  {
-    "slug": "defender-office365-checklist",
-    "title": "Microsoft Defender for Office 365 Security Configuration Checklist",
-    "description": "Created an enterprise security configuration checklist covering email protection, phishing prevention, malware protection, policy configuration, and secure score improvements.",
-    "technologies": [
-      "Microsoft Defender for Office 365",
-      "Exchange Online Protection",
-      "Microsoft Secure Score",
-      "Microsoft 365 Security Center",
-      "Excel"
-    ],
-    "images": [
-      "defender_email_security_checklist.png",
-      "phishing_policy_configuration.png"
-    ],
-    "link": "#"
-  },
-  {
-    "slug": "defender-endpoint-checklist",
-    "title": "Microsoft Defender for Endpoint Security Configuration Checklist",
-    "description": "Created an endpoint security deployment checklist covering device onboarding, EDR configuration, attack surface reduction, antivirus policies, firewall settings, and endpoint hardening recommendations.",
-    "technologies": [
-      "Microsoft Defender for Endpoint",
-      "Microsoft Defender XDR",
-      "Endpoint Detection and Response",
-      "Microsoft Intune",
-      "Microsoft Security Portal"
-    ],
-    "images": [
-      "defender_endpoint_dashboard.png",
-      "endpoint_security_controls.png"
-    ],
-    "link": "#"
-  },
-  {
-    "slug": "soc-incident-response-playbooks",
-    "title": "SOC Incident Response Playbooks",
-    "description": "Authored professional incident response playbooks for phishing, malware, and account compromise scenarios, including detection methods, investigation steps, containment, recovery, escalation, and flowcharts.",
-    "technologies": [
-      "Microsoft Sentinel",
-      "Microsoft Defender",
-      "SIEM investigation workflows",
-      "Incident response frameworks",
-      "Draw.io"
-    ],
-    "images": [
-      "phishing_playbook_flowchart.png",
-      "malware_playbook_flowchart.png",
-      "account_compromise_flowchart.png"
-    ],
-    "link": "#"
-  },
-  {
-    "slug": "soc-monitoring-dashboard",
-    "title": "SOC Monitoring Dashboard",
-    "description": "Built a personal SOC monitoring dashboard to visualize security events and improve visibility using Wazuh and Elastic Stack.",
-    "technologies": [
-      "Wazuh",
-      "Elastic Stack",
-      "SIEM dashboards",
-      "VMware Workstation"
-    ],
-    "images": [
-      "wazuh_dashboard.png",
-      "security_events_dashboard.png"
-    ],
-    "link": "#"
+    "link": "#",
+    "linkType": "private"
   },
   {
     "slug": "wazuh-siem-home-lab",
     "title": "Wazuh SIEM Home Lab",
-    "description": "Built a personal Security Operations Center lab environment on Ubuntu and Windows servers, deploying Wazuh Manager, Agents, Sysmon, and Elastic Stack for log collection and investigation.",
+    "category": "SIEM / Security Monitoring",
+    "description": "Built a security monitoring environment using Wazuh to collect, analyze, and investigate endpoint security telemetry.",
+    "featured": false,
+    "securityFocus": "Endpoint Telemetry • Threat Detection • Event Correlation",
     "technologies": [
-      "Ubuntu Server 24.04",
-      "Windows Server 2022",
-      "Wazuh Manager",
-      "Wazuh Agent",
+      "Wazuh",
+      "Ubuntu",
+      "Windows",
       "Sysmon",
-      "Elastic Stack",
-      "VMware Workstation"
+      "File Integrity Monitoring",
+      "Security Events",
+      "Endpoint Monitoring",
+      "Detection"
     ],
-    "images": [
-      "wazuh_architecture.png",
-      "wazuh_agent_connection.png",
-      "siem_lab_setup.png"
-    ],
-    "link": "#"
+    "link": "#",
+    "linkType": "lab"
   },
   {
-    "slug": "osint-exposure-checker",
-    "title": "OSINT Exposure Checker",
-    "description": "Developed an OSINT‑based security exposure assessment tool integrating multiple threat intelligence APIs to identify leaked credentials, exposed assets, and risk scores.",
+    "slug": "soc-implementation-roadmap",
+    "title": "SOC Implementation Roadmap",
+    "category": "SOC / Security Operations",
+    "description": "Developed a practical roadmap for establishing and maturing a Security Operations Center, covering architecture, technology, processes, detection, monitoring, incident response, and operational maturity.",
+    "featured": false,
+    "securityFocus": "SOC Maturity • Operations Framework • Incident Response",
     "technologies": [
-      "Python",
-      "Flask",
-      "Machine Learning (planned)",
-      "Have I Been Pwned",
-      "Shodan",
-      "Censys",
-      "Spyse",
-      "AbuseIPDB"
+      "SOC Architecture",
+      "Technology Selection",
+      "Monitoring Operations",
+      "Incident Response",
+      "Operational Maturity"
     ],
-    "images": [
-      "osint_dashboard.png",
-      "osint_results_page.png"
-    ],
-    "link": "#"
+    "link": "#",
+    "linkType": "confidential"
   },
   {
-    "slug": "vulnerability-assessment-docs",
-    "title": "Vulnerability Assessment Documentation",
-    "description": "Created professional vulnerability assessment documentation packages including questionnaires, proposals, scope documents, reports, and security recommendations based on OWASP methodologies.",
+    "slug": "socaas-planning",
+    "title": "SOCaaS Planning",
+    "category": "Security Operations",
+    "description": "Developed a framework for planning a managed Security Operations service, including client onboarding, monitoring architecture, security tooling, operational workflows, detection capabilities, and service delivery.",
+    "featured": false,
+    "securityFocus": "Managed SOC • Service Architecture • Telemetry Management",
     "technologies": [
-      "OWASP methodologies",
-      "Vulnerability assessment frameworks",
-      "Documentation tools"
+      "Client Onboarding",
+      "Monitoring Architecture",
+      "Security Tooling",
+      "Operational Workflows",
+      "Detection Capabilities",
+      "Service Delivery"
     ],
-    "images": [
-      "vulnerability_report_template.png",
-      "security_assessment_document.png"
-    ],
-    "link": "#"
+    "link": "#",
+    "linkType": "confidential"
   },
   {
-    "slug": "nesa-compliance-planning",
-    "title": "NESA Compliance Planning",
-    "description": "Created a cybersecurity compliance roadmap aligned with UAE NESA requirements, covering gap assessment, control review, technical implementation phases, and improvement strategy.",
+    "slug": "microsoft-security-implementation",
+    "title": "Microsoft Security Implementation",
+    "category": "Microsoft Security",
+    "description": "Developed security implementation and hardening strategies across Microsoft security technologies.",
+    "featured": false,
+    "securityFocus": "Identity Protection • Endpoint Defense • Mailbox Hardening",
     "technologies": [
-      "NESA IAS Controls",
-      "Compliance frameworks",
-      "Risk assessment methodologies",
-      "Documentation tools"
+      "Microsoft Defender",
+      "Microsoft 365",
+      "Entra ID",
+      "MFA",
+      "Conditional Access",
+      "Identity Security",
+      "Email Security",
+      "Endpoint Security",
+      "Security Policies"
     ],
-    "images": [
-      "nesa_roadmap.png",
-      "compliance_framework.png"
+    "link": "#",
+    "linkType": "confidential"
+  },
+  {
+    "slug": "security-posture-assessment-framework",
+    "title": "Security Posture Assessment Framework",
+    "category": "Security Assessment",
+    "description": "Developed a structured security posture assessment methodology covering identity, endpoint, email, network, SIEM, administrative access, authentication, and security controls.",
+    "featured": false,
+    "securityFocus": "Baseline Validation • Defense Gap Analysis • Risk Rating",
+    "technologies": [
+      "Identity Assessment",
+      "Endpoint Security",
+      "Email Controls",
+      "Network Controls",
+      "SIEM Audit",
+      "Administrative Access",
+      "Authentication Review"
     ],
-    "link": "#"
+    "link": "#",
+    "linkType": "private"
+  },
+  {
+    "slug": "vapt-documentation-framework",
+    "title": "VAPT Documentation Framework",
+    "category": "VAPT",
+    "description": "Developed structured documentation and reporting workflows for vulnerability assessment and penetration testing activities.",
+    "featured": false,
+    "securityFocus": "VAPT Workflows • Evidence Standardization • Risk Classification",
+    "technologies": [
+      "Finding Classification",
+      "Evidence Logging",
+      "Risk Ratings",
+      "Remediation Recommendations",
+      "Technical Reporting"
+    ],
+    "link": "#",
+    "linkType": "confidential"
+  },
+  {
+    "slug": "incident-response-playbook-framework",
+    "title": "Incident Response Playbook Framework",
+    "category": "Incident Response",
+    "description": "Developed structured incident response playbooks covering common enterprise security incidents and investigation workflows.",
+    "featured": false,
+    "securityFocus": "Incident Containment • Root Cause Analysis • Runbook Standardization",
+    "technologies": [
+      "Business Email Compromise",
+      "Account Compromise",
+      "Malicious URLs",
+      "PowerShell Activity",
+      "Data Exfiltration",
+      "Privilege Abuse",
+      "Vulnerability Exploitation"
+    ],
+    "link": "#",
+    "linkType": "private"
+  },
+  {
+    "slug": "detection-catalogue",
+    "title": "Detection Catalogue",
+    "category": "Detection Engineering",
+    "description": "Developed a structured catalogue of security detections mapped to relevant threats, telemetry sources, investigation requirements, and recommended security controls.",
+    "featured": false,
+    "securityFocus": "Detection Engineering • MITRE Mapping • Gap Identification",
+    "technologies": [
+      "Detection Logic",
+      "Data Sources",
+      "Threat Scenarios",
+      "Investigation Guidance",
+      "Detection Gaps",
+      "Recommended Telemetry"
+    ],
+    "link": "#",
+    "linkType": "private"
+  },
+  {
+    "slug": "nesa-security-roadmap",
+    "title": "NESA Security Roadmap",
+    "category": "Compliance / Security",
+    "description": "Developed a structured cybersecurity roadmap aligned with security governance and compliance requirements.",
+    "featured": false,
+    "securityFocus": "Governance Alignment • Control Mapping • Technical Milestones",
+    "technologies": [
+      "Governance Alignment",
+      "Compliance Requirements",
+      "Control Assessment",
+      "Security Roadmap",
+      "Implementation Framework"
+    ],
+    "link": "#",
+    "linkType": "confidential"
+  },
+  {
+    "slug": "port-scanner",
+    "title": "Port Scanner",
+    "category": "Cybersecurity Tool",
+    "description": "Built a multi-tenant network port scanning platform designed to discover exposed services and provide structured security visibility.",
+    "featured": true,
+    "securityFocus": "Network Security • Security Tooling • Multi-Tenant Architecture",
+    "technologies": [
+      "Port Scanning Engine",
+      "Authentication",
+      "Role-Based Access Control",
+      "Multi-Tenant Architecture",
+      "Organization Management",
+      "Team Management",
+      "Licensing Engine",
+      "Security-Focused Reporting"
+    ],
+    "link": "#",
+    "linkType": "tool"
+  },
+  {
+    "slug": "security-reporting-platform",
+    "title": "Security Reporting Platform",
+    "category": "Cybersecurity Platform",
+    "description": "Built a cybersecurity assessment and reporting platform for organizing security findings, vulnerability intelligence, assessment workflows, and professional security reports.",
+    "featured": true,
+    "securityFocus": "Security Assessments • Vulnerability Intelligence • Reporting",
+    "technologies": [
+      "Security Assessments",
+      "Vulnerability Intelligence",
+      "NVD Data",
+      "CISA KEV Data",
+      "Assessment Templates",
+      "Security Findings",
+      "PDF Reporting",
+      "Organization/Workspace Management",
+      "Administrative Workflows"
+    ],
+    "link": "#",
+    "linkType": "platform"
+  },
+  {
+    "slug": "threat-analysis-platform",
+    "title": "Threat Analysis Platform",
+    "category": "Threat Intelligence / Security Analysis",
+    "description": "Built a cybersecurity analysis platform designed to help users assess potentially malicious URLs, messages, and digital content before interacting with them.",
+    "featured": false,
+    "securityFocus": "Threat Intelligence • Digital Content Analysis • Attack Surface Visibility",
+    "technologies": [
+      "URL Analysis",
+      "SMS Analysis",
+      "Email Analysis",
+      "Messaging Content Analysis",
+      "QR-Related Analysis",
+      "Threat Intelligence",
+      "Risk Analysis",
+      "SSRF Protection",
+      "AI-Assisted Security Analysis"
+    ],
+    "link": "#",
+    "linkType": "tool"
+  },
+  {
+    "slug": "web-application-security-lab",
+    "title": "Web Application Security Lab",
+    "category": "Application Security",
+    "description": "Built a controlled web application security testing environment using DVWA and OWASP Juice Shop to practice vulnerability discovery, exploitation, validation, and security reporting against intentionally vulnerable applications.",
+    "featured": false,
+    "securityFocus": "Web Vulnerability Discovery • Input Sanitization • OWASP Validation",
+    "technologies": [
+      "DVWA",
+      "OWASP Juice Shop",
+      "Burp Suite",
+      "OWASP Top 10",
+      "Vulnerability Discovery",
+      "Exploitation Validation",
+      "Security Reporting"
+    ],
+    "link": "#",
+    "linkType": "lab"
+  },
+  {
+    "slug": "osint-threat-intelligence-toolkit",
+    "title": "OSINT & Threat Intelligence Toolkit",
+    "category": "Threat Intelligence",
+    "description": "Built an intelligence platform to discover publicly exposed organizational credentials, IP reputation indicators, domain exposure metrics, and risk calculation algorithms.",
+    "featured": false,
+    "securityFocus": "External Exposure Assessment • Threat Intelligence • Risk Scoring",
+    "technologies": [
+      "Python / Flask",
+      "VirusTotal API",
+      "HaveIBeenPwned API",
+      "Risk Scoring Engine",
+      "Breach Detection",
+      "IP Reputation"
+    ],
+    "link": "https://github.com/hameezcam/osint-data-exposure-tool",
+    "linkType": "github"
   }
 ]
