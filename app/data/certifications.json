@@ -1,18 +1,26 @@
 [
   {
-    "name": "BSc (Hons) Cybersecurity and Digital Forensics",
-    "issuer": "Kingston University",
+    "name": "Microsoft Copilot for Security",
+    "issuer": "Microsoft",
     "status": "completed",
-    "badge": "kingston_university.png"
+    "year": "2026",
+    "badge": "copilot.png"
   },
   {
-    "name": "CCNA 200-301",
+    "name": "SOC Fundamentals",
+    "issuer": "LetsDefend",
+    "status": "completed",
+    "year": "2026",
+    "badge": "letsdefend.png"
+  },
+  {
+    "name": "Cisco Certified Network Associate (CCNA 200-301)",
     "issuer": "Cisco",
     "status": "completed",
     "badge": "ccna.png"
   },
   {
-    "name": "Microsoft Azure AZ-900",
+    "name": "Microsoft Azure Fundamentals (AZ-900)",
     "issuer": "Microsoft",
     "status": "completed",
     "badge": "az900.png"
@@ -24,15 +32,9 @@
     "badge": "hardware_networking.png"
   },
   {
-    "name": "Certified Ethical Hacker (CEH v13)",
+    "name": "Certified Ethical Hacker (CEH)",
     "issuer": "EC-Council",
-    "status": "pursuing",
+    "status": "in_progress",
     "badge": "ceh.png"
-  },
-  {
-    "name": "ISC2 Certified in Cybersecurity (CC)",
-    "issuer": "ISC2",
-    "status": "pursuing",
-    "badge": "isc2_cc.png"
   }
 ]
