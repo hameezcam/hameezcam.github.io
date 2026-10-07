@@ -1056,11 +1056,11 @@ function initModals() {
         },
         'kingston': {
             title: "BSc (Hons) Cybersecurity & Digital Forensics",
-            issuer: "Kingston University",
-            date: "Completed",
-            id: "Kingston University London",
-            status: "COMPLETED",
-            details: "Comprehensive degree program covering network security, digital forensics, cryptographic foundations, operating systems, malware analysis, incident response, and security governance frameworks."
+            issuer: "Kingston University London",
+            date: "Graduated — First-Class Honours",
+            id: "Grade: First-Class Honours",
+            status: "COMPLETED // FIRST-CLASS HONOURS",
+            details: "Graduated with First Class Honours in Cyber Security & Digital Forensics from Kingston University London. Developed strong knowledge in threat hunting, cryptography, network security, and OSINT techniques. Completed a final year project focused on data exposure analysis using OSINT methodologies. Served as an EXCO member, organizing and managing IT club and media club events."
         },
         'ccna': {
             title: "Cisco Certified Network Associate (CCNA 200-301)",
@@ -1515,7 +1515,7 @@ TECHNICAL SKILL MATRIX
 VERIFIED CERTIFICATIONS & EDUCATION
 ------------------------------------------------------------------------
 * Microsoft Copilot for Security [Completed — 2026]
-* BSc (Hons) Cybersecurity & Digital Forensics — Kingston University London
+* BSc (Hons) Cybersecurity & Digital Forensics — Kingston University London [First-Class Honours]
 * Cisco Certified Network Associate (CCNA 200-301) — Cisco
 * Microsoft Azure Fundamentals (AZ-900) — Microsoft
 * Advanced Diploma in Hardware & Networking Professional — Institute

@@ -578,14 +578,24 @@ export default function Portfolio() {
                   <div className="timeline-title-group">
                     <span className="career-stage-tag"><i className="fas fa-graduation-cap"></i> EDUCATION &amp; TRAINING</span>
                     <h3>BSc (Hons) Cybersecurity &amp; Digital Forensics</h3>
-                    <span className="company-tag"><i className="fas fa-university"></i> Kingston University</span>
+                    <span className="company-tag"><i className="fas fa-university"></i> Kingston University London</span>
                   </div>
-                  <span className="timeline-date"><i className="far fa-calendar-alt"></i> Graduated</span>
+                  <div style={{ textAlign: "right" }}>
+                    <span className="timeline-date"><i className="far fa-calendar-check text-success"></i> Graduated</span>
+                    <div style={{ marginTop: "6px" }}>
+                      <span className="badge" style={{ borderColor: "rgba(0, 240, 255, 0.45)", color: "var(--cyber-blue)", fontSize: "0.8rem", padding: "3px 10px", background: "rgba(0, 240, 255, 0.08)" }}>
+                        <i className="fas fa-medal"></i> Grade: First-Class Honours
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="timeline-body">
-                  <p className="timeline-description">
-                    Core academic foundation in network protocols, operating system architecture, digital forensics, incident investigation methodologies, cryptography, and security governance frameworks.
+                  <p className="timeline-description" style={{ marginBottom: "0.8rem" }}>
+                    Graduated with First Class Honours in Cyber Security &amp; Digital Forensics from Kingston University London. Developed strong knowledge in threat hunting, cryptography, network security, and OSINT techniques. Completed a final year project focused on data exposure analysis using OSINT methodologies.
+                  </p>
+                  <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", marginBottom: "0.75rem", lineHeight: "1.6" }}>
+                    <strong style={{ color: "var(--cyber-blue)" }}>Activities and societies:</strong> Served as an EXCO member, organizing and managing IT club and media club events. Took initiative in planning, coordination, digital promotions, and technical support, ensuring successful execution while developing leadership and problem-solving skills.
                   </p>
                 </div>
               </div>
@@ -885,30 +895,43 @@ export default function Portfolio() {
             <div className="section-header">
               <span className="section-badge">ACADEMIC_FOUNDATION</span>
               <h2 className="section-title text-glow">Education</h2>
-              <p className="section-subtitle">Formal degree program in cybersecurity and digital forensics.</p>
+              <p className="section-subtitle">Formal degree program in cybersecurity and digital forensics from Kingston University London.</p>
             </div>
 
             <div style={{ maxWidth: "850px", margin: "0 auto" }}>
               <div className="timeline-item glass-card hover-glow" style={{ padding: "1.75rem 2rem" }}>
                 <div className="timeline-header" style={{ marginBottom: "1rem" }}>
                   <div className="timeline-title-group">
-                    <span className="career-stage-tag"><i className="fas fa-graduation-cap"></i> HIGHER EDUCATION</span>
+                    <span className="career-stage-tag"><i className="fas fa-graduation-cap"></i> HIGHEST ACADEMIC QUALIFICATION</span>
                     <h3 style={{ fontSize: "1.35rem", margin: "0.25rem 0" }}>BSc (Hons) Cybersecurity &amp; Digital Forensics</h3>
-                    <span className="company-tag"><i className="fas fa-university"></i> Kingston University</span>
+                    <span className="company-tag"><i className="fas fa-university"></i> Kingston University London</span>
                   </div>
-                  <span className="timeline-date"><i className="far fa-calendar-alt"></i> Graduated</span>
+                  <div style={{ textAlign: "right" }}>
+                    <span className="timeline-date"><i className="far fa-calendar-check text-success"></i> Graduated</span>
+                    <div style={{ marginTop: "6px" }}>
+                      <span className="badge" style={{ borderColor: "rgba(0, 240, 255, 0.45)", color: "var(--cyber-blue)", fontSize: "0.82rem", padding: "3px 10px", background: "rgba(0, 240, 255, 0.08)" }}>
+                        <i className="fas fa-medal"></i> Grade: First-Class Honours
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <div className="timeline-body">
-                  <p className="timeline-description" style={{ marginBottom: "0.75rem" }}>
-                    Rigorous degree syllabus providing deep technical grounding across network security, digital forensics, cryptographic algorithms, malware analysis methodologies, operating system architecture, and security governance frameworks.
+                  <p className="timeline-description" style={{ marginBottom: "0.9rem", fontSize: "1rem", lineHeight: "1.7" }}>
+                    Graduated with First Class Honours in Cyber Security &amp; Digital Forensics from Kingston University London. Developed strong knowledge in threat hunting, cryptography, network security, and OSINT techniques. Completed a final year project focused on data exposure analysis using OSINT methodologies.
                   </p>
-                  <div className="pillar-tech-chips" style={{ marginTop: "1rem" }}>
-                    <span className="pillar-chip">Network Protocols</span>
-                    <span className="pillar-chip">Digital Forensics</span>
-                    <span className="pillar-chip">Incident Investigation</span>
+                  <div style={{ marginBottom: "1.1rem", padding: "12px 16px", background: "rgba(0, 0, 0, 0.25)", borderRadius: "6px", border: "1px solid rgba(255, 255, 255, 0.06)", fontSize: "0.88rem", lineHeight: "1.6", color: "var(--text-secondary)" }}>
+                    <div style={{ color: "var(--cyber-blue)", fontFamily: "var(--font-mono)", fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "4px" }}>
+                      <i className="fas fa-users-gear" style={{ marginRight: "6px" }}></i> Activities and societies
+                    </div>
+                    <span>Served as an EXCO member, organizing and managing IT club and media club events. Took initiative in planning, coordination, digital promotions, and technical support, ensuring successful execution while developing leadership and problem-solving skills.</span>
+                  </div>
+                  <div className="pillar-tech-chips" style={{ marginTop: "1rem", paddingTop: "12px", borderTop: "1px solid rgba(255, 255, 255, 0.06)" }}>
+                    <span className="pillar-chip">Threat Hunting</span>
                     <span className="pillar-chip">Cryptography</span>
-                    <span className="pillar-chip">Malware Analysis</span>
-                    <span className="pillar-chip">Security Governance</span>
+                    <span className="pillar-chip">Network Security</span>
+                    <span className="pillar-chip">OSINT Techniques</span>
+                    <span className="pillar-chip">Digital Forensics</span>
+                    <span className="pillar-chip">Data Exposure Analysis</span>
                   </div>
                 </div>
               </div>
