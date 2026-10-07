@@ -137,7 +137,7 @@ const PORTFOLIO_PROJECTS = [
     id: 9,
     featured: false,
     category: "soc-siem sec-ops",
-    icon: "fa-radar",
+    icon: "fa-crosshairs",
     bgText: "DETECTION_CAT",
     tags: ["Detection Engineering", "MITRE ATT&CK", "Telemetry"],
     title: "09 — Detection Catalogue",

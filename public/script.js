@@ -3,6 +3,19 @@
    Interactive CLI, Plexus Canvas, Modals, & Form
    ---------------------------------------------------- */
 
+// Clean URL in browser address bar (enforces extensionless /home, /about, etc.)
+(function() {
+    try {
+        const p = window.location.pathname;
+        if (p === '/' || p.endsWith('/index.html')) {
+            window.history.replaceState(null, '', '/home' + window.location.search + window.location.hash);
+        } else if (p.endsWith('.html')) {
+            const clean = p.slice(0, -5);
+            window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
+        }
+    } catch (e) {}
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     // Current date display in terminal
     updateTerminalDate();
@@ -295,11 +308,21 @@ function initHeaderScroll() {
     if (!navbar) return;
     
     // Auto-highlight active link based on current page URL
-    const currentPath = window.location.pathname.toLowerCase();
-    const currentPage = (currentPath.split('/').pop() || 'index.html');
+    let path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+    let pageSlug = path.split('/').filter(Boolean).pop() || 'home';
+    if (pageSlug === 'index.html' || pageSlug === 'home.html' || pageSlug === '') {
+        pageSlug = 'home';
+    } else {
+        pageSlug = pageSlug.replace(/\.html$/, '');
+    }
+
     navLinks.forEach(link => {
-        const href = (link.getAttribute('href') || '').toLowerCase();
-        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        let href = (link.getAttribute('href') || '').toLowerCase().replace(/\/+$/, '');
+        let hrefSlug = href.split('/').filter(Boolean).pop() || '';
+        hrefSlug = hrefSlug.replace(/\.html$/, '');
+        if (hrefSlug === 'index') hrefSlug = 'home';
+
+        if (hrefSlug === pageSlug || (pageSlug === 'home' && (hrefSlug === '' || hrefSlug === 'home' || link.id === 'nav-home'))) {
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
         }
@@ -581,7 +604,7 @@ SuperCAD | Dubai, UAE`,
 • Network Security (Check Point, Fortinet, WatchGuard, Cisco Meraki)
 • Cybersecurity Tool Development (Python, RBAC, Multi-Tenant Systems)
 
-→ <a href="skills.html" class="term-link">Open Full Skills Page &rarr;</a>`,
+→ <a href="/skills" class="term-link">Open Full Skills Page &rarr;</a>`,
 
         'projects': `--- FEATURED SECURITY WORK ---
 [01] Port Scanner (Network Security • Tool Development)
@@ -591,7 +614,7 @@ SuperCAD | Dubai, UAE`,
 [05] In-House SOC Development (Architecture • Incident Response)
 [06] Active Directory Red Team Lab (Red Teaming • Penetration Testing)
 
-→ <a href="projects.html" class="term-link">Open Projects Page &rarr;</a>`,
+→ <a href="/projects" class="term-link">Open Projects Page &rarr;</a>`,
 
         'experience': `--- PROFESSIONAL EXPERIENCE & CAREER PROGRESSION ---
 [CURRENT ROLE]
@@ -608,13 +631,13 @@ Company: SuperCAD · Dubai, UAE
 Period: July 2026 – September 2026
 Focus: SIEM monitoring, security event analysis, alert investigation, vulnerability assessment, VAPT support, Microsoft & network security, security documentation.
 
-→ <a href="experience.html" class="term-link">Open Experience Page &rarr;</a>`,
+→ <a href="/experience" class="term-link">Open Experience Page &rarr;</a>`,
 
         'certs': `--- PROFESSIONAL CERTIFICATIONS ---
 • Microsoft Copilot for Security — Completed, 2026
 • CEH — In Progress
 
-→ <a href="certifications.html" class="term-link">Open Certifications Page &rarr;</a>`,
+→ <a href="/certifications" class="term-link">Open Certifications Page &rarr;</a>`,
 
         'status': `--- SECURITY CAPABILITY STATUS ---
 [OK] Security Operations
@@ -629,7 +652,7 @@ Focus: SIEM monitoring, security event analysis, alert investigation, vulnerabil
         'contact': `Interested in connecting?
 Reach out for security operations, assessments, or professional inquiries.
 
-→ <a href="contact.html" class="term-link">Open Contact Page &rarr;</a>
+→ <a href="/contact" class="term-link">Open Contact Page &rarr;</a>
 • Email: <a href="mailto:hameez.cam@gmail.com" class="term-link">hameez.cam@gmail.com</a>
 • LinkedIn: <a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank" class="term-link">LinkedIn Profile</a>
 • GitHub: <a href="https://github.com/hameezcam" target="_blank" class="term-link">GitHub Profile</a>`,
@@ -638,7 +661,7 @@ Reach out for security operations, assessments, or professional inquiries.
 Cybersecurity Analyst based in Dubai, UAE.
 Focusing on security operations, threat detection, incident response, vulnerability assessment, and building practical cybersecurity solutions.
 
-→ <a href="about.html" class="term-link">Open About Page &rarr;</a>`,
+→ <a href="/about" class="term-link">Open About Page &rarr;</a>`,
 
         // Easter eggs
         'sudo': `Nice try.

@@ -12,6 +12,15 @@ class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
 
+    def translate_path(self, path):
+        orig_path = super().translate_path(path)
+        if not os.path.exists(orig_path):
+            if os.path.exists(orig_path + ".html"):
+                return orig_path + ".html"
+            if path.rstrip("/") == "/home" and os.path.exists(os.path.join(DIRECTORY, "index.html")):
+                return os.path.join(DIRECTORY, "index.html")
+        return orig_path
+
     def end_headers(self):
         # Kill all caching
         self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
