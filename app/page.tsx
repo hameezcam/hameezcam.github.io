@@ -575,14 +575,12 @@ export default function Portfolio() {
               {/* Education Milestone */}
               <div className="timeline-item glass-card hover-glow">
                 <div className="timeline-header">
-                  <div className="timeline-title-group">
+                  <div className="timeline-title-group" style={{ width: "100%" }}>
                     <span className="career-stage-tag"><i className="fas fa-graduation-cap"></i> EDUCATION &amp; TRAINING</span>
                     <h3>BSc (Hons) Cybersecurity &amp; Digital Forensics</h3>
-                    <span className="company-tag"><i className="fas fa-university"></i> Kingston University London</span>
-                  </div>
-                  <div style={{ textAlign: "right" }}>
-                    <span className="timeline-date"><i className="far fa-calendar-check text-success"></i> Graduated</span>
-                    <div style={{ marginTop: "6px" }}>
+                    <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "10px 14px", marginTop: "6px" }}>
+                      <span className="company-tag" style={{ color: "var(--cyber-blue)", fontWeight: 600 }}><i className="fas fa-university"></i> Kingston University London</span>
+                      <span className="timeline-date" style={{ fontSize: "0.85rem", display: "inline-flex", alignItems: "center", gap: "6px" }}><i className="far fa-calendar-check text-success"></i> Graduated</span>
                       <span className="badge" style={{ borderColor: "rgba(0, 240, 255, 0.45)", color: "var(--cyber-blue)", fontSize: "0.8rem", padding: "3px 10px", background: "rgba(0, 240, 255, 0.08)" }}>
                         <i className="fas fa-medal"></i> Grade: First-Class Honours
                       </span>
@@ -901,14 +899,12 @@ export default function Portfolio() {
             <div style={{ maxWidth: "850px", margin: "0 auto" }}>
               <div className="timeline-item glass-card hover-glow" style={{ padding: "1.75rem 2rem" }}>
                 <div className="timeline-header" style={{ marginBottom: "1rem" }}>
-                  <div className="timeline-title-group">
+                  <div className="timeline-title-group" style={{ width: "100%" }}>
                     <span className="career-stage-tag"><i className="fas fa-graduation-cap"></i> HIGHEST ACADEMIC QUALIFICATION</span>
-                    <h3 style={{ fontSize: "1.35rem", margin: "0.25rem 0" }}>BSc (Hons) Cybersecurity &amp; Digital Forensics</h3>
-                    <span className="company-tag"><i className="fas fa-university"></i> Kingston University London</span>
-                  </div>
-                  <div style={{ textAlign: "right" }}>
-                    <span className="timeline-date"><i className="far fa-calendar-check text-success"></i> Graduated</span>
-                    <div style={{ marginTop: "6px" }}>
+                    <h3 style={{ fontSize: "1.35rem", margin: "0.25rem 0 0.5rem 0" }}>BSc (Hons) Cybersecurity &amp; Digital Forensics</h3>
+                    <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "10px 14px", marginTop: "4px" }}>
+                      <span className="company-tag" style={{ color: "var(--cyber-blue)", fontWeight: 600 }}><i className="fas fa-university"></i> Kingston University London</span>
+                      <span className="timeline-date" style={{ fontSize: "0.85rem", display: "inline-flex", alignItems: "center", gap: "6px" }}><i className="far fa-calendar-check text-success"></i> Graduated</span>
                       <span className="badge" style={{ borderColor: "rgba(0, 240, 255, 0.45)", color: "var(--cyber-blue)", fontSize: "0.82rem", padding: "3px 10px", background: "rgba(0, 240, 255, 0.08)" }}>
                         <i className="fas fa-medal"></i> Grade: First-Class Honours
                       </span>
