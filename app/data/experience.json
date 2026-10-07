@@ -1,19 +1,50 @@
 [
-  "Working across security operations, monitoring, security assessments, incident investigation, Microsoft security, network security, vulnerability management, and cybersecurity service development within a managed security environment.",
-  "Security alert investigation and security event analysis across enterprise SIEM and endpoint telemetry",
-  "SIEM monitoring and threat detection across real-time security events",
-  "Incident investigation and structured incident response playbook execution",
-  "Microsoft Defender security operations across Endpoint, Office 365, and XDR",
-  "Microsoft Sentinel SIEM management, log analytics, and detection rule operations",
-  "Microsoft 365 security administration, Entra ID identity security, MFA, and Conditional Access",
-  "Check Point security operations and Harmony Email protection",
-  "Fortinet and WatchGuard network security administration",
-  "Cisco Meraki security assessments and configuration reviews",
-  "Security posture assessments and technical VAPT documentation",
-  "Vulnerability assessment, risk classification, and remediation tracking",
-  "Security audit activities and compliance roadmap alignment",
-  "Incident response playbooks authoring for common attack scenarios",
-  "Detection gap assessments and threat detection documentation",
-  "SOC implementation planning and SOCaaS service delivery design",
-  "Client security reporting and structured remediation roadmaps"
+  {
+    "id": "cybersecurity-analyst",
+    "role": "Cybersecurity Analyst",
+    "company": "SuperCAD",
+    "location": "Dubai, UAE",
+    "period": "September 2026 – Present",
+    "timelineBadge": "Sep 2026 – Present",
+    "status": "Current Role",
+    "isCurrent": true,
+    "progressionType": "promoted",
+    "description": "Working across security operations, SIEM monitoring, threat detection, incident investigation, Microsoft security, network security, vulnerability management, security assessments, security auditing, and cybersecurity service development.",
+    "keyAreas": [
+      "SIEM Monitoring & Alert Investigation",
+      "Threat Detection & Detection Engineering",
+      "Microsoft Sentinel & Defender",
+      "Microsoft 365 & Entra Security",
+      "Network Security",
+      "Vulnerability Assessment & VAPT",
+      "Security Posture Assessments",
+      "Security Auditing",
+      "Incident Response",
+      "SOC & SOCaaS Development"
+    ]
+  },
+  {
+    "id": "cyber-security-intern",
+    "role": "Cyber Security Intern",
+    "company": "SuperCAD",
+    "location": "Dubai, UAE",
+    "period": "July 2026 – September 2026",
+    "timelineBadge": "Jul 2026 – Sep 2026",
+    "status": "Previous Position",
+    "isCurrent": false,
+    "progressionType": "internship",
+    "description": "Supported cybersecurity operations and security assessment activities while gaining hands-on experience in SIEM monitoring, threat detection, vulnerability assessment, Microsoft security, network security, incident response processes, and security documentation.",
+    "keyAreas": [
+      "SIEM Monitoring",
+      "Security Event Analysis",
+      "Alert Investigation",
+      "Vulnerability Assessment",
+      "VAPT Support",
+      "Microsoft Security",
+      "Network Security",
+      "Security Assessments",
+      "Security Documentation",
+      "Incident Response Support"
+    ]
+  }
 ]

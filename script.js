@@ -593,13 +593,20 @@ SuperCAD | Dubai, UAE`,
 
 → <a href="projects.html" class="term-link">Open Projects Page &rarr;</a>`,
 
-        'experience': `--- PROFESSIONAL EXPERIENCE ---
+        'experience': `--- PROFESSIONAL EXPERIENCE & CAREER PROGRESSION ---
+[CURRENT ROLE]
 Role: Cybersecurity Analyst
-Company: SuperCAD
-Location: Dubai, UAE
-Period: 2026 – Present
+Company: SuperCAD · Dubai, UAE
+Period: September 2026 – Present
+Focus: Security operations, SIEM monitoring, threat detection, incident investigation, Microsoft security, network security, vulnerability management, security assessments, security auditing, SOC development.
 
-Focus: Security operations, SIEM monitoring, threat detection, Microsoft security, network security, and security assessments.
+    ▲ PROMOTED (Career Progression)
+    │
+[PREVIOUS POSITION]
+Role: Cyber Security Intern
+Company: SuperCAD · Dubai, UAE
+Period: July 2026 – September 2026
+Focus: SIEM monitoring, security event analysis, alert investigation, vulnerability assessment, VAPT support, Microsoft & network security, security documentation.
 
 → <a href="experience.html" class="term-link">Open Experience Page &rarr;</a>`,
 
@@ -1445,33 +1452,51 @@ Development. Working across practical enterprise security operations,
 monitoring capabilities, assessment methodologies, and security applications.
 
 ------------------------------------------------------------------------
-PROFESSIONAL EXPERIENCE
+PROFESSIONAL EXPERIENCE & CAREER PROGRESSION
 ------------------------------------------------------------------------
-Cybersecurity Analyst
-SuperCAD — Dubai, UAE
-2026 – Present
+1. Cybersecurity Analyst [CURRENT ROLE]
+SuperCAD · Dubai, UAE
+September 2026 – Present
 Description:
-Working across security operations, monitoring, security assessments, 
+Working across security operations, SIEM monitoring, threat detection, 
 incident investigation, Microsoft security, network security, vulnerability 
-management, and cybersecurity service development within a managed security 
-environment.
+management, security assessments, security auditing, and cybersecurity 
+service development.
 
-Key Responsibilities & Operational Areas:
-* Security alert investigation and event analysis across SIEM environments
-* Centralized telemetry monitoring using Microsoft Sentinel and Wazuh
-* Threat detection, incident investigation, and containment procedures
-* Microsoft Defender security operations (Endpoint, Office 365, Identity, XDR)
-* Microsoft Sentinel SIEM detection rules and Log Analytics queries
-* Microsoft 365 and Entra ID security hardening (MFA, Conditional Access)
-* Check Point security operations, email security, and perimeter firewalls
-* Fortinet and WatchGuard security management
-* Cisco Meraki security assessments and audits
-* Security posture assessments and gap evaluations
-* Vulnerability assessment and VAPT documentation
-* Security audit activities and remediation tracking
-* Authoring incident response playbooks and detection catalogues
-* SOC implementation planning and SOCaaS service delivery planning
-* Client security reporting and executive deliverables
+Key Areas:
+* SIEM Monitoring & Alert Investigation
+* Threat Detection & Detection Engineering
+* Microsoft Sentinel & Defender
+* Microsoft 365 & Entra Security
+* Network Security
+* Vulnerability Assessment & VAPT
+* Security Posture Assessments
+* Security Auditing
+* Incident Response
+* SOC & SOCaaS Development
+
+[Internal Career Progression: Promoted from Cyber Security Intern]
+
+2. Cyber Security Intern [PREVIOUS POSITION]
+SuperCAD · Dubai, UAE
+July 2026 – September 2026
+Description:
+Supported cybersecurity operations and security assessment activities while 
+gaining hands-on experience in SIEM monitoring, threat detection, 
+vulnerability assessment, Microsoft security, network security, 
+incident response processes, and security documentation.
+
+Key Areas:
+* SIEM Monitoring
+* Security Event Analysis
+* Alert Investigation
+* Vulnerability Assessment
+* VAPT Support
+* Microsoft Security
+* Network Security
+* Security Assessments
+* Security Documentation
+* Incident Response Support
 
 ------------------------------------------------------------------------
 TECHNICAL SKILL MATRIX

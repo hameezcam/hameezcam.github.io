@@ -470,31 +470,80 @@ export default function Portfolio() {
             <div className="timeline-container">
               <div className="timeline-line-indicator"></div>
 
-              {/* SuperCAD Role */}
-              <div className="timeline-item glass-card hover-glow">
+              {/* Role 1: SuperCAD - Cybersecurity Analyst (Current Role) */}
+              <div className="timeline-item glass-card hover-glow role-card-active">
                 <div className="timeline-header">
                   <div className="timeline-title-group">
-                    <span className="career-stage-tag"><i className="fas fa-certificate"></i> CURRENT PROFESSIONAL ROLE</span>
+                    <span className="career-stage-tag"><i className="fas fa-shield-halved"></i> CURRENT PROFESSIONAL ROLE</span>
                     <h3>Cybersecurity Analyst</h3>
-                    <span className="company-tag"><i className="fas fa-building"></i> SuperCAD — Dubai, UAE</span>
+                    <span className="company-tag"><i className="fas fa-building"></i> SuperCAD · Dubai, UAE</span>
                   </div>
-                  <span className="timeline-date"><i className="far fa-calendar-alt"></i> 2026 – Present</span>
+                  <span className="timeline-date"><i className="far fa-calendar-alt text-success"></i> September 2026 – Present</span>
                 </div>
 
                 <div className="timeline-body">
                   <p className="timeline-description">
-                    Working across security operations, monitoring, security assessments, incident investigation, Microsoft security, network security, vulnerability management, and cybersecurity service development within a managed security environment.
+                    Working across security operations, SIEM monitoring, threat detection, incident investigation, Microsoft security, network security, vulnerability management, security assessments, security auditing, and cybersecurity service development.
                   </p>
 
-                  <ul className="duties-list">
-                    <li><i className="fas fa-shield-halved duty-icon"></i><span><strong>Security Alert Investigation &amp; Event Analysis:</strong> Investigating security alerts, correlating event logs, analyzing malicious indicators, and evaluating abnormal activity across client infrastructures.</span></li>
-                    <li><i className="fas fa-tower-broadcast duty-icon"></i><span><strong>SIEM Monitoring &amp; Threat Detection:</strong> Monitoring real-time telemetry, detecting threat behaviors, identifying security anomalies, and assessing detection gaps across monitored assets.</span></li>
-                    <li><i className="fas fa-fire-extinguisher duty-icon"></i><span><strong>Incident Investigation &amp; Response Playbooks:</strong> Conducting structured incident investigations, executing incident response playbooks for account compromise and phishing, and recommending immediate containment steps.</span></li>
-                    <li><i className="fab fa-microsoft duty-icon"></i><span><strong>Microsoft Security Operations:</strong> Operating Microsoft Sentinel SIEM, Microsoft Defender suite, Microsoft 365 security controls, Entra ID identity policies, MFA enforcement, and Conditional Access rules.</span></li>
-                    <li><i className="fas fa-network-wired duty-icon"></i><span><strong>Network Security Operations:</strong> Performing operational security administration across Check Point gateways, Fortinet firewalls, WatchGuard appliances, and conducting Cisco Meraki security assessments.</span></li>
-                    <li><i className="fas fa-magnifying-glass-chart duty-icon"></i><span><strong>Security Assessments &amp; Vulnerability Management:</strong> Executing security posture assessments, vulnerability assessments, security audit activities, and technical VAPT documentation workflows.</span></li>
-                    <li><i className="fas fa-file-shield duty-icon"></i><span><strong>SOC Architecture &amp; Service Planning:</strong> Developing detection gap assessments, threat detection documentation, SOC implementation roadmaps, and SOCaaS framework planning.</span></li>
-                    <li><i className="fas fa-clipboard-check duty-icon"></i><span><strong>Client Reporting &amp; Remediation Tracking:</strong> Producing structured client security assessment reports, risk classification summaries, and tracking remediation milestones.</span></li>
+                  <h4 style={{ fontFamily: "var(--font-mono)", fontSize: "0.92rem", color: "var(--cyber-blue)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+                    <i className="fas fa-list-check" style={{ marginRight: "6px" }}></i> Key Areas
+                  </h4>
+
+                  <ul className="duties-list" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "10px" }}>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>SIEM Monitoring &amp; Alert Investigation</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Threat Detection &amp; Detection Engineering</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Microsoft Sentinel &amp; Defender</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Microsoft 365 &amp; Entra Security</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Network Security</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Vulnerability Assessment &amp; VAPT</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Security Posture Assessments</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Security Auditing</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>Incident Response</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-success"></i><span>SOC &amp; SOCaaS Development</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Career Progression Connector */}
+              <div className="career-progression-bridge" style={{ margin: "24px 0" }}>
+                <div className="career-progression-pill">
+                  <i className="fas fa-arrow-up prog-arrow"></i>
+                  <span>Career Progression: Cyber Security Intern &rarr; Promoted to Cybersecurity Analyst</span>
+                </div>
+              </div>
+
+              {/* Role 2: SuperCAD - Cyber Security Intern (Previous Position) */}
+              <div className="timeline-item glass-card role-card-previous">
+                <div className="timeline-header">
+                  <div className="timeline-title-group">
+                    <span className="career-stage-tag" style={{ background: "rgba(148, 163, 184, 0.12)", color: "#94a3b8", borderColor: "rgba(148, 163, 184, 0.25)" }}><i className="fas fa-history"></i> PREVIOUS POSITION</span>
+                    <h3 style={{ color: "#cbd5e1" }}>Cyber Security Intern</h3>
+                    <span className="company-tag" style={{ color: "#94a3b8" }}><i className="fas fa-building"></i> SuperCAD · Dubai, UAE</span>
+                  </div>
+                  <span className="timeline-date" style={{ color: "#94a3b8" }}><i className="far fa-calendar-check text-muted"></i> July 2026 – September 2026</span>
+                </div>
+
+                <div className="timeline-body">
+                  <p className="timeline-description" style={{ color: "#94a3b8" }}>
+                    Supported cybersecurity operations and security assessment activities while gaining hands-on experience in SIEM monitoring, threat detection, vulnerability assessment, Microsoft security, network security, incident response processes, and security documentation.
+                  </p>
+
+                  <h4 style={{ fontFamily: "var(--font-mono)", fontSize: "0.92rem", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+                    <i className="fas fa-list-check" style={{ marginRight: "6px" }}></i> Key Areas
+                  </h4>
+
+                  <ul className="duties-list" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "10px" }}>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>SIEM Monitoring</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Security Event Analysis</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Alert Investigation</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Vulnerability Assessment</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>VAPT Support</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Microsoft Security</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Network Security</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Security Assessments</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Security Documentation</span></li>
+                    <li><i className="fas fa-circle-check duty-icon text-muted"></i><span>Incident Response Support</span></li>
                   </ul>
                 </div>
               </div>
