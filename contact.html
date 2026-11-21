@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://hameezcam.github.io/contact">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <title>Contact | Hameez Cambal — Cybersecurity Analyst</title>
     <meta name="description" content="Establish professional contact with Hameez Cambal, Cybersecurity Analyst in Dubai, UAE. Available for cybersecurity opportunities and networking.">
     <meta name="author" content="Hameez Cambal">
@@ -12,7 +14,9 @@
     <meta property="og:url" content="https://hameezcam.github.io/contact">
     <meta property="og:title" content="Contact | Hameez Cambal — Cybersecurity Analyst">
     <meta property="og:description" content="Establish professional contact with Hameez Cambal, Cybersecurity Analyst in Dubai, UAE. Available for cybersecurity opportunities and networking.">
-    <meta property="og:image" content="https://hameezcam.github.io/hameez.jpg">
+    <meta property="og:image" content="https://hameezcam.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body class="cyber-theme">
     <!-- Background Canvas for Particles -->
@@ -37,13 +41,13 @@
     <!-- Navigation Header -->
     <header class="main-header" id="navbar">
         <div class="header-container">
-            <a href="/home" class="logo">
+            <a href="/" class="logo">
                 <span class="cyber-accent-blue">&lt;</span>H.CAMBAL<span class="cursor-blink">_</span><span class="cyber-accent-purple">/&gt;</span>
             </a>
             
             <nav class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
-                    <li><a href="/home" class="nav-link" id="nav-home">Home</a></li>
+                    <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
                     <li><a href="/about" class="nav-link" id="nav-about">About</a></li>
                     <li><a href="/experience" class="nav-link" id="nav-experience">Experience</a></li>
                     <li><a href="/projects" class="nav-link" id="nav-projects">Projects</a></li>
@@ -53,14 +57,14 @@
                     <li><a href="/contact" class="nav-link active" id="nav-contact">Contact</a></li>
                 </ul>
                 <div class="mobile-socials">
-                    <a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/hameezcam" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/hameezcam" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="mailto:hameez.cam@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </nav>
             
             <div class="header-actions">
-                <a href="Hameez_Cambal_Resume.pdf" target="_blank" class="terminal-btn-nav" title="Download Resume">
+                <a href="/Hameez_Cambal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="terminal-btn-nav" title="Download Resume">
                     <i class="fas fa-file-pdf"></i> Resume
                 </a>
                 <button class="hamburger-menu" id="menu-toggle" aria-label="Toggle navigation menu">
@@ -77,7 +81,7 @@
         <section class="page-hero">
             <div class="page-hero-inner">
                 <div class="page-breadcrumb">
-                    <a href="/home"><i class="fas fa-home"></i> HOME</a>
+                    <a href="/"><i class="fas fa-home"></i> HOME</a>
                     <span class="sep">/</span>
                     <span>CONTACT</span>
                 </div>
@@ -107,50 +111,45 @@
                     <div class="contact-form-wrapper glass-card">
                         <h3 class="comms-title"><i class="fas fa-key"></i> Start a Conversation</h3>
                         
-                        <form id="contact-form">
+                        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                            <input type="hidden" name="access_key" value="68bc2bf9-f414-4dad-b353-4e7a1d9f35d1">
+                            <input type="hidden" name="from_name" value="hameezcam.github.io contact form">
+                            <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="form-name">NAME:</label>
-                                    <input type="text" id="form-name" required placeholder="Your Name">
+                                    <label for="form-name">Name</label>
+                                    <input type="text" id="form-name" name="name" required autocomplete="name" placeholder="Your name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="form-email">EMAIL:</label>
-                                    <input type="email" id="form-email" required placeholder="name@organization.com">
+                                    <label for="form-email">Email</label>
+                                    <input type="email" id="form-email" name="email" required autocomplete="email" placeholder="name@organization.com">
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="form-subject">INQUIRY_PURPOSE:</label>
-                                <input type="text" id="form-subject" required placeholder="e.g. Cybersecurity Opportunity / Technical Discussion">
+                                <label for="form-subject">Subject</label>
+                                <input type="text" id="form-subject" name="subject" required placeholder="e.g. SOC Analyst role / Technical discussion">
                             </div>
                             
                             <div class="form-group">
-                                <label for="form-message">MESSAGE:</label>
-                                <textarea id="form-message" required rows="5" placeholder="Write your message here..."></textarea>
+                                <label for="form-message">Message</label>
+                                <textarea id="form-message" name="message" required rows="5" placeholder="Write your message here..."></textarea>
                             </div>
                             
-                            <!-- Custom anti-bot challenge -->
+                            <!-- Simple anti-bot check (client-side; Web3Forms also filters spam server-side) -->
                             <div class="form-security-challenge">
-                                <div class="sec-challenge-label">ANTI_BOT_VERIFICATION: Solve equation</div>
+                                <label class="sec-challenge-label" for="form-captcha">Quick check: what is <span id="challenge-num1">5</span> + <span id="challenge-num2">9</span>?</label>
                                 <div class="challenge-math">
-                                    <span id="challenge-num1">5</span> + <span id="challenge-num2">9</span> = 
-                                    <input type="number" id="form-captcha" required placeholder="?">
+                                    <input type="number" id="form-captcha" required inputmode="numeric" placeholder="?">
                                 </div>
                             </div>
                             
                             <button type="submit" class="cyber-btn primary-btn block-btn" id="contact-submit-btn">
-                                <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>
+                                <span class="btn-text"><i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message</span>
                                 <span class="btn-glow"></span>
                             </button>
+                            <p class="form-status" id="contact-form-status" role="status" aria-live="polite"></p>
                         </form>
-                        
-                        <!-- Simulated transmission terminal output -->
-                        <div class="contact-log-box" id="contact-log-box" style="display: none;">
-                            <div class="log-line text-success">&gt; Initializing encryption protocols... [DONE]</div>
-                            <div class="log-line text-success">&gt; Hashing message payload... SHA-256 [COMPLETED]</div>
-                            <div class="log-line text-success">&gt; Transmitting secure data packets to UAE Node...</div>
-                            <div class="log-line text-glow" id="log-transmitting-status">&gt; Connecting...</div>
-                        </div>
                     </div>
                     
                     <!-- Direct Channels -->
@@ -175,7 +174,7 @@
                             <div class="channel-icon cyber-accent-purple"><i class="fab fa-linkedin"></i></div>
                             <div class="channel-info">
                                 <h4>LINKEDIN</h4>
-                                <p><a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank">linkedin.com/in/hameez-cambal</a></p>
+                                <p><a href="https://www.linkedin.com/in/hameez-cambal-988a2b314/" target="_blank" rel="noopener noreferrer">linkedin.com/in/hameez-cambal-988a2b314</a></p>
                             </div>
                         </div>
 
@@ -183,7 +182,7 @@
                             <div class="channel-icon"><i class="fab fa-github"></i></div>
                             <div class="channel-info">
                                 <h4>GITHUB</h4>
-                                <p><a href="https://github.com/hameezcam" target="_blank">github.com/hameezcam</a></p>
+                                <p><a href="https://github.com/hameezcam" target="_blank" rel="noopener noreferrer">github.com/hameezcam</a></p>
                             </div>
                         </div>
 
@@ -191,7 +190,7 @@
                             <div class="channel-icon text-danger"><i class="fas fa-file-pdf"></i></div>
                             <div class="channel-info">
                                 <h4>PROFESSIONAL CV</h4>
-                                <p><a href="Hameez_Cambal_Resume.pdf" target="_blank">Download PDF Resume</a></p>
+                                <p><a href="/Hameez_Cambal_Resume.pdf" target="_blank" rel="noopener noreferrer">Download PDF Resume</a></p>
                             </div>
                         </div>
                     </div>
@@ -210,16 +209,16 @@
             <hr class="footer-divider">
             
             <div class="footer-bottom">
-                <p class="copyright">&copy; 2026 Hameez Cambal · Cybersecurity Analyst. All rights secured.</p>
+                <p class="copyright">&copy; 2026 Hameez Cambal · Cybersecurity Analyst. All rights reserved.</p>
                 <div class="footer-system-status">
                     <span class="status-indicator-light"></span>
-                    <span class="status-text">CORE_SYSTEM: SECURE // SUPERCAD NODE</span>
+                    <span class="status-text">Based in Dubai, UAE</span>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>

@@ -4088,3 +4088,60 @@ body {
 
 
 
+
+/* --- Contact form status and honeypot --- */
+.hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.form-status {
+    margin-top: 14px;
+    min-height: 1.4em;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.form-status.is-success { color: var(--accent-green); }
+.form-status.is-error { color: var(--accent-red); }
+
+/* --- Keyboard focus visibility --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 3px;
+}
+
+.modal-overlay:focus { outline: none; }
+
+/* --- Larger touch targets for header navigation --- */
+.nav-link {
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 24px;
+}
+
+/* --- Muted text contrast (WCAG AA on dark background) --- */
+:root {
+    --text-muted: #8291a6;
+}
+
+/* --- Reduce motion: stop decorative animations --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

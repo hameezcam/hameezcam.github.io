@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found | Hameez Cambal</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <script>
+        // Send old or slightly wrong URLs to the right page:
+        // /about/ -> /about, /home -> /, /about.html/ -> /about
+        (function () {
+            var p = window.location.pathname;
+            var clean = p.replace(/\/+$/, '').replace(/\.html$/, '');
+            if (clean === '/home' || clean === '/index') clean = '';
+            var known = ['', '/about', '/experience', '/projects', '/certifications', '/education', '/skills', '/contact'];
+            if (clean !== p && known.indexOf(clean) !== -1) {
+                window.location.replace((clean || '/') + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
+    <style>
+        body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+               background: #07070c; color: #f1f5f9; font-family: Inter, system-ui, sans-serif; padding: 16px; text-align: center; }
+        a { color: #38bdf8; }
+        h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        p { color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Page not found</h1>
+        <p>This page does not exist. <a href="/">Go to the homepage</a>.</p>
+    </main>
+</body>
+</html>
