@@ -3,15 +3,14 @@
    Interactive CLI, Plexus Canvas, Modals, & Form
    ---------------------------------------------------- */
 
-// Clean URL in browser address bar (enforces extensionless /home, /about, etc.)
+// Clean URL in browser address bar (extensionless routes: /about, /projects, ...)
 (function() {
     try {
         const p = window.location.pathname;
-        if (p === '/' || p.endsWith('/index.html')) {
-            window.history.replaceState(null, '', '/home' + window.location.search + window.location.hash);
+        if (p.endsWith('/index.html')) {
+            window.history.replaceState(null, '', p.slice(0, -10) + window.location.search + window.location.hash);
         } else if (p.endsWith('.html')) {
-            const clean = p.slice(0, -5);
-            window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
+            window.history.replaceState(null, '', p.slice(0, -5) + window.location.search + window.location.hash);
         }
     } catch (e) {}
 })();
@@ -31,24 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initModals();
     initContactForm();
     initBackToTop();
-    initCVDownload();
 });
-
-// Global init export for Next.js hydration
-window.initCyberApp = function() {
-    updateTerminalDate();
-    initPlexusCanvas();
-    initTypewriter();
-    initMobileNav();
-    initHeaderScroll();
-    initTerminal();
-    initSkillsTabs();
-    initProjectsFilter();
-    initModals();
-    initContactForm();
-    initBackToTop();
-    initCVDownload();
-};
 
 /* --- Update Date in Terminal --- */
 function updateTerminalDate() {
@@ -63,6 +45,11 @@ function updateTerminalDate() {
 function initPlexusCanvas() {
     const canvas = document.getElementById('plexus-canvas');
     if (!canvas) return;
+    // Respect users who ask for less motion
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        canvas.style.display = 'none';
+        return;
+    }
     const ctx = canvas.getContext('2d');
     
     let particlesArray = [];
@@ -223,7 +210,6 @@ function initTypewriter() {
 
     const roles = [
         "Cybersecurity Analyst",
-        "Penetration Tester",
         "Security Operations Analyst",
         "Vulnerability Assessment Analyst",
         "Security Assessment Analyst",
@@ -286,15 +272,20 @@ function initMobileNav() {
     
     if (!menuToggle || !navMenu) return;
     
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-controls', 'nav-menu');
+
     menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        document.body.classList.toggle('menu-toggle-active');
+        const isOpen = navMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-toggle-active', isOpen);
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
     });
     
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
             document.body.classList.remove('menu-toggle-active');
+            menuToggle.setAttribute('aria-expanded', 'false');
         });
     });
 }
@@ -707,7 +698,7 @@ status`
                 return;
             }
 
-            if (commands[inputVal]) {
+            if (Object.prototype.hasOwnProperty.call(commands, inputVal)) {
                 appendLine(commands[inputVal]);
             } else {
                 appendLine(`Command not recognized: "${escapeHtml(rawVal)}"<br>Type <span class="term-cmd">help</span> to view available commands.`, 'term-error');
@@ -738,9 +729,6 @@ function initModals() {
     const certModalBody = document.getElementById('cert-modal-body');
     const certClose = document.getElementById('cert-modal-close');
     
-    const blogModal = document.getElementById('blog-modal');
-    const blogModalBody = document.getElementById('blog-modal-body');
-    const blogClose = document.getElementById('blog-modal-close');
 
     // Projects Database - Complete 20 Projects (Numbered 01 to 20)
     const projectsData = {
@@ -1127,105 +1115,6 @@ function initModals() {
         }
     };
 
-    // Blog Articles Database
-    const blogData = {
-        'soc-roadmap': {
-            title: "SOC Analyst Roadmap: From Scratch to Deployed",
-            category: "Roadmaps",
-            date: "June 2026",
-            readTime: "8 min read",
-            content: `
-                <p>Entering the Security Operations Center (SOC) requires a structured approach to systems, networks, and telemetry tracking. As a SOC analyst, your role is to act as the primary defense line, identifying and investigating threats before they become critical breaches.</p>
-                
-                <h4>1. Solidify Network Foundations</h4>
-                <p>You cannot defend what you don't understand. A SOC analyst must comprehend how packets traverse networks. Focus on:</p>
-                <ul>
-                    <li>The TCP/IP model in depth (packet headers, 3-way handshakes, TCP flags).</li>
-                    <li>DNS operations, DHCP, ARP, and routing configurations.</li>
-                    <li>Network traffic analysis using tools like Wireshark and TCPdump.</li>
-                </ul>
-
-                <h4>2. Master SIEM & Telemetry Operations</h4>
-                <p>Security Information and Event Management (SIEM) systems act as the brain of the SOC. Key focus areas:</p>
-                <ul>
-                    <li>Log collection, normalization, and KQL query writing in Microsoft Sentinel.</li>
-                    <li>Constructing correlation rules to trigger alerts under specific threat heuristics.</li>
-                    <li>Wazuh and Sysmon telemetry for endpoint event correlation (Event ID 1, 3, 11, 4625, 4624).</li>
-                </ul>
-
-                <h4>3. Incident Response Playbooks</h4>
-                <p>Learn structured triage and containment steps for phishing, malware outbreaks, and account compromises following NIST SP 800-61 frameworks.</p>
-            `
-        },
-        'siem-intro': {
-            title: "Introduction to SIEM: Ingestion, Correlating, and Alerts",
-            category: "SIEM",
-            date: "May 2026",
-            readTime: "6 min read",
-            content: `
-                <p>SIEM (Security Information and Event Management) forms the backbone of modern security operations. By collecting and correlating data from endpoints, cloud services, and network perimeters, it provides centralized threat visibility.</p>
-                
-                <h4>Data Ingestion Pipelines</h4>
-                <p>Logs from endpoints, firewalls, and Active Directory domains are collected by forwarders or cloud connectors (CEF, Syslog, Graph API). The SIEM normalizes this data into structured schemas.</p>
-
-                <h4>Correlation Engines & Detection Rules</h4>
-                <p>Correlation rules map disparate events to uncover adversary tactics. For example: multiple Event ID 4625 failed logons within 60 seconds followed by a successful Event ID 4624 and subsequent PowerShell execution triggers a high-severity alert.</p>
-
-                <h4>Best Practices for SOC Rule Tuning</h4>
-                <ul>
-                    <li>Reduce Alert Fatigue: Continuously tune rules to minimize false positives and elevate signal-to-noise ratio.</li>
-                    <li>Align with MITRE ATT&CK: Map detections to specific adversary techniques to identify coverage blind spots.</li>
-                </ul>
-            `
-        },
-        'threat-hunting': {
-            title: "Threat Hunting Methodology: Detecting Hidden Adversaries",
-            category: "Threat Hunting",
-            date: "May 2026",
-            readTime: "10 min read",
-            content: `
-                <p>Passive alert triage is no longer sufficient against sophisticated threat actors. Proactive threat hunting searches for adversaries who have evaded automated detections.</p>
-                
-                <h4>Hypothesis-Driven Hunting</h4>
-                <p>Formulate actionable hypotheses based on threat intelligence reports, MITRE ATT&CK techniques, and environment-specific risks (e.g. searching for unmanaged scheduled tasks or living-off-the-land binaries).</p>
-
-                <h4>Endpoint & Network Telemetry Triangulation</h4>
-                <p>Correlate process execution logs (Sysmon Event ID 1) with outbound network connections (Event ID 3) and DNS queries to trace command-and-control beacons.</p>
-            `
-        },
-        'ad-security': {
-            title: "Active Directory Security & Attack Paths",
-            category: "Active Directory",
-            date: "April 2026",
-            readTime: "7 min read",
-            content: `
-                <p>Active Directory remains the primary target for lateral movement and privilege escalation in enterprise environments.</p>
-                
-                <h4>Key Vulnerability Surfaces</h4>
-                <ul>
-                    <li><strong>Kerberoasting:</strong> Requesting TGS tickets for accounts with SPNs and cracking them offline.</li>
-                    <li><strong>AS-REP Roasting:</strong> Exploiting user accounts that do not require Kerberos pre-authentication.</li>
-                    <li><strong>LLMNR / NBT-NS Poisoning:</strong> Capturing NetNTLM hashes by responding to broadcast name resolution requests.</li>
-                </ul>
-
-                <h4>Defensive Mitigations</h4>
-                <p>Enforce strong AES-256 Kerberos encryption, disable LLMNR/NBT-NS via GPO, implement Tiered Administration models, and monitor Event IDs 4768 and 4769 for anomalies.</p>
-            `
-        },
-        'osint-techniques': {
-            title: "OSINT & External Attack Surface Management",
-            category: "OSINT",
-            date: "March 2026",
-            readTime: "5 min read",
-            content: `
-                <p>Understanding an organization's public-facing attack surface is crucial for both offensive penetration testing and defensive exposure management.</p>
-                
-                <h4>Asset Discovery & Exposure Assessment</h4>
-                <p>Utilize Certificate Transparency logs, DNS enumeration, Shodan queries, and breach intelligence APIs to identify exposed credentials, leaked endpoints, and misconfigured perimeter services before threat actors can target them.</p>
-            `
-        }
-    };
-
     // Open Project Modal
     document.querySelectorAll('.open-project-modal').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1266,18 +1155,9 @@ function initModals() {
                     </a>
                 </div>` : ''}
             `;
-            projectModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            openModal(projectModal, btn);
         });
     });
-
-    // Close Project Modal
-    if (projectClose && projectModal) {
-        projectClose.addEventListener('click', () => {
-            projectModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    }
 
     // Open Cert Modal
     document.querySelectorAll('.verify-cert-link').forEach(link => {
@@ -1298,79 +1178,82 @@ function initModals() {
                     <p class="cert-desc-text">${cert.details}</p>
                 </div>
             `;
-            certModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            openModal(certModal, link);
         });
     });
 
-    if (certClose && certModal) {
-        certClose.addEventListener('click', () => {
-            certModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Open Blog Modal
-    document.querySelectorAll('.read-blog-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const bid = btn.getAttribute('data-post');
-            const blog = blogData[bid];
-            if (!blog || !blogModal || !blogModalBody) return;
-
-            blogModalBody.innerHTML = `
-                <div class="blog-modal-header">
-                    <span class="blog-category">${blog.category}</span>
-                    <h2>${blog.title}</h2>
-                    <div class="blog-meta">
-                        <span><i class="far fa-calendar"></i> ${blog.date}</span>
-                        <span><i class="far fa-clock"></i> ${blog.readTime}</span>
-                    </div>
-                </div>
-                <div class="blog-modal-article">
-                    ${blog.content}
-                </div>
-            `;
-            blogModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    [[projectModal, projectClose], [certModal, certClose]].forEach(([modal, closeBtn]) => {
+        if (!modal) return;
+        if (closeBtn) closeBtn.addEventListener('click', () => closeModal(modal));
+        // Close on overlay click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal(modal);
         });
     });
 
-    if (blogClose && blogModal) {
-        blogClose.addEventListener('click', () => {
-            blogModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Close on overlay click
-    window.addEventListener('click', (e) => {
-        if (e.target === projectModal) {
-            projectModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+    // Escape closes, Tab stays inside the open dialog
+    document.addEventListener('keydown', (e) => {
+        const modal = document.querySelector('.modal-overlay.active');
+        if (!modal) return;
+        if (e.key === 'Escape') {
+            closeModal(modal);
+            return;
         }
-        if (e.target === certModal) {
-            certModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        if (e.target === blogModal) {
-            blogModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+        if (e.key === 'Tab') {
+            const focusable = [...modal.querySelectorAll('a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])')]
+                .filter(el => el.offsetParent !== null);
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
         }
     });
 }
 
-/* --- Contact Form Simulation with Math Captcha --- */
+let lastModalTrigger = null;
+
+function openModal(modal, trigger) {
+    if (!modal) return;
+    lastModalTrigger = trigger || document.activeElement;
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    const heading = modal.querySelector('h2, h3');
+    if (heading) {
+        if (!heading.id) heading.id = modal.id + '-title';
+        modal.setAttribute('aria-labelledby', heading.id);
+    }
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = modal.querySelector('.modal-close, [id$="-modal-close"]');
+    (closeBtn || modal).focus();
+}
+
+function closeModal(modal) {
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
+        lastModalTrigger.focus();
+    }
+    lastModalTrigger = null;
+}
+
+/* --- Contact Form (Web3Forms) with simple math check --- */
 function initContactForm() {
     const form = document.getElementById('contact-form');
     const captchaNum1 = document.getElementById('challenge-num1');
     const captchaNum2 = document.getElementById('challenge-num2');
     const captchaInput = document.getElementById('form-captcha');
     const submitBtn = document.getElementById('contact-submit-btn');
-    const logsBox = document.getElementById('contact-log-box');
-    const logStatusText = document.getElementById('log-transmitting-status');
+    const statusEl = document.getElementById('contact-form-status');
 
-    if (!form || !captchaNum1 || !captchaNum2) return;
+    if (!form || !captchaNum1 || !captchaNum2 || !captchaInput || !submitBtn || !statusEl) return;
 
     let num1, num2;
 
@@ -1379,51 +1262,54 @@ function initContactForm() {
         num2 = Math.floor(Math.random() * 9) + 2; // [2-10]
         captchaNum1.textContent = num1;
         captchaNum2.textContent = num2;
-        if (captchaInput) captchaInput.value = '';
+        captchaInput.value = '';
+    }
+
+    function setStatus(message, type) {
+        statusEl.textContent = message;
+        statusEl.className = 'form-status' + (type ? ' is-' + type : '');
     }
 
     generateCaptcha();
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const answer = parseInt(captchaInput.value);
-        if (answer !== (num1 + num2)) {
-            alert('Captcha verification failed. Please check your math equation.');
-            generateCaptcha();
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
             return;
         }
 
-        // Simulating packet transmission
-        submitBtn.disabled = true;
-        logsBox.style.display = 'flex';
-        logStatusText.textContent = '> Connecting to SuperCAD Security Node...';
-        
-        let sequences = [
-            { t: 800, txt: '> Socket connection established. Exchanging certificates...' },
-            { t: 1500, txt: '> Tunnel established. Encrypting message bytes via AES-256-GCM...' },
-            { t: 2300, txt: '> Transmitting payload hashes... 100%' },
-            { t: 3000, txt: '> Transmission successful! Response code: 200 OK.' },
-            { t: 3500, txt: '> Message transmitted securely. Hameez will review the packet shortly.' }
-        ];
+        if (parseInt(captchaInput.value, 10) !== (num1 + num2)) {
+            setStatus('The answer to the quick check is not right. Please try again.', 'error');
+            generateCaptcha();
+            captchaInput.focus();
+            return;
+        }
 
-        sequences.forEach(step => {
-            setTimeout(() => {
-                const logLine = document.createElement('div');
-                logLine.className = 'log-line text-success';
-                logLine.innerHTML = step.txt;
-                logsBox.appendChild(logLine);
-                logsBox.scrollTop = logsBox.scrollHeight;
-                
-                if (step.txt.includes('Response code: 200')) {
-                    logStatusText.style.display = 'none';
-                    // Reset form fields
-                    form.reset();
-                    generateCaptcha();
-                    submitBtn.disabled = false;
-                }
-            }, step.t);
-        });
+        submitBtn.disabled = true;
+        setStatus('Sending your message...', 'pending');
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: new FormData(form)
+            });
+            const result = await response.json().catch(() => ({}));
+
+            if (response.ok && result.success) {
+                setStatus('Thanks, your message has been sent. I will reply by email.', 'success');
+                form.reset();
+                generateCaptcha();
+            } else {
+                throw new Error(result.message || 'Request failed');
+            }
+        } catch (err) {
+            setStatus('Sorry, the message could not be sent. Please email hameez.cam@gmail.com directly.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+        }
     });
 }
 
@@ -1446,138 +1332,3 @@ function initBackToTop() {
     });
 }
 
-/* --- Dynamic Text-Based CV Generator --- */
-function initCVDownload() {
-    const downloadBtn = document.getElementById('download-cv-btn');
-    if (!downloadBtn) return;
-    
-    downloadBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const cvText = `========================================================================
-                      HAMEEZ CAMBAL - CYBERSECURITY CV
-========================================================================
-Title: Cybersecurity Analyst
-Company: SuperCAD — Dubai, UAE
-Employment: 2026 – Present
-Location: Dubai, United Arab Emirates
-Contact: hameez.cam@gmail.com
-Website: https://hameezcam.github.io
-GitHub: https://github.com/hameezcam
-LinkedIn: https://www.linkedin.com/in/hameez-cambal-988a2b314/
-
-------------------------------------------------------------------------
-PROFESSIONAL SUMMARY
-------------------------------------------------------------------------
-Cybersecurity Analyst focused on Security Operations, Threat Detection, 
-SIEM, Incident Response, Security Assessments and Cybersecurity Tool 
-Development. Working across practical enterprise security operations,
-monitoring capabilities, assessment methodologies, and security applications.
-
-------------------------------------------------------------------------
-PROFESSIONAL EXPERIENCE & CAREER PROGRESSION
-------------------------------------------------------------------------
-1. Cybersecurity Analyst [CURRENT ROLE]
-SuperCAD · Dubai, UAE
-September 2026 – Present
-Description:
-Working across security operations, SIEM monitoring, threat detection, 
-incident investigation, Microsoft security, network security, vulnerability 
-management, security assessments, security auditing, and cybersecurity 
-service development.
-
-Key Areas:
-* SIEM Monitoring & Alert Investigation
-* Threat Detection & Detection Engineering
-* Microsoft Sentinel & Defender
-* Microsoft 365 & Entra Security
-* Network Security
-* Vulnerability Assessment & VAPT
-* Security Posture Assessments
-* Security Auditing
-* Incident Response
-* SOC & SOCaaS Development
-
-[Internal Career Progression: Promoted from Cyber Security Intern]
-
-2. Cyber Security Intern [PREVIOUS POSITION]
-SuperCAD · Dubai, UAE
-July 2026 – September 2026
-Description:
-Supported cybersecurity operations and security assessment activities while 
-gaining hands-on experience in SIEM monitoring, threat detection, 
-vulnerability assessment, Microsoft security, network security, 
-incident response processes, and security documentation.
-
-Key Areas:
-* SIEM Monitoring
-* Security Event Analysis
-* Alert Investigation
-* Vulnerability Assessment
-* VAPT Support
-* Microsoft Security
-* Network Security
-* Security Assessments
-* Security Documentation
-* Incident Response Support
-
-------------------------------------------------------------------------
-TECHNICAL SKILL MATRIX
-------------------------------------------------------------------------
-* Security Operations: SOC Operations, SIEM, Security Monitoring, Alert Investigation,
-                       Incident Response, Threat Detection, Threat Hunting, Detection Engineering.
-* Microsoft Security:  Microsoft Sentinel, Microsoft Defender, Microsoft 365 Security,
-                       Microsoft Entra, Identity Security, Conditional Access.
-* Network Security:    Check Point, Fortinet, WatchGuard, Cisco Meraki, Firewall Security, VPN Security.
-* Security Assessment: VAPT, Vulnerability Assessment, Security Auditing, Security Posture Assessment,
-                       Risk Assessment, Compliance Mapping.
-* Security Dev:        Cybersecurity Tool Development, Authentication, RBAC, Multi-Tenant Architecture,
-                       Security Automation, Threat Intelligence Integration.
-
-------------------------------------------------------------------------
-VERIFIED CERTIFICATIONS & EDUCATION
-------------------------------------------------------------------------
-* Microsoft Copilot for Security [Completed — 2026]
-* BSc (Hons) Cybersecurity & Digital Forensics — Kingston University London [First-Class Honours]
-* Cisco Certified Network Associate (CCNA 200-301) — Cisco
-* Microsoft Azure Fundamentals (AZ-900) — Microsoft
-* Advanced Diploma in Hardware & Networking Professional — Institute
-* Certified Ethical Hacker (CEH) [In Progress]
-
-------------------------------------------------------------------------
-SECURITY PROJECTS PORTFOLIO
-------------------------------------------------------------------------
-1. Microsoft Sentinel SOC Architecture [SOC / SIEM] ★ FEATURED
-   - Focus: SIEM • Detection • SOC Architecture
-2. Port Scanner [Cybersecurity Tool] ★ FEATURED
-   - Focus: Network Security • Security Tooling • Multi-Tenant Architecture
-3. Security Reporting Platform [Cybersecurity Platform] ★ FEATURED
-   - Focus: Security Assessments • Vulnerability Intelligence • Reporting
-4. Wazuh SIEM Home Lab [SIEM / Security Monitoring]
-5. SOC Implementation Roadmap [SOC / Security Operations]
-6. SOCaaS Planning [Security Operations]
-7. Microsoft Security Implementation [Microsoft Security]
-8. Security Posture Assessment Framework [Security Assessment]
-9. VAPT Documentation Framework [VAPT]
-10. Incident Response Playbook Framework [Incident Response]
-11. Detection Catalogue [Detection Engineering]
-12. NESA Security Roadmap [Compliance / Security]
-13. Threat Analysis Platform [Threat Intelligence / Security Analysis]
-14. Web Application Security Lab [Application Security]
-15. OSINT & Threat Intelligence Toolkit [Threat Intelligence]
-
-========================================================================
-STATUS: ACTIVE // CYBERSECURITY ANALYST // SUPERCAD (DUBAI, UAE)
-========================================================================`;
-
-        const blob = new Blob([cvText], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Hameez_Cambal_Security_CV.txt';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
-}
